@@ -9,6 +9,8 @@ import scala.concurrent.duration._
   */
 class Red5Sensor extends Actor {
   import context._
+  import spray.http._
+  import spray.client.pipelining._
 
   val log = Logging(context.system, this)
 
@@ -22,6 +24,8 @@ class Red5Sensor extends Actor {
     case "tick" =>
       // send another periodic tick after the specified delay
       system.scheduler.scheduleOnce(1000 millis, self, "tick")
+      val pipeline: HttpRequest => Future[HttpResponse] = sendReceive
+      val response: Future[HttpResponse] = pipeline(Get("http://spray.io/"))
       log.debug(this.toString)
   }
 }
