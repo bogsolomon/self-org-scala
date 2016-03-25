@@ -14,11 +14,11 @@ object Bootstraper {
   val system = ActorSystem("controlSystem")
 
   def createSensor(config: SensorConfig) = {
-    val sensor = system.actorOf(Props[Red5Sensor], "sensor")
+    val sensor = system.actorOf(Props(classOf[Red5Sensor], config), "sensor")
   }
 
   def createControlLoop(config: Config): Unit = {
-    config.sensors.foreach(createSensor)
+    config.sensors.foreach(x => createSensor(x))
   }
 
   def main(args: Array[String]): Unit = {

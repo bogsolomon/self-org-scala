@@ -1,21 +1,31 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component
 
-import akka.actor.Actor
-import akka.event.Logging
+import akka.actor.{Props, ActorLogging, Actor}
+import ca.ncct.uottawa.control.selforg.bootstrap.component.data.SensorMeasurement
+import ca.ncct.uottawa.control.selforg.bootstrap.config.SensorConfig
+import scala.concurrent.Future
 import scala.concurrent.duration._
+import scala.util.Try
+
+object Red5Sensor {
+  def props(config: SensorConfig): Props = Props(new Red5Sensor(config))
+}
 
 /**
   * Created by Bogdan on 2/21/2016.
   */
-class Red5Sensor extends Actor {
-  import context._
+class Red5Sensor(config: SensorConfig) extends Actor with ActorLogging {
+
+  def SERVLET_URL = "serverStats"
+  var measurementURL:String = "http://" + config.managedServerHost + ":" + config.managedServerPort + "/" + config.managedApp + "/" + SERVLET_URL
+
   import spray.http._
   import spray.client.pipelining._
+  import scala.concurrent.ExecutionContext.Implicits.global
 
-  val log = Logging(context.system, this)
-
-  override def preStart() =
-    system.scheduler.scheduleOnce(500 millis, self, "tick")
+  override def preStart() = {
+    context.system.scheduler.scheduleOnce(config.scheduledTime millis, self, "tick")
+  }
 
   // override postRestart so we don't call preStart and schedule a new message
   override def postRestart(reason: Throwable) = {}
@@ -23,9 +33,12 @@ class Red5Sensor extends Actor {
   override def receive  = {
     case "tick" =>
       // send another periodic tick after the specified delay
-      system.scheduler.scheduleOnce(1000 millis, self, "tick")
-      val pipeline: HttpRequest => Future[HttpResponse] = sendReceive
-      val response: Future[HttpResponse] = pipeline(Get("http://spray.io/"))
+      context.system.scheduler.scheduleOnce(config.scheduledTime millis, self, "tick")
+      val pipeline: HttpRequest => Future[SensorMeasurement] = sendReceive ~> unmarshal[SensorMeasurement]
+      val response: Future[SensorMeasurement] = pipeline(Get(measurementURL))
       log.debug(this.toString)
+      response.onComplete(
+    case SUcc
+      )
   }
 }
