@@ -5,7 +5,7 @@ import ca.ncct.uottawa.control.selforg.bootstrap.component.data.SensorMeasuremen
 import ca.ncct.uottawa.control.selforg.bootstrap.config.SensorConfig
 import scala.concurrent.Future
 import scala.concurrent.duration._
-import scala.util.Try
+import scala.util.{Failure, Success}
 
 object Red5Sensor {
   def props(config: SensorConfig): Props = Props(new Red5Sensor(config))
@@ -23,6 +23,12 @@ class Red5Sensor(config: SensorConfig) extends Actor with ActorLogging {
   import spray.client.pipelining._
   import scala.concurrent.ExecutionContext.Implicits.global
 
+  def mapMediaType: HttpResponse => HttpResponse = {
+    case x@HttpResponse(_, _, _, _) => {
+      x.copy(x.status, x.entity)
+    }
+  }
+
   override def preStart() = {
     context.system.scheduler.scheduleOnce(config.scheduledTime millis, self, "tick")
   }
@@ -34,11 +40,14 @@ class Red5Sensor(config: SensorConfig) extends Actor with ActorLogging {
     case "tick" =>
       // send another periodic tick after the specified delay
       context.system.scheduler.scheduleOnce(config.scheduledTime millis, self, "tick")
-      val pipeline: HttpRequest => Future[SensorMeasurement] = sendReceive ~> unmarshal[SensorMeasurement]
+      val pipeline: HttpRequest => Future[SensorMeasurement] = sendReceive ~> mapMediaType ~> unmarshal[SensorMeasurement]
       val response: Future[SensorMeasurement] = pipeline(Get(measurementURL))
       log.debug(this.toString)
-      response.onComplete(
-    case SUcc
-      )
+      response.onComplete {
+        case Success(s: SensorMeasurement) =>
+          log.debug("CPU: " + s.cpu)
+        case Failure(error) =>
+          log.error(error, "Couldn't get sensor metrics")
+      }
   }
 }
