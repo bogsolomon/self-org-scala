@@ -18,3 +18,12 @@ object SensorConfig {
       scheduledTime = ((node \ "scheduler") \ "@time").text.toInt
     )
 }
+
+case class FilterConfig() {
+
+}
+
+object FilterConfig {
+  def fromXML(node: scala.xml.NodeSeq) : FilterConfig =
+    new FilterConfig()
+}

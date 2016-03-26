@@ -4,4 +4,6 @@
         <managed-server port="5080" app="wtRed5_cld" host="172.30.5.1"></managed-server>
         <scheduler time="30000"></scheduler>
     </sensor>
+    <filter type="DataFilterChain">
+    </filter>
 </self-org-config>

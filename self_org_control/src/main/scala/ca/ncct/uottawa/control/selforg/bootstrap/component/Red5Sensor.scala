@@ -1,6 +1,6 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component
 
-import akka.actor.{Props, ActorLogging, Actor}
+import akka.actor.{ActorRef, Props, ActorLogging, Actor}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.SensorMeasurement
 import ca.ncct.uottawa.control.selforg.bootstrap.config.SensorConfig
 import scala.concurrent.Future
@@ -8,13 +8,13 @@ import scala.concurrent.duration._
 import scala.util.{Failure, Success}
 
 object Red5Sensor {
-  def props(config: SensorConfig): Props = Props(new Red5Sensor(config))
+  def props(config: SensorConfig, filter: ActorRef): Props = Props(new Red5Sensor(config, filter))
 }
 
 /**
   * Created by Bogdan on 2/21/2016.
   */
-class Red5Sensor(config: SensorConfig) extends Actor with ActorLogging {
+class Red5Sensor(config: SensorConfig, filter: ActorRef) extends Actor with ActorLogging {
 
   def SERVLET_URL = "serverStats"
   var measurementURL:String = "http://" + config.managedServerHost + ":" + config.managedServerPort + "/" + config.managedApp + "/" + SERVLET_URL
@@ -25,7 +25,7 @@ class Red5Sensor(config: SensorConfig) extends Actor with ActorLogging {
 
   def mapMediaType: HttpResponse => HttpResponse = {
     case x@HttpResponse(_, _, _, _) => {
-      x.copy(x.status, x.entity)
+       x.copy(x.status, HttpEntity(ContentType(MediaTypes.`application/xml`), x.entity.data))
     }
   }
 
@@ -44,8 +44,10 @@ class Red5Sensor(config: SensorConfig) extends Actor with ActorLogging {
       val response: Future[SensorMeasurement] = pipeline(Get(measurementURL))
       log.debug(this.toString)
       response.onComplete {
-        case Success(s: SensorMeasurement) =>
-          log.debug("CPU: " + s.cpu)
+        case Success(s: SensorMeasurement) => {
+          filter ! s
+          filter ! s.room
+        }
         case Failure(error) =>
           log.error(error, "Couldn't get sensor metrics")
       }
