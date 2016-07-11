@@ -13,6 +13,10 @@ object DataFilterChain {
 
 class DataFilterChain(config: FilterConfig) extends Actor with ActorLogging {
   override def receive  = {
-    case msg : SensorMeasurement => log.info("" + msg)
+    case msg : SensorMeasurement => filter(msg)
+  }
+
+  def filter(msg: SensorMeasurement): Unit = {
+    log.info("" + msg)
   }
 }

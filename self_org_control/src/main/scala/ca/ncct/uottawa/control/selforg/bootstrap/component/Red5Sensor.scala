@@ -46,7 +46,6 @@ class Red5Sensor(config: SensorConfig, filter: ActorRef) extends Actor with Acto
       response.onComplete {
         case Success(s: SensorMeasurement) => {
           filter ! s
-          filter ! s.room
         }
         case Failure(error) =>
           log.error(error, "Couldn't get sensor metrics")
