@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<self-org-manager network="red5-1" startPort="1935" cloudName="red5-1">
+<self-org-manager network="red5" startPort="1935" cloudName="red5-1">
 </self-org-manager>
