@@ -28,5 +28,9 @@
     <orderEntry type="library" name="SBT: org.scala-lang:scala-reflect:2.10.3:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scalatest:scalatest_2.10:2.1.6:jar" level="project" />
     <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.7.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.google.protobuf:protobuf-java:2.5.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-remote_2.10:2.3.5:jar" level="project" />
+    <orderEntry type="library" name="SBT: io.netty:netty:3.8.0.Final:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.uncommons.maths:uncommons-maths:1.2.2a:jar" level="project" />
   </component>
 </module>

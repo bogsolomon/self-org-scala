@@ -1,5 +1,7 @@
 package ca.ncct.uottawa.control.selforg.manager
 
+import com.typesafe.config.ConfigFactory
+
 import scala.xml.XML
 import akka.actor.{Props, ActorSystem}
 import ca.ncct.uottawa.control.selforg.manager.config.Config
@@ -9,7 +11,8 @@ import ca.ncct.uottawa.control.selforg.manager.config.Config
   */
 object Bootstraper {
 
-  val system = ActorSystem("controlSystem")
+  val config = ConfigFactory.load()
+  val system = ActorSystem("controlSystem", config.getConfig("remote").withFallback(config))
   def startManager(config: Config): Unit = {
     system.actorOf(Props(classOf[Manager], config), "manager")
   }
