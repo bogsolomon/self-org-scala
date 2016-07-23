@@ -1,13 +1,12 @@
 package ca.ncct.uottawa.control.selforg.manager
 
-import java.net.{InetAddress, NetworkInterface}
 import java.nio.charset.StandardCharsets
 import java.nio.file.{StandardOpenOption, Files, Paths}
-import java.util
 
 import akka.actor.{ActorLogging, Actor, ActorRef, Props}
 import ca.ncct.uottawa.control.selforg.manager.common.{RemoveNode, AddNode}
 import ca.ncct.uottawa.control.selforg.manager.config.Config
+import ca.ncct.uottawa.control.selforg.manager.util.Utils
 
 import scala.io.Source
 import scala.sys.process.Process
@@ -31,24 +30,7 @@ class Manager(config : Config) extends Actor with ActorLogging {
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8))
   }
 
-  val interfaces = NetworkInterface.getNetworkInterfaces
-  def findEth0Address: String = {
-    while (interfaces.hasMoreElements) {
-      val element = interfaces.nextElement
-      if (element.getDisplayName.equalsIgnoreCase("eth0")) {
-        val addresses: util.Enumeration[InetAddress] = element.getInetAddresses
-        while (addresses.hasMoreElements) {
-          val address = addresses.nextElement
-          if (!address.getHostAddress.contains(":")) {
-            return address.getHostAddress
-          }
-        }
-      }
-    }
-    ""
-  }
-
-  val localIpAddress: String = findEth0Address
+  val localIpAddress: String = Utils.findEth0Address
   var port = config.startPort + startCount
   val command = s"docker run -d --net=${config.networkName} --name=red5-$startCount " +
     s"-e red5_port=$port -e red5_ip=$localIpAddress -p $port:${config.startPort} bsolomon/red5-media:v1"
