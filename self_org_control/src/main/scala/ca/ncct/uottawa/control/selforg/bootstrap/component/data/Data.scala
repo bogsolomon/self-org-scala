@@ -46,3 +46,6 @@ object SensorMeasurement {
     )
   }
 }
+
+case class FilterMeasurement(sensorMeasurement: SensorMeasurement, packetIn: Double, packetOut: Double)
+case class Model(bucketLevel: Double)

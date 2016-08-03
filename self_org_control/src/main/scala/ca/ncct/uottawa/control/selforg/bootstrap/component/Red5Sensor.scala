@@ -42,9 +42,9 @@ class Red5Sensor(config: SensorConfig, filter: ActorRef) extends Actor with Acto
       context.system.scheduler.scheduleOnce(config.scheduledTime millis, self, "tick")
       val pipeline: HttpRequest => Future[SensorMeasurement] = sendReceive ~> mapMediaType ~> unmarshal[SensorMeasurement]
       val response: Future[SensorMeasurement] = pipeline(Get(measurementURL))
-      log.debug(this.toString)
       response.onComplete {
         case Success(s: SensorMeasurement) => {
+          log.debug(s.toString)
           filter ! s
         }
         case Failure(error) =>

@@ -17,6 +17,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.3.5",
   "com.typesafe.akka" %% "akka-slf4j" % "2.3.5",
   "com.typesafe.akka" %% "akka-remote" % "2.3.5",
-  "ch.qos.logback" % "logback-classic" % "1.1.3"
+  "ch.qos.logback" % "logback-classic" % "1.1.3",
+  "com.fuzzylite" % "jfuzzylite" % "5.0"
   //"com.typesafe.akka" %% "akka-testkit" % "2.3.5"
 )

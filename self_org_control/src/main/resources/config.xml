@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <self-org-config>
     <sensor type="Red5Sensor">
-        <managed-server port="5082" app="wtRed5_cld" host="172.30.4.2"></managed-server>
-        <scheduler time="30000"></scheduler>
+        <managed-server port="5080" app="wtRed5_cld" host="172.30.4.2"/>
+        <scheduler time="30000"/>
     </sensor>
-    <filter type="DataFilterChain">
-    </filter>
+    <filter_chain type="DataFilterChain">
+        <filter class="BandwithToPacketFilter">
+            <param name="PACKET_SIZE" value="482"/>
+        </filter>
+    </filter_chain>
+    <coordinator type="Red5ServerCoordinator">
+    </coordinator>
+    <model type="FuzzyModel">
+        <param name="CLIENTS_THR" value="50"/>
+        <param name="CPU_THR" value="40"/>
+        <param name="STREAMSIN_THR" value="20"/>
+        <param name="STREAMSOUT_THR" value="10"/>
+    </model>
+    <estimator type="ThresholdEstimator">
+        <param name="LOWER_THRESHOLD" value="20"/>
+        <param name="HIGH_THRESHOLD" value="40"/>
+    </estimator>
 </self-org-config>

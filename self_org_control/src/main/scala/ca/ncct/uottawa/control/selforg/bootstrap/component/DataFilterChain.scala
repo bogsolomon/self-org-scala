@@ -1,22 +1,28 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component
 
-import akka.actor.{Props, ActorLogging, Actor}
-import ca.ncct.uottawa.control.selforg.bootstrap.component.data.SensorMeasurement
+import akka.actor.{ActorRef, Props, ActorLogging, Actor}
+import ca.ncct.uottawa.control.selforg.bootstrap.component.data.{FilterMeasurement, SensorMeasurement}
 import ca.ncct.uottawa.control.selforg.bootstrap.config.{FilterConfig, SensorConfig}
 
 /**
   * Created by Bogdan on 3/26/2016.
   */
 object DataFilterChain {
-  def props(config: FilterConfig): Props = Props(new DataFilterChain(config))
+  def props(config: FilterConfig, coordinator: ActorRef): Props = Props(new DataFilterChain(config, coordinator))
 }
 
-class DataFilterChain(config: FilterConfig) extends Actor with ActorLogging {
+class DataFilterChain(config: FilterConfig, coordinator: ActorRef) extends Actor with ActorLogging {
+  val packetSize = config.filterConfigs("BandwithToPacketFilter")("PACKET_SIZE").toInt * 8
+
   override def receive  = {
     case msg : SensorMeasurement => filter(msg)
   }
 
   def filter(msg: SensorMeasurement): Unit = {
-    log.info("" + msg)
+    val packetsIn = msg.stream.inBw * 1000 / packetSize
+    val packetsOut = msg.stream.outBw * 1000 / packetSize
+    log.debug("Vals:"+packetsIn+"/"+packetsOut)
+
+    coordinator ! FilterMeasurement(msg, packetsIn, packetsOut)
   }
 }

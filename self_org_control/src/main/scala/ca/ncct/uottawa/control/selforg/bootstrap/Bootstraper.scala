@@ -1,8 +1,8 @@
 package ca.ncct.uottawa.control.selforg.bootstrap
 
 import akka.actor._
-import ca.ncct.uottawa.control.selforg.bootstrap.component.{DataFilterChain, Red5Sensor}
-import ca.ncct.uottawa.control.selforg.bootstrap.config.{FilterConfig, SensorConfig, Config}
+import ca.ncct.uottawa.control.selforg.bootstrap.component.{FuzzyModel, Coordinator, DataFilterChain, Red5Sensor}
+import ca.ncct.uottawa.control.selforg.bootstrap.config._
 
 import scala.xml.XML
 
@@ -17,12 +17,25 @@ object Bootstraper {
     val sensor = system.actorOf(Props(classOf[Red5Sensor], config, filter), "sensor")
   }
 
-  def createFilter(config: FilterConfig) = {
-    system.actorOf(Props(classOf[DataFilterChain], config), "filter")
+  def createFilter(config: FilterConfig, coordinator: ActorRef) = {
+    system.actorOf(Props(classOf[DataFilterChain], config, coordinator), "filter")
+  }
+
+  def createCoordinator(config: CoordinatorConfig, model: ActorRef) = {
+    system.actorOf(Props(classOf[Coordinator], config, model), "coordinator")
+  }
+
+  def createModel(config: ModelConfig) = {
+    system.actorOf(Props(classOf[FuzzyModel], config), "model")
   }
 
   def createControlLoop(config: Config): Unit = {
-    config.sensors.foreach(x => createSensor(x, createFilter(config.filter)))
+    val model: ActorRef = createModel(config.model)
+    val coordinator: ActorRef = createCoordinator(config.coordinator, model)
+    val filter: ActorRef = createFilter(config.filter, coordinator)
+    config.sensors.foreach(x => {
+      createSensor(x, filter)
+    })
 
     val listener = system.actorOf(Props(new UnhandledMessageListener()))
     system.eventStream.subscribe(listener, classOf[UnhandledMessage])
