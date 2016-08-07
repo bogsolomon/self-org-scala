@@ -1,7 +1,7 @@
 package ca.ncct.uottawa.control.selforg.bootstrap
 
 import akka.actor._
-import ca.ncct.uottawa.control.selforg.bootstrap.component.{FuzzyModel, Coordinator, DataFilterChain, Red5Sensor}
+import ca.ncct.uottawa.control.selforg.bootstrap.component._
 import ca.ncct.uottawa.control.selforg.bootstrap.config._
 
 import scala.xml.XML
@@ -21,17 +21,27 @@ object Bootstraper {
     system.actorOf(Props(classOf[DataFilterChain], config, coordinator), "filter")
   }
 
-  def createCoordinator(config: CoordinatorConfig, model: ActorRef) = {
-    system.actorOf(Props(classOf[Coordinator], config, model), "coordinator")
+  def createCoordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, decisionMaker: ActorRef) = {
+    system.actorOf(Props(classOf[Coordinator], config, model, estimator, decisionMaker), "coordinator")
   }
 
-  def createModel(config: ModelConfig) = {
+  def createModel(config: GenericConfig) = {
     system.actorOf(Props(classOf[FuzzyModel], config), "model")
+  }
+
+  def createEstimator(config: GenericConfig) = {
+    system.actorOf(Props(classOf[Estimator], config), "estimator")
+  }
+
+  def createDecisionMaker(config: GenericConfig) = {
+    system.actorOf(Props(classOf[DecisionMaker], config), "decisionMaker")
   }
 
   def createControlLoop(config: Config): Unit = {
     val model: ActorRef = createModel(config.model)
-    val coordinator: ActorRef = createCoordinator(config.coordinator, model)
+    val estimator: ActorRef = createEstimator(config.estimatorConfig)
+    val decisionMaker: ActorRef = createDecisionMaker(config.dmConfig)
+    val coordinator: ActorRef = createCoordinator(config.coordinator, model, estimator, decisionMaker)
     val filter: ActorRef = createFilter(config.filter, coordinator)
     config.sensors.foreach(x => {
       createSensor(x, filter)

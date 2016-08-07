@@ -21,4 +21,12 @@
         <param name="LOWER_THRESHOLD" value="20"/>
         <param name="HIGH_THRESHOLD" value="40"/>
     </estimator>
+    <decisionMaker class="ClientPolicyDecisionMaker">
+        <param name="LOWER_THRESHOLD_CHANGE_COUNT" value="5"/>
+        <param name="HIGH_THRESHOLD_CHANGE_COUNT" value="2"/>
+    </decisionMaker>
+    <actuator class="ClientPolicyActuator">
+    </actuator>
+    <adaptor class="AntAdaptor">
+    </adaptor>
 </self-org-config>

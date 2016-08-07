@@ -1,5 +1,7 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component.data
 
+import ca.ncct.uottawa.control.selforg.bootstrap.component.DecisionMaker.DecisionType.DecisionType
+import ca.ncct.uottawa.control.selforg.bootstrap.component.Estimator.CountType.CountType
 import spray.http.MediaTypes
 import spray.httpx.unmarshalling.Unmarshaller
 
@@ -49,3 +51,5 @@ object SensorMeasurement {
 
 case class FilterMeasurement(sensorMeasurement: SensorMeasurement, packetIn: Double, packetOut: Double)
 case class Model(bucketLevel: Double)
+case class EstimatedData(count: Int, countType: CountType)
+case class Decision(decision: DecisionType)
