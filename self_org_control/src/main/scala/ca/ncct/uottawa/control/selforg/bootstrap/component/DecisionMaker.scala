@@ -35,7 +35,7 @@ class DecisionMaker(config: GenericConfig) extends Actor with ActorLogging {
       lastDecision = DecisionType.Reject
       sender ! Decision(lastDecision)
     } else if (count > highThreshold && countType == CountType.Add && lastDecision != DecisionType.Accept) {
-      lastDecision = DecisionType.Reject
+      lastDecision = DecisionType.Accept
       sender ! Decision(lastDecision)
     } else {
       sender ! Decision(DecisionType.Nochange)
