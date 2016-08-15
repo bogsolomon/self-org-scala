@@ -8,7 +8,6 @@ import org.jgroups.JChannel;
 import org.jgroups.Message;
 import org.jgroups.Receiver;
 import org.jgroups.ReceiverAdapter;
-import org.jgroups.stack.IpAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +22,6 @@ public class GroupManager {
     private List<Receiver> receivers = new ArrayList<>();
 
     private static final Logger logger = LoggerFactory.getLogger(GroupManager.class);
-    private String envHost = System.getenv("red5_ip");
-    private String envPort = System.getenv("red5_port");
 
     public static GroupManager getManager() {
         if (instance == null) {
@@ -57,7 +54,7 @@ public class GroupManager {
 
     public void broadcastMessage(ClientPolicyMessage msg) {
         try {
-            managementChannel.send(new Message(null, new IpAddress(envHost + ":" + envPort), msg));
+            managementChannel.send(new Message(null, null, msg));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -3,6 +3,7 @@ package ca.ncct.uottawa.control.selforg.bootstrap
 import akka.actor._
 import ca.ncct.uottawa.control.selforg.bootstrap.component._
 import ca.ncct.uottawa.control.selforg.bootstrap.config._
+import com.watchtogether.autonomic.selforg.red5.manager.group.GroupManager
 
 import scala.xml.XML
 
@@ -21,8 +22,8 @@ object Bootstraper {
     system.actorOf(Props(classOf[DataFilterChain], config, coordinator), "filter")
   }
 
-  def createCoordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, decisionMaker: ActorRef) = {
-    system.actorOf(Props(classOf[Coordinator], config, model, estimator, decisionMaker), "coordinator")
+  def createCoordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, decisionMaker: ActorRef, actuator: ActorRef) = {
+    system.actorOf(Props(classOf[Coordinator], config, model, estimator, decisionMaker, actuator), "coordinator")
   }
 
   def createModel(config: GenericConfig) = {
@@ -37,11 +38,17 @@ object Bootstraper {
     system.actorOf(Props(classOf[DecisionMaker], config), "decisionMaker")
   }
 
+  def createActuator(config: GenericConfig) = {
+    system.actorOf(Props(classOf[Actuator], config), "actuator")
+  }
+
   def createControlLoop(config: Config): Unit = {
+    GroupManager.getManager
     val model: ActorRef = createModel(config.model)
     val estimator: ActorRef = createEstimator(config.estimatorConfig)
     val decisionMaker: ActorRef = createDecisionMaker(config.dmConfig)
-    val coordinator: ActorRef = createCoordinator(config.coordinator, model, estimator, decisionMaker)
+    val actuator: ActorRef = createActuator(config.actuatorConfig)
+    val coordinator: ActorRef = createCoordinator(config.coordinator, model, estimator, decisionMaker, actuator)
     val filter: ActorRef = createFilter(config.filter, coordinator)
     config.sensors.foreach(x => {
       createSensor(x, filter)

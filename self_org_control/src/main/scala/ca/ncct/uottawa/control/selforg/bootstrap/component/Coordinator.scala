@@ -8,9 +8,10 @@ import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
   * Created by Bogdan on 7/31/2016.
   */
 object Coordinator {
-  def props(config: GenericConfig, model: ActorRef, estimator: ActorRef, dm: ActorRef): Props = Props(new Coordinator(config, model, estimator, dm))
+  def props(config: GenericConfig, model: ActorRef, estimator: ActorRef, dm: ActorRef, actuator: ActorRef): Props =
+    Props(new Coordinator(config, model, estimator, dm, actuator))
 }
-class Coordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, dm: ActorRef) extends Actor with ActorLogging {
+class Coordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, dm: ActorRef, actuator: ActorRef) extends Actor with ActorLogging {
 
   override def receive  = {
     case msg : FilterMeasurement => coordinate(msg)
@@ -39,5 +40,7 @@ class Coordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, d
 
   def coordinate(msg: Decision): Unit = {
     log.debug("coordinate decision: " + msg)
+
+    actuator ! msg
   }
 }

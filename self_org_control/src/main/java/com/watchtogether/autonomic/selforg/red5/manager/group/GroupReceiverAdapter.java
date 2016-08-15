@@ -13,7 +13,6 @@ public class GroupReceiverAdapter extends ReceiverAdapter {
 	@Override
 	public void receive(Message msg) {
 		Object message = msg.getObject();
-		groupManager.addAddress(msg.getSrc());
 		
 		if (message instanceof String && message.equals(StringMessages.JOIN_MESSAGE)) {
 			
@@ -23,10 +22,6 @@ public class GroupReceiverAdapter extends ReceiverAdapter {
 		for (Receiver rec:groupManager.getReceivers()) {
 			rec.receive(msg);
 		}
-	}
-
-	public GroupManager getGroupManager() {
-		return groupManager;
 	}
 
 	public void setGroupManager(GroupManager groupManager) {

@@ -15,7 +15,8 @@ object Actuator {
   def props(config: GenericConfig): Props = Props(new Actuator(config))
 }
 class Actuator(config: GenericConfig) extends Actor with ActorLogging {
-
+  val envHost: String = System.getenv("red5_ip")
+  val envPort: Int = System.getenv("red5_port").toInt
 
   override def receive  = {
     case msg : Decision => actuate(msg.decision)
@@ -23,8 +24,8 @@ class Actuator(config: GenericConfig) extends Actor with ActorLogging {
 
   def actuate(decision: DecisionType): Unit = {
     decision match {
-      case DecisionType.Accept => GroupManager.getManager.broadcastMessage(new ClientPolicyMessage(true))
-      case DecisionType.Reject => GroupManager.getManager.broadcastMessage(new ClientPolicyMessage(false))
+      case DecisionType.Accept => GroupManager.getManager.broadcastMessage(new ClientPolicyMessage(true, envHost, envPort))
+      case DecisionType.Reject => GroupManager.getManager.broadcastMessage(new ClientPolicyMessage(false, envHost, envPort))
       case DecisionType.Nochange =>
     }
   }

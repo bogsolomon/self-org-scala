@@ -16,8 +16,9 @@ object Red5Sensor {
   */
 class Red5Sensor(config: SensorConfig, filter: ActorRef) extends Actor with ActorLogging {
 
+  val managedServerHost = System.getenv("managed_host")
   def SERVLET_URL = "serverStats"
-  var measurementURL:String = "http://" + config.managedServerHost + ":" + config.managedServerPort + "/" + config.managedApp + "/" + SERVLET_URL
+  var measurementURL:String = "http://" + managedServerHost + ":" + config.managedServerPort + "/" + config.managedApp + "/" + SERVLET_URL
 
   import spray.http._
   import spray.client.pipelining._

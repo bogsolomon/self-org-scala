@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <self-org-config>
     <sensor type="Red5Sensor">
-        <managed-server port="5080" app="wtRed5_cld" host="172.30.4.2"/>
+        <managed-server port="5080" app="wtRed5_cld"/>
         <scheduler time="30000"/>
     </sensor>
     <filter_chain type="DataFilterChain">
