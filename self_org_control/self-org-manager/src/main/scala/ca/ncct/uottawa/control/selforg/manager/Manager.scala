@@ -51,7 +51,11 @@ class Manager(config : Config) extends Actor with ActorLogging {
     val command = s"docker run -d --net=${config.networkName} --name=red5-$startCount " +
       s"-e red5_port=$port -e red5_ip=$localIpAddress -p ${port}:${config.startPort} bsolomon/red5-media:v1"
     log.debug("New command is: " + command)
-    Process(command).run()
+    Process(command).run().exitValue()
+    val commandControl = s"docker run -d --net=${config.networkName} --name=red5-control-$startCount " +
+      s"-e red5_port=$port -e red5_ip=$localIpAddress -e managed_host=red5-$startCount bsolomon/red5-control:v1"
+    log.debug("New command is: " + commandControl)
+    Process(commandControl).run().exitValue()
   }
 
   def removeNode: Unit = {
@@ -60,7 +64,13 @@ class Manager(config : Config) extends Actor with ActorLogging {
     Process(command).run().exitValue()
     command = s"docker rm red5-$startCount"
     log.debug("Stop command is: " + command)
-    Process(command).run()
+    Process(command).run().exitValue()
+    command = s"docker stop red5-control-$startCount"
+    log.debug("Stop command is: " + command)
+    Process(command).run().exitValue()
+    command = s"docker rm red5-control-$startCount"
+    log.debug("Stop command is: " + command)
+    Process(command).run().exitValue()
     startCount -= 1
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
