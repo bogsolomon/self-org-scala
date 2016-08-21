@@ -12,21 +12,24 @@ import ca.ncct.uottawa.control.selforg.manager.config.Config
   */
 object Bootstraper {
 
-  val localIpAddress: String = Utils.findEth0Address
-  val customConf = ConfigFactory.parseString(
-  s"""remote {
-  akka {
-    remote {
-      netty.tcp {
-        hostname = "${localIpAddress}"
-      }
-    }
-  }
-  }""")
-  val config = ConfigFactory.load()
-  val system = ActorSystem("controlSystem", customConf.getConfig("remote").withFallback(config))
-  def startManager(config: Config): Unit = {
-    system.actorOf(Props(classOf[Manager], config), "manager")
+  def startManager(systemConfig: Config): Unit = {
+    val localIpAddress: String = if (System.getenv("is_seed").toBoolean) systemConfig.seedNode else Utils.findEth0Address
+    val customConf = ConfigFactory.parseString(
+      s"""remote {
+        akka {
+          remote {
+            netty.tcp {
+              hostname = "${localIpAddress}"
+            }
+          }
+        }
+        }""")
+    val config = ConfigFactory.load()
+    val system = ActorSystem("controlSystem", customConf.getConfig("remote").
+        withFallback(ConfigFactory.parseString("akka.cluster.roles = [manager]")).
+        withFallback(ConfigFactory.parseString(s"""akka.cluster.seed-nodes = ["akka.tcp://controlSystem@${systemConfig.seedNode}:2551"]""")).
+        withFallback(config))
+    system.actorOf(Props(classOf[Manager], systemConfig), "manager")
   }
 
   def main(args: Array[String]): Unit = {

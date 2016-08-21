@@ -29,6 +29,7 @@
       <element id="library" level="project" name="SBT: org.uncommons.maths:uncommons-maths:1.2.2a:jar" />
       <element id="library" level="project" name="SBT: io.netty:netty:3.8.0.Final:jar" />
       <element id="library" level="project" name="SBT: com.google.protobuf:protobuf-java:2.5.0:jar" />
+      <element id="library" level="project" name="SBT: com.typesafe.akka:akka-cluster_2.10:2.3.5:jar" />
     </root>
   </artifact>
 </component>

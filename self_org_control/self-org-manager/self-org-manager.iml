@@ -32,5 +32,6 @@
     <orderEntry type="library" name="SBT: com.typesafe.akka:akka-remote_2.10:2.3.5:jar" level="project" />
     <orderEntry type="library" name="SBT: io.netty:netty:3.8.0.Final:jar" level="project" />
     <orderEntry type="library" name="SBT: org.uncommons.maths:uncommons-maths:1.2.2a:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-cluster_2.10:2.3.5:jar" level="project" />
   </component>
 </module>

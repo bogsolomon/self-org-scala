@@ -7,7 +7,7 @@ import scala.collection.mutable
   */
 case class Config(val sensors: List[SensorConfig], filter: FilterConfig, coordinator: GenericConfig,
                   model: GenericConfig, estimatorConfig: GenericConfig, dmConfig: GenericConfig,
-                  actuatorConfig: GenericConfig, adaptorConfig: GenericConfig)
+                  actuatorConfig: GenericConfig, adaptorConfig: GenericConfig, seedNode : String)
 
 object Config {
   def fromXML(node: scala.xml.NodeSeq): Config =
@@ -19,7 +19,8 @@ object Config {
       GenericConfig.fromXML(node \ "estimator"),
       GenericConfig.fromXML(node \ "decisionMaker"),
       GenericConfig.fromXML(node \ "actuator"),
-      GenericConfig.fromXML(node \ "adaptor")
+      GenericConfig.fromXML(node \ "adaptor"),
+      (node \ "@cluster-seed").text
     )
 }
 

@@ -30,7 +30,7 @@ class Manager(config : Config) extends Actor with ActorLogging {
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8))
   }
 
-  val localIpAddress: String = Utils.findEth0Address
+  val localIpAddress: String = System.getenv("red5_ip")
   var port = config.startPort + startCount
   val command = s"docker run -d --net=${config.networkName} --name=red5-$startCount " +
     s"-e red5_port=$port -e red5_ip=$localIpAddress -p $port:${config.startPort} bsolomon/red5-media:v1"

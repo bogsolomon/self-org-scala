@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<self-org-config>
+<self-org-config cluster-seed="red5-manager-0">
     <sensor type="Red5Sensor">
         <managed-server port="5080" app="wtRed5_cld"/>
         <scheduler time="30000"/>

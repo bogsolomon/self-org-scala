@@ -7,6 +7,6 @@ Class-Path: spray-routing_2.10-1.3.3.jar akka-actor_2.10-2.3.5.jar spr
  il_2.10-1.3.3.jar spray-http_2.10-1.3.3.jar spray-io_2.10-1.3.3.jar s
  pray-client_2.10-1.3.3.jar config-1.2.1.jar logback-classic-1.1.3.jar
   parboiled-core-1.1.7.jar akka-remote_2.10-2.3.5.jar netty-3.8.0.Fina
- l.jar protobuf-java-2.5.0.jar
+ l.jar protobuf-java-2.5.0.jar akka-cluster_2.10-2.3.5.jar
 Main-Class: ca.ncct.uottawa.control.selforg.manager.Bootstraper
 

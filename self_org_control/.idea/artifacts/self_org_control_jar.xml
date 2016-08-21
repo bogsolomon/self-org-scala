@@ -30,6 +30,7 @@
       <element id="library" level="project" name="SBT: com.fuzzylite:jfuzzylite:5.0:jar" />
       <element id="library" level="project" name="SBT: org.slf4j:slf4j-api:1.7.7:jar" />
       <element id="library" level="project" name="SBT: com.chuusai:shapeless_2.10:1.2.4:jar" />
+      <element id="library" level="project" name="SBT: com.typesafe.akka:akka-cluster_2.10:2.3.5:jar" />
     </root>
   </artifact>
 </component>
