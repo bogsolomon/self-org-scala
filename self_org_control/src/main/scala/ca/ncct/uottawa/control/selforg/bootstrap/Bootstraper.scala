@@ -4,6 +4,9 @@ import java.net.{InetAddress, NetworkInterface}
 import java.util
 
 import akka.actor._
+import akka.cluster.Cluster
+import akka.cluster.ClusterEvent._
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.ClusterMessageListener
 import ca.ncct.uottawa.control.selforg.bootstrap.component._
 import ca.ncct.uottawa.control.selforg.bootstrap.config._
 import com.typesafe.config.ConfigFactory
@@ -75,6 +78,10 @@ object Bootstraper {
 
     val listener = system.actorOf(Props(new UnhandledMessageListener()))
     system.eventStream.subscribe(listener, classOf[UnhandledMessage])
+    val cluster = Cluster(system)
+    val clusterListener = system.actorOf(Props(new ClusterMessageListener()))
+    cluster.subscribe(clusterListener, initialStateMode = InitialStateAsEvents,
+      classOf[MemberEvent], classOf[UnreachableMember])
   }
 
   def main(args: Array[String]): Unit = {
