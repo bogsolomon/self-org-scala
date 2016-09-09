@@ -6,7 +6,7 @@ import java.nio.file.{StandardOpenOption, Files, Paths}
 import akka.actor.{ActorLogging, Actor, ActorRef, Props}
 import ca.ncct.uottawa.control.selforg.manager.common.{RemoveNode, AddNode}
 import ca.ncct.uottawa.control.selforg.manager.config.Config
-import ca.ncct.uottawa.control.selforg.manager.util.Utils
+import scala.concurrent.duration._
 
 import scala.io.Source
 import scala.sys.process.Process
@@ -20,6 +20,9 @@ object Manager {
 }
 
 class Manager(config : Config) extends Actor with ActorLogging {
+
+  import scala.concurrent.ExecutionContext.Implicits.global
+
   val PERSITENCE_FILE: String = "instance-count.txt"
 
   var startCount = 0;
@@ -41,6 +44,14 @@ class Manager(config : Config) extends Actor with ActorLogging {
       addNode
     case RemoveNode =>
       removeNode
+    case "tick" =>
+      val count = startCount + 1
+      var command = s"docker stop red5-control-$count"
+      log.debug("Stop command is: " + command)
+      Process(command).run().exitValue()
+      command = s"docker rm red5-control-$count"
+      log.debug("Stop command is: " + command)
+      Process(command).run().exitValue()
   }
 
   def addNode: Unit = {
@@ -65,12 +76,7 @@ class Manager(config : Config) extends Actor with ActorLogging {
     command = s"docker rm red5-$startCount"
     log.debug("Stop command is: " + command)
     Process(command).run().exitValue()
-    command = s"docker stop red5-control-$startCount"
-    log.debug("Stop command is: " + command)
-    Process(command).run().exitValue()
-    command = s"docker rm red5-control-$startCount"
-    log.debug("Stop command is: " + command)
-    Process(command).run().exitValue()
+    context.system.scheduler.scheduleOnce(180 second, self, "tick")
     startCount -= 1
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)

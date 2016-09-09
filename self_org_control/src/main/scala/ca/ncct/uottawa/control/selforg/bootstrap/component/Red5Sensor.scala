@@ -1,6 +1,7 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component
 
 import akka.actor.{ActorRef, Props, ActorLogging, Actor}
+import akka.cluster.Cluster
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.SensorMeasurement
 import ca.ncct.uottawa.control.selforg.bootstrap.config.SensorConfig
 import scala.concurrent.Future
@@ -19,6 +20,8 @@ class Red5Sensor(config: SensorConfig, filter: ActorRef) extends Actor with Acto
   val managedServerHost = System.getenv("managed_host")
   def SERVLET_URL = "serverStats"
   var measurementURL:String = "http://" + managedServerHost + ":" + config.managedServerPort + "/" + config.managedApp + "/" + SERVLET_URL
+  var MAX_FAIL = 5
+  var failCount = 0
 
   import spray.http._
   import spray.client.pipelining._
@@ -47,9 +50,18 @@ class Red5Sensor(config: SensorConfig, filter: ActorRef) extends Actor with Acto
         case Success(s: SensorMeasurement) => {
           log.debug(s.toString)
           filter ! s
+          failCount = 0
         }
-        case Failure(error) =>
+        case Failure(error) => {
+          failCount += 1
           log.error(error, "Couldn't get sensor metrics")
+          if (failCount > MAX_FAIL) {
+            log.info("Leaving cluster")
+            Cluster(context.system).leave(Cluster(context.system).selfAddress)
+            log.info("Shutting down")
+            context.system.shutdown()
+          }
+        }
       }
   }
 }

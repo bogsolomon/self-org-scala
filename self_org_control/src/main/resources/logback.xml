@@ -10,6 +10,8 @@
 
     <logger name="spray.can" level="WARN"/>
     <logger name="org.jgroups" level="WARN"/>
+    <logger name="akka.cluster" level="ERROR"/>
+    <logger name="akka.remote" level="ERROR"/>
 
     <root level="debug">
         <appender-ref ref="STDOUT" />

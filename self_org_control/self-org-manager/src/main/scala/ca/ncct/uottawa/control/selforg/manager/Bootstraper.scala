@@ -1,5 +1,7 @@
 package ca.ncct.uottawa.control.selforg.manager
 
+import akka.cluster.Cluster
+import akka.cluster.ClusterEvent._
 import ca.ncct.uottawa.control.selforg.manager.util.Utils
 import com.typesafe.config.ConfigFactory
 
@@ -30,6 +32,11 @@ object Bootstraper {
         withFallback(ConfigFactory.parseString(s"""akka.cluster.seed-nodes = ["akka.tcp://controlSystem@${systemConfig.seedNode}:2551"]""")).
         withFallback(config))
     system.actorOf(Props(classOf[Manager], systemConfig), "manager")
+
+    val cluster = Cluster(system)
+    val clusterListener = system.actorOf(Props(new ClusterMessageListener()))
+    cluster.subscribe(clusterListener, initialStateMode = InitialStateAsEvents,
+      classOf[MemberEvent], classOf[UnreachableMember], classOf[MemberUp], classOf[MemberRemoved])
   }
 
   def main(args: Array[String]): Unit = {

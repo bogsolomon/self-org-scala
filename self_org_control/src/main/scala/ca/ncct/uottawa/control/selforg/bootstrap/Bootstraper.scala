@@ -81,7 +81,7 @@ object Bootstraper {
     val cluster = Cluster(system)
     val clusterListener = system.actorOf(Props(new ClusterMessageListener()))
     cluster.subscribe(clusterListener, initialStateMode = InitialStateAsEvents,
-      classOf[MemberEvent], classOf[UnreachableMember])
+      classOf[MemberEvent], classOf[UnreachableMember], classOf[MemberUp], classOf[MemberRemoved])
   }
 
   def main(args: Array[String]): Unit = {
