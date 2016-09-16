@@ -6,7 +6,7 @@ import java.util
 import akka.actor._
 import akka.cluster.Cluster
 import akka.cluster.ClusterEvent._
-import ca.ncct.uottawa.control.selforg.bootstrap.ants.ClusterMessageListener
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.AntSystem
 import ca.ncct.uottawa.control.selforg.bootstrap.component._
 import ca.ncct.uottawa.control.selforg.bootstrap.config._
 import com.typesafe.config.ConfigFactory
@@ -27,8 +27,9 @@ object Bootstraper {
     system.actorOf(Props(classOf[DataFilterChain], config, coordinator), "filter")
   }
 
-  def createCoordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, decisionMaker: ActorRef, actuator: ActorRef, system: ActorSystem) = {
-    system.actorOf(Props(classOf[Coordinator], config, model, estimator, decisionMaker, actuator), "coordinator")
+  def createCoordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, decisionMaker: ActorRef,
+                        actuator: ActorRef, system: ActorSystem, antSystem: ActorRef) = {
+    system.actorOf(Props(classOf[Coordinator], config, model, estimator, decisionMaker, actuator, antSystem), "coordinator")
   }
 
   def createModel(config: GenericConfig, system: ActorSystem) = {
@@ -70,7 +71,8 @@ object Bootstraper {
     val estimator: ActorRef = createEstimator(systemConfig.estimatorConfig, system)
     val decisionMaker: ActorRef = createDecisionMaker(systemConfig.dmConfig, system)
     val actuator: ActorRef = createActuator(systemConfig.actuatorConfig, system)
-    val coordinator: ActorRef = createCoordinator(systemConfig.coordinator, model, estimator, decisionMaker, actuator, system)
+    val antSystem = system.actorOf(Props(new AntSystem(System.getenv("managed_host").split("-")(1).toInt)), "antSystem")
+    val coordinator: ActorRef = createCoordinator(systemConfig.coordinator, model, estimator, decisionMaker, actuator, system, antSystem)
     val filter: ActorRef = createFilter(systemConfig.filter, coordinator, system)
     systemConfig.sensors.foreach(x => {
       createSensor(x, filter, system)
@@ -79,8 +81,7 @@ object Bootstraper {
     val listener = system.actorOf(Props(new UnhandledMessageListener()))
     system.eventStream.subscribe(listener, classOf[UnhandledMessage])
     val cluster = Cluster(system)
-    val clusterListener = system.actorOf(Props(new ClusterMessageListener()))
-    cluster.subscribe(clusterListener, initialStateMode = InitialStateAsEvents,
+    cluster.subscribe(antSystem, initialStateMode = InitialStateAsEvents,
       classOf[MemberEvent], classOf[UnreachableMember], classOf[MemberUp], classOf[MemberRemoved])
   }
 
