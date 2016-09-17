@@ -6,8 +6,6 @@ import akka.cluster.{Cluster, Member}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Model
 import scala.concurrent.duration._
 
-import scala.collection.mutable.ListBuffer
-
 /**
   * Created by Bogdan on 8/21/2016.
   */
@@ -18,8 +16,7 @@ class AntSystem(instCount: Int) extends Actor with ActorLogging {
   var hasSentAnt = false
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
   val isFirst = instCount == 0
-  var model: Model
-  var nextAddresses: scala.collection.mutable.Map[Address, Ant]
+  var model: Model = null
 
   override def receive = {
     case MemberUp(member) => {
@@ -27,8 +24,9 @@ class AntSystem(instCount: Int) extends Actor with ActorLogging {
       if (member.roles.contains("control")) {
         controlMembers += (member -> new Metrics)
         if (!isFirst && !hasSentAnt) {
-          context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! Ant
-          hasSentAnt
+          context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! Ant(List(Triple(member.address, 0, 0)))
+          hasSentAnt = true
+          log.info("Sent initial ant")
         }
       }
     }
@@ -46,14 +44,15 @@ class AntSystem(instCount: Int) extends Actor with ActorLogging {
     case ant:Ant => {
       log.info("Received ant: {}", ant)
       val nextAddress = ant.receive(Cluster(context.system).selfAddress, model.bucketLevel)
-      nextAddresses += nextAddress._1 -> ant
-      log.info("Ant {} will jump to {} in {}", ant, nextAddress._1, nextAddress._2.toLong * 1000)
-      context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, nextAddress)
+      log.info("Ant {} will jump to {} in {} seconds", ant, nextAddress._1, nextAddress._2.toLong)
+      context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, Pair(ant, nextAddress._2.toLong))
     }
-    case modelRec:Model =>
+    case modelRec:Model => {
       model = modelRec
-    case jump:Pair[Address, Double] => {
-      
+    }
+    case jump:Pair[Ant, Address] => {
+      context.actorSelection(RootActorPath(jump._2) / "user" / "antSystem") ! jump._1
+      log.info("Ant {} jumped to {}", jump._1, jump._2);
     }
   }
 }

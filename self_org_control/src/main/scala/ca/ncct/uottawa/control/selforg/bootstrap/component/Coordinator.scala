@@ -1,6 +1,7 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component
 
 import akka.actor.{ActorLogging, Actor, Props, ActorRef}
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.AntSystem
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.{Decision, EstimatedData, Model, FilterMeasurement}
 import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
 
@@ -8,10 +9,11 @@ import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
   * Created by Bogdan on 7/31/2016.
   */
 object Coordinator {
-  def props(config: GenericConfig, model: ActorRef, estimator: ActorRef, dm: ActorRef, actuator: ActorRef): Props =
-    Props(new Coordinator(config, model, estimator, dm, actuator))
+  def props(config: GenericConfig, model: ActorRef, estimator: ActorRef, dm: ActorRef, actuator: ActorRef, antSystem: ActorRef): Props =
+    Props(new Coordinator(config, model, estimator, dm, actuator, antSystem))
 }
-class Coordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, dm: ActorRef, actuator: ActorRef) extends Actor with ActorLogging {
+class Coordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, dm: ActorRef, actuator: ActorRef,
+                  antSystem: ActorRef) extends Actor with ActorLogging {
 
   override def receive  = {
     case msg : FilterMeasurement => coordinate(msg)
@@ -30,6 +32,7 @@ class Coordinator(config: GenericConfig, model: ActorRef, estimator: ActorRef, d
     log.debug("coordinate model update: " + msg)
 
     estimator ! msg
+    antSystem ! msg
   }
 
   def coordinate(msg: EstimatedData): Unit = {
