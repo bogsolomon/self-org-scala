@@ -44,7 +44,7 @@ case class Ant(serverData: List[Triple[Address, Int, Double]]) {
   }
 
   private def jumpNextNode(serverData: List[Triple[Address, Int, Double]], currentAddress: Address,
-                           knownServers:List[Address]): Pair[Address, Double] = {
+                           knownServers:List[Address], newPheromoneValue: Double): Triple[Address, Double, Double] = {
     val r = scala.util.Random
     var sumOfTimes = 0
     var sumOfPheromones:Double = 0
@@ -68,18 +68,18 @@ case class Ant(serverData: List[Triple[Address, Int, Double]]) {
 
     for (prob <- probTable) {
       if (sumOfProbs + prob._2 < random ) {
-        return prob
+        return Triple(prob._1, prob._2, newPheromoneValue)
       } else {
         sumOfProbs += prob._2
       }
     }
 
-    probTable.last
+    Triple(probTable.last._1, probTable.last._2, newPheromoneValue)
   }
 
-  def receive(currentAddress: Address, fuzzyFactor: Double, knownServers:List[Address]): Pair[Address, Double] = {
+  def receive(currentAddress: Address, fuzzyFactor: Double, knownServers:List[Address]): Triple[Address, Double, Double] = {
     val newPheromone = calculatePheromone(fuzzyFactor)
-    val newTable = updateTables(currentAddress, newPheromone, fuzzyFactor)
-    jumpNextNode(newTable, currentAddress, knownServers)
+    val newTable = updateTables(currentAddress, newPheromone, fuzzyFactor, knownServers)
+    jumpNextNode(newTable, currentAddress, knownServers, newPheromone)
   }
 }

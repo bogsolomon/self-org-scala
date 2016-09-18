@@ -13,10 +13,18 @@ import scala.concurrent.duration._
 
 class AntSystem(instCount: Int) extends Actor with ActorLogging {
 
+  def PHEROMONE_DECAY = 10
+  def DECAY_RATE = 15
+
   var hasSentAnt = false
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
   val isFirst = instCount == 0
   var model: Model = null
+  var pheromoneLevel:Double = 0
+
+  override def preStart() = {
+    context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
+  }
 
   override def receive = {
     case MemberUp(member) => {
@@ -43,9 +51,10 @@ class AntSystem(instCount: Int) extends Actor with ActorLogging {
       log.info("Members: {}", controlMembers)
     case ant:Ant => {
       log.info("Received ant: {}", ant)
-      val nextAddress = ant.receive(Cluster(context.system).selfAddress, model.bucketLevel)
+      val nextAddress = ant.receive(Cluster(context.system).selfAddress, model.bucketLevel, controlMembers.keySet.map(_.address).toList)
       log.info("Ant {} will jump to {} in {} seconds", ant, nextAddress._1, nextAddress._2.toLong)
       context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, Pair(ant, nextAddress._2.toLong))
+      pheromoneLevel += nextAddress._3
     }
     case modelRec:Model => {
       model = modelRec
@@ -53,6 +62,10 @@ class AntSystem(instCount: Int) extends Actor with ActorLogging {
     case jump:Pair[Ant, Address] => {
       context.actorSelection(RootActorPath(jump._2) / "user" / "antSystem") ! jump._1
       log.info("Ant {} jumped to {}", jump._1, jump._2);
+    }
+    case "decay" => {
+      pheromoneLevel = (pheromoneLevel + PHEROMONE_DECAY).max(0)
+      context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
     }
   }
 }
