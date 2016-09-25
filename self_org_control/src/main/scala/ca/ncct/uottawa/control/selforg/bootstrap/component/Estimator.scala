@@ -1,8 +1,7 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component
 
 import akka.actor.{ActorLogging, Actor, Props}
-import ca.ncct.uottawa.control.selforg.bootstrap.component.Estimator.CountType
-import ca.ncct.uottawa.control.selforg.bootstrap.component.Estimator.CountType.CountType
+import ca.ncct.uottawa.control.selforg.bootstrap.component.Estimator.{Add, Remove, Stable, CountType}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.{EstimatedData, Model}
 import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
 
@@ -12,29 +11,29 @@ import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
 object Estimator {
   def props(config: GenericConfig): Props = Props(new Estimator(config))
 
-  object CountType extends Enumeration {
-    type CountType = Value
-    val Add, Remove, Stable = Value
-  }
+  sealed trait CountType
+  case object Add extends CountType
+  case object Remove extends CountType
+  case object Stable extends CountType
 }
 class Estimator(config: GenericConfig) extends Actor with ActorLogging {
 
   val lowThreshold = config.params("LOWER_THRESHOLD").toDouble
   val highThreshold = config.params("HIGH_THRESHOLD").toDouble
   private var count:Int = 0
-  private var countType:CountType = CountType.Stable
+  private var countType:CountType = Stable
 
   override def receive  = stable
 
   def stable: Receive = {
     case msg : Model => msg.bucketLevel match {
       case x if x < lowThreshold => {
-        countType = CountType.Remove
+        countType = Remove
         count = 0
         context become remove
       }
       case x if x > highThreshold => {
-        countType = CountType.Add
+        countType = Add
         count = 0
         context become add
       }
@@ -48,7 +47,7 @@ class Estimator(config: GenericConfig) extends Actor with ActorLogging {
         sender ! EstimatedData(count, countType)
       }
       case x if x > highThreshold => {
-        countType = CountType.Add
+        countType = Add
         count = 0
         context become add
       }
@@ -59,7 +58,7 @@ class Estimator(config: GenericConfig) extends Actor with ActorLogging {
   def add: Receive = {
     case msg : Model => msg.bucketLevel match {
       case x if x < lowThreshold => {
-        countType = CountType.Remove
+        countType = Remove
         count = 0
         context become remove
       }

@@ -2,8 +2,12 @@ package ca.ncct.uottawa.control.selforg.bootstrap.ants
 
 import akka.actor.{Address, RootActorPath, ActorLogging, Actor}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, UnreachableMember, MemberUp}
+import akka.cluster.pubsub.DistributedPubSub
+import akka.cluster.pubsub.DistributedPubSubMediator.Subscribe
 import akka.cluster.{Cluster, Member}
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{NoMorph, MinMorph, MaxMorph}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Model
+import scala.collection.mutable
 import scala.concurrent.duration._
 
 /**
@@ -13,6 +17,9 @@ import scala.concurrent.duration._
 
 class AntSystem(instCount: Int) extends Actor with ActorLogging {
 
+  case class SLABreach()
+  case class AntJump(value: (Ant, Address))
+
   def PHEROMONE_DECAY = 10
   def DECAY_RATE = 15
 
@@ -21,6 +28,15 @@ class AntSystem(instCount: Int) extends Actor with ActorLogging {
   val isFirst = instCount == 0
   var model: Model = null
   var pheromoneLevel:Double = 0
+  var ants : mutable.LinkedHashSet[Ant] = new mutable.LinkedHashSet[Ant]
+  var manager: Member = null
+  var slaBreach: Boolean = false
+
+  import scala.concurrent.ExecutionContext.Implicits.global
+
+  val mediator = DistributedPubSub(context.system).mediator
+  val topic = "antSubsystem"
+  mediator ! Subscribe(topic, self)
 
   override def preStart() = {
     context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
@@ -36,6 +52,8 @@ class AntSystem(instCount: Int) extends Actor with ActorLogging {
           hasSentAnt = true
           log.info("Sent initial ant")
         }
+      } else {
+        manager = member
       }
     }
     case UnreachableMember(member) => {
@@ -51,21 +69,40 @@ class AntSystem(instCount: Int) extends Actor with ActorLogging {
       log.info("Members: {}", controlMembers)
     case ant:Ant => {
       log.info("Received ant: {}", ant)
-      val nextAddress = ant.receive(Cluster(context.system).selfAddress, model.bucketLevel, controlMembers.keySet.map(_.address).toList)
+      var nextAddress: (Address, Double, Double) = null
+      if (slaBreach) {
+        log.info("SLA breach, ant going to manager")
+        nextAddress = (manager.address, 0, 0)
+      } else {
+        nextAddress = ant.receive(Cluster(context.system).selfAddress, model.bucketLevel, controlMembers.keySet.map(_.address).toList)
+      }
       log.info("Ant {} will jump to {} in {} seconds", ant, nextAddress._1, nextAddress._2.toLong)
-      context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, Pair(ant, nextAddress._2.toLong))
+      context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, AntJump((ant, nextAddress._1)))
       pheromoneLevel += nextAddress._3
+      ants += ant
     }
     case modelRec:Model => {
       model = modelRec
     }
-    case jump:Pair[Ant, Address] => {
-      context.actorSelection(RootActorPath(jump._2) / "user" / "antSystem") ! jump._1
-      log.info("Ant {} jumped to {}", jump._1, jump._2);
+    case jump:AntJump => {
+      context.actorSelection(RootActorPath(jump.value._2) / "user" / "antSystem") ! jump.value._1
+      log.info("Ant {} jumped to {}", jump.value._1, jump.value._2);
     }
     case "decay" => {
-      pheromoneLevel = (pheromoneLevel + PHEROMONE_DECAY).max(0)
+      pheromoneLevel = (pheromoneLevel + PHEROMONE_DECAY) max 0
       context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
+      val maxAnts = ants.count(_.morphType == MaxMorph)
+      val minAnts = ants.count(_.morphType == MinMorph)
+      val noAnts = ants.count(_.morphType == NoMorph)
+
+      if (maxAnts * 2 > minAnts + noAnts || minAnts * 2 > maxAnts + noAnts) {
+        slaBreach = true
+        mediator ! SLABreach
+      }
+    }
+    case SLABreach => {
+      log.info("Received SLA breach detected")
+      slaBreach = true
     }
   }
 }

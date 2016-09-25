@@ -1,8 +1,7 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component
 
 import akka.actor.{Actor, ActorLogging, Props}
-import ca.ncct.uottawa.control.selforg.bootstrap.component.DecisionMaker.DecisionType
-import ca.ncct.uottawa.control.selforg.bootstrap.component.DecisionMaker.DecisionType._
+import ca.ncct.uottawa.control.selforg.bootstrap.component.DecisionMaker.{Nochange, Reject, Accept, DecisionType}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Decision
 import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
 import com.watchtogether.autonomic.selforg.red5.manager.group.GroupManager
@@ -24,9 +23,9 @@ class Actuator(config: GenericConfig) extends Actor with ActorLogging {
 
   def actuate(decision: DecisionType): Unit = {
     decision match {
-      case DecisionType.Accept => GroupManager.getManager.broadcastMessage(new ClientPolicyMessage(true, envHost, envPort))
-      case DecisionType.Reject => GroupManager.getManager.broadcastMessage(new ClientPolicyMessage(false, envHost, envPort))
-      case DecisionType.Nochange =>
+      case Accept => GroupManager.getManager.broadcastMessage(new ClientPolicyMessage(true, envHost, envPort))
+      case Reject => GroupManager.getManager.broadcastMessage(new ClientPolicyMessage(false, envHost, envPort))
+      case Nochange =>
     }
   }
 }

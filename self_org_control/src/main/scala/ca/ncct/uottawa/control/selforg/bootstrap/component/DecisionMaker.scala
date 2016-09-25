@@ -1,10 +1,8 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.component
 
 import akka.actor.{ActorLogging, Actor, Props}
-import ca.ncct.uottawa.control.selforg.bootstrap.component.DecisionMaker.DecisionType
-import ca.ncct.uottawa.control.selforg.bootstrap.component.DecisionMaker.DecisionType.DecisionType
-import ca.ncct.uottawa.control.selforg.bootstrap.component.Estimator.CountType
-import ca.ncct.uottawa.control.selforg.bootstrap.component.Estimator.CountType._
+import ca.ncct.uottawa.control.selforg.bootstrap.component.DecisionMaker.{Accept, Reject, Nochange, DecisionType}
+import ca.ncct.uottawa.control.selforg.bootstrap.component.Estimator.{Add, Remove, CountType}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.{Decision, EstimatedData}
 import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
 
@@ -14,15 +12,15 @@ import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
 object DecisionMaker {
   def props(config: GenericConfig): Props = Props(new DecisionMaker(config))
 
-  object DecisionType extends Enumeration {
-    type DecisionType = Value
-    val Accept, Reject, Nochange = Value
-  }
+  sealed trait DecisionType
+  case object Accept extends DecisionType
+  case object Reject extends DecisionType
+  case object Nochange extends DecisionType
 }
 
 class DecisionMaker(config: GenericConfig) extends Actor with ActorLogging {
 
-  var lastDecision:DecisionType = DecisionType.Nochange
+  var lastDecision:DecisionType = Nochange
   val lowThreshold = config.params("LOWER_THRESHOLD_CHANGE_COUNT").toDouble
   val highThreshold = config.params("HIGH_THRESHOLD_CHANGE_COUNT").toDouble
 
@@ -31,14 +29,14 @@ class DecisionMaker(config: GenericConfig) extends Actor with ActorLogging {
   }
 
   def makeDecision(count: Int, countType: CountType): Unit = {
-    if (count > lowThreshold && countType == CountType.Remove && lastDecision != DecisionType.Reject) {
-      lastDecision = DecisionType.Reject
+    if (count > lowThreshold && countType == Remove && lastDecision != Reject) {
+      lastDecision = Reject
       sender ! Decision(lastDecision)
-    } else if (count > highThreshold && countType == CountType.Add && lastDecision != DecisionType.Accept) {
-      lastDecision = DecisionType.Accept
+    } else if (count > highThreshold && countType == Add && lastDecision != Accept) {
+      lastDecision = Accept
       sender ! Decision(lastDecision)
     } else {
-      sender ! Decision(DecisionType.Nochange)
+      sender ! Decision(Nochange)
     }
   }
 }
