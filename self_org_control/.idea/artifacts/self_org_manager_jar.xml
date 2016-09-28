@@ -24,6 +24,7 @@
       <element id="library" level="project" name="SBT: io.netty:netty:3.10.3.Final:jar" />
       <element id="library" level="project" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.3:jar" />
       <element id="library" level="project" name="SBT: org.scala-lang:scala-library:2.11.7:jar" />
+      <element id="artifact" artifact-name="self-org-common:jar" />
     </root>
   </artifact>
 </component>

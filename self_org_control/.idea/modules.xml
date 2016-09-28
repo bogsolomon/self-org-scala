@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/self-org-common/self-org-common.iml" filepath="$PROJECT_DIR$/self-org-common/self-org-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/self-org-manager/self-org-manager.iml" filepath="$PROJECT_DIR$/self-org-manager/self-org-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/self_org_control.iml" filepath="$PROJECT_DIR$/.idea/modules/self_org_control.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/self_org_control-build.iml" filepath="$PROJECT_DIR$/.idea/modules/self_org_control-build.iml" />

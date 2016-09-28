@@ -47,5 +47,6 @@
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.7:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.3:jar" level="project" />
     <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.7.12:jar" level="project" />
+    <orderEntry type="module" module-name="self-org-common" />
   </component>
 </module>

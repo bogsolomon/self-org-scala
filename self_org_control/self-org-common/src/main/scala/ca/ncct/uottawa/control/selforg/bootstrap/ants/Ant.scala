@@ -1,7 +1,7 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.ants
 
 import akka.actor.Address
-import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, NoMorph, MorphType}
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, MorphType, NoMorph}
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
