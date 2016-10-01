@@ -6,7 +6,8 @@ import ca.ncct.uottawa.control.selforg.manager.util.Utils
 import com.typesafe.config.ConfigFactory
 
 import scala.xml.XML
-import akka.actor.{Props, ActorSystem}
+import akka.actor.{ActorSystem, Props}
+import ca.ncct.uottawa.control.selforg.manager.ants.AntSystem
 import ca.ncct.uottawa.control.selforg.manager.config.Config
 
 /**
@@ -34,7 +35,7 @@ object Bootstraper {
     system.actorOf(Props(classOf[Manager], systemConfig), "manager")
 
     val cluster = Cluster(system)
-    val clusterListener = system.actorOf(Props(new ClusterMessageListener()))
+    val clusterListener = system.actorOf(Props(new AntSystem()))
     cluster.subscribe(clusterListener, initialStateMode = InitialStateAsEvents,
       classOf[MemberEvent], classOf[UnreachableMember], classOf[MemberUp], classOf[MemberRemoved])
   }

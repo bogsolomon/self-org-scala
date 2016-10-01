@@ -1,17 +1,20 @@
-package ca.ncct.uottawa.control.selforg.manager
+package ca.ncct.uottawa.control.selforg.manager.ants
 
 import akka.actor.{Actor, ActorLogging}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.Member
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant
+
+import scala.collection.mutable.ListBuffer
 
 /**
-  * Created by Bogdan on 8/21/2016.
+  * Created by Bogdan on 2016-09-26.
   */
-
-
-class ClusterMessageListener extends Actor with ActorLogging {
+class AntSystem  extends Actor with ActorLogging {
 
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
+  var activeAnts : ListBuffer[Ant] = new ListBuffer[Ant]
+  var inactiveAnts : ListBuffer[Ant] = new ListBuffer[Ant]
 
   override def receive = {
     case MemberUp(member) => {
@@ -30,7 +33,18 @@ class ClusterMessageListener extends Actor with ActorLogging {
       controlMembers -= member
     }
     case _: MemberEvent => // ignore
-    log.info("Members: {}", controlMembers)
+      log.info("Members: {}", controlMembers)
+    case ant:Ant => {
+      log.info("Received ant: {}", ant)
+      activeAnts += ant
+      if (activeAnts.size + 1 == controlMembers.size) {
+        houseHuntingOptimization
+      }
+    }
+  }
+
+  def houseHuntingOptimization: Int = {
+    ListBuffer[HHAnt] initSolutions
   }
 }
 
