@@ -12,7 +12,8 @@ libraryDependencies ++= Seq(
   "io.spray" %%  "spray-routing" % sprayV  withSources() withJavadoc(),
   "io.spray" %%  "spray-client"     % sprayV  withSources() withJavadoc(),
   // Change this to another test framework if you prefer
-  // "org.scalatest" %% "scalatest" % "2.1.6" % "test",
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+  "com.typesafe.akka" %% "akka-testkit" % "2.4.0" % "test",
   // Akka
   "com.typesafe.akka" %% "akka-actor" % "2.4.0",
   "com.typesafe.akka" %% "akka-slf4j" % "2.4.0",

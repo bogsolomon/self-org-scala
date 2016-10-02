@@ -6,6 +6,7 @@ import akka.cluster.Member
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant
 
 import scala.collection.mutable.ListBuffer
+import scala.util.Random
 
 /**
   * Created by Bogdan on 2016-09-26.
@@ -14,7 +15,10 @@ class AntSystem  extends Actor with ActorLogging {
 
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
   var activeAnts : ListBuffer[Ant] = new ListBuffer[Ant]
-  var inactiveAnts : ListBuffer[Ant] = new ListBuffer[Ant]
+  var inactiveAnts : ListBuffer[HHAnt] = new ListBuffer[HHAnt]
+  var controlMemberSize : Int = -1
+
+  def THR = 0.1
 
   override def receive = {
     case MemberUp(member) => {
@@ -44,7 +48,61 @@ class AntSystem  extends Actor with ActorLogging {
   }
 
   def houseHuntingOptimization: Int = {
-    ListBuffer[HHAnt] initSolutions
+    var initSolutions = new ListBuffer[HHAnt]
+    val size = controlMemberSize max controlMembers.size
+    // Round 1 - all ants are initialized with solutions
+    activeAnts.zipWithIndex.map {case (s,i) => initSolutions += new HHAnt(s, size, i)}
+    // Check suitabilities
+    initSolutions.filter(_.solFitness < THR).map(inactiveAnts += _)
+    initSolutions = initSolutions.filterNot(inactiveAnts.toSet)
+    houseHuntingRound(initSolutions)
+  }
+
+  def houseHuntingRound(initSolutions: ListBuffer[HHAnt]): Int = {
+    var prevNestCounts: Map[Int, Int] = Map()
+    initSolutions.foreach(ant => prevNestCounts = prevNestCounts + (ant.nestId -> 1))
+    // Round 2 - go home nest and recruit randomly
+    val recruited: ListBuffer[(HHAnt, HHAnt)] = antRecruitment(initSolutions)
+    // Round 3 - Ants go to new nest and check nests which increased/decreased
+    var nests: Map[Int, List[HHAnt]] = Map()
+    recruited.foreach(ant => {
+      var prevList: List[HHAnt] = nests.getOrElse(ant._1.nestId, Nil)
+      prevList = ant._1 :: prevList
+      if (ant._2.nestCount != -1) {
+        prevList = ant._2 :: prevList
+      }
+      nests = nests + (ant._1.nestId -> prevList)
+    })
+
+    if (nests.size == 1) {
+      return nests.head._2(0).newCount
+    }
+
+    var newInitSolutions: ListBuffer[HHAnt] = ListBuffer()
+    nests.foreach(nest => {
+      if (nest._2.size < prevNestCounts(nest._1)) {
+        // nest has decreased in size so it should be dropped. Filter out all ants going to it
+        newInitSolutions = initSolutions.filterNot(ant => nest._2.contains(ant))
+      }
+    })
+    houseHuntingRound(newInitSolutions)
+  }
+
+  def antRecruitment(initSolutions: ListBuffer[HHAnt]): ListBuffer[(HHAnt, HHAnt)] = {
+    val recruited:ListBuffer[(HHAnt, HHAnt)] = new ListBuffer[(HHAnt, HHAnt)]
+
+    while (initSolutions.size > 1) {
+      val ant1 = initSolutions.remove(Random.nextInt(initSolutions.size))
+      val ant2 = initSolutions.remove(Random.nextInt(initSolutions.size))
+      ant2.nestId = ant1.nestId
+      recruited += Tuple2(ant1, ant2)
+    }
+
+    if (initSolutions.nonEmpty) {
+      recruited += Tuple2(initSolutions(0), HHAnt(initSolutions(0).ant, 0, -1))
+    }
+
+    recruited
   }
 }
 
