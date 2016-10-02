@@ -6,7 +6,7 @@ import ca.ncct.uottawa.control.selforg.manager.util.Utils
 import com.typesafe.config.ConfigFactory
 
 import scala.xml.XML
-import akka.actor.{ActorSystem, Props}
+import akka.actor.{ActorRef, ActorSystem, Props}
 import ca.ncct.uottawa.control.selforg.manager.ants.AntSystem
 import ca.ncct.uottawa.control.selforg.manager.config.Config
 
@@ -32,10 +32,10 @@ object Bootstraper {
         withFallback(ConfigFactory.parseString("akka.cluster.roles = [manager]")).
         withFallback(ConfigFactory.parseString(s"""akka.cluster.seed-nodes = ["akka.tcp://controlSystem@${systemConfig.seedNode}:2551"]""")).
         withFallback(config))
-    system.actorOf(Props(classOf[Manager], systemConfig), "manager")
+    val manager:ActorRef = system.actorOf(Props(classOf[Manager], systemConfig), "manager")
 
     val cluster = Cluster(system)
-    val clusterListener = system.actorOf(Props(new AntSystem()))
+    val clusterListener = system.actorOf(Props(classOf[AntSystem], manager), "antSystem")
     cluster.subscribe(clusterListener, initialStateMode = InitialStateAsEvents,
       classOf[MemberEvent], classOf[UnreachableMember], classOf[MemberUp], classOf[MemberRemoved])
   }

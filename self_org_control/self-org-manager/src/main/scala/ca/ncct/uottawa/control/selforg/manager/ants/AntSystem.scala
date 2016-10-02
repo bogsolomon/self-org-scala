@@ -1,9 +1,10 @@
 package ca.ncct.uottawa.control.selforg.manager.ants
 
-import akka.actor.{Actor, ActorLogging}
+import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.Member
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant
+import ca.ncct.uottawa.control.selforg.manager.common.{AddNode, RemoveNode}
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
@@ -11,7 +12,12 @@ import scala.util.Random
 /**
   * Created by Bogdan on 2016-09-26.
   */
-class AntSystem  extends Actor with ActorLogging {
+
+object AntSystem {
+  def props(manager: ActorRef): Props = Props(new AntSystem(manager))
+}
+
+class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
 
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
   var activeAnts : ListBuffer[Ant] = new ListBuffer[Ant]
@@ -42,7 +48,18 @@ class AntSystem  extends Actor with ActorLogging {
       log.info("Received ant: {}", ant)
       activeAnts += ant
       if (activeAnts.size + 1 == controlMembers.size) {
-        houseHuntingOptimization
+        // all ants received - optimize
+        val newCount = houseHuntingOptimization
+        if (newCount > controlMembers.size) {
+          for (count <- 0 until newCount - controlMembers.size) {
+            manager ! AddNode
+          }
+        } else {
+          for (count <- 0 until controlMembers.size - newCount) {
+            manager ! RemoveNode
+            activeAnts.remove(0, controlMembers.size - newCount)
+          }
+        }
       }
     }
   }

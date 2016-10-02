@@ -71,7 +71,7 @@ object Bootstraper {
     val estimator: ActorRef = createEstimator(systemConfig.estimatorConfig, system)
     val decisionMaker: ActorRef = createDecisionMaker(systemConfig.dmConfig, system)
     val actuator: ActorRef = createActuator(systemConfig.actuatorConfig, system)
-    val antSystem = system.actorOf(Props(new AntSystem(System.getenv("managed_host").split("-")(1).toInt)), "antSystem")
+    val antSystem = system.actorOf(Props(classOf[AntSystem], System.getenv("managed_host").split("-")(1).toInt), "antSystem")
     val coordinator: ActorRef = createCoordinator(systemConfig.coordinator, model, estimator, decisionMaker, actuator, system, antSystem)
     val filter: ActorRef = createFilter(systemConfig.filter, coordinator, system)
     systemConfig.sensors.foreach(x => {

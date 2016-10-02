@@ -1,12 +1,13 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.ants
 
-import akka.actor.{Address, RootActorPath, ActorLogging, Actor}
-import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, UnreachableMember, MemberUp}
+import akka.actor.{Actor, ActorLogging, ActorRef, Address, Props, RootActorPath}
+import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.pubsub.DistributedPubSub
 import akka.cluster.pubsub.DistributedPubSubMediator.Subscribe
 import akka.cluster.{Cluster, Member}
-import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{NoMorph, MinMorph, MaxMorph}
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, NoMorph}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Model
+
 import scala.collection.mutable
 import scala.concurrent.duration._
 
@@ -14,6 +15,9 @@ import scala.concurrent.duration._
   * Created by Bogdan on 8/21/2016.
   */
 
+object AntSystem {
+  def props(instCount: Int): Props = Props(new AntSystem(instCount))
+}
 
 class AntSystem(instCount: Int) extends Actor with ActorLogging {
 
