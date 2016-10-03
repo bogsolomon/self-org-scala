@@ -7,6 +7,7 @@ import akka.cluster.pubsub.DistributedPubSubMediator.Subscribe
 import akka.cluster.{Cluster, Member}
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, NoMorph}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Model
+import ca.ncct.uottawa.control.selforg.bootstrap.config.AntSystemConfig
 
 import scala.collection.mutable
 import scala.concurrent.duration._
@@ -16,16 +17,16 @@ import scala.concurrent.duration._
   */
 
 object AntSystem {
-  def props(instCount: Int): Props = Props(new AntSystem(instCount))
+  def props(instCount: Int, antSystemConfig: AntSystemConfig): Props = Props(new AntSystem(instCount, antSystemConfig))
 }
 
-class AntSystem(instCount: Int) extends Actor with ActorLogging {
+class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor with ActorLogging {
 
   case class SLABreach()
   case class AntJump(value: (Ant, Address))
 
-  def PHEROMONE_DECAY = 10
-  def DECAY_RATE = 15
+  def PHEROMONE_DECAY = antSystemConfig.decayAmount
+  def DECAY_RATE = antSystemConfig.decayRate
 
   var hasSentAnt = false
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()

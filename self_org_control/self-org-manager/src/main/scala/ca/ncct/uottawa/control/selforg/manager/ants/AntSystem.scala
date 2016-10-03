@@ -1,11 +1,13 @@
 package ca.ncct.uottawa.control.selforg.manager.ants
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.actor.{Actor, ActorLogging, ActorRef, Props, RootActorPath}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.Member
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.NoMorph
 import ca.ncct.uottawa.control.selforg.manager.common.{AddNode, RemoveNode}
 
+import scala.concurrent.duration._
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
@@ -23,6 +25,8 @@ class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
   var activeAnts : ListBuffer[Ant] = new ListBuffer[Ant]
   var inactiveAnts : ListBuffer[HHAnt] = new ListBuffer[HHAnt]
   var controlMemberSize : Int = -1
+  var deltaServerCount = 0
+  val random:Random = Random
 
   def THR = 0.1
 
@@ -48,18 +52,40 @@ class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
       log.info("Received ant: {}", ant)
       activeAnts += ant
       if (activeAnts.size + 1 == controlMembers.size) {
+        log.info("Received all ants, startong optimization")
         // all ants received - optimize
         val newCount = houseHuntingOptimization
+        deltaServerCount = math.abs(newCount - controlMemberSize)
+        log.info("Delta servers: {}", deltaServerCount)
         if (newCount > controlMembers.size) {
-          for (count <- 0 until newCount - controlMembers.size) {
+          for (count <- 0 until deltaServerCount) {
             manager ! AddNode
           }
         } else {
-          for (count <- 0 until controlMembers.size - newCount) {
+          for (count <- 0 until deltaServerCount) {
             manager ! RemoveNode
-            activeAnts.remove(0, controlMembers.size - newCount)
           }
+          activeAnts.remove(0, deltaServerCount)
         }
+      }
+    }
+    case AddNode | RemoveNode => {
+      log.info("Server added/removed")
+      deltaServerCount = deltaServerCount - 1
+      if (deltaServerCount == 0) {
+        log.info("All Servers added/removed")
+        context.system.scheduler.scheduleOnce(1 minute, self, "tick")
+      }
+    }
+    case "tick" => {
+      for (activeAnt <- activeAnts) {
+        log.info("Restarting ants")
+        activeAnt.history = ListBuffer()
+        activeAnt.morphType = NoMorph
+        activeAnt.serverData = Nil
+
+        val member = controlMembers.toList(random.nextInt(controlMembers.size - 1))._1
+        context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! activeAnt
       }
     }
   }

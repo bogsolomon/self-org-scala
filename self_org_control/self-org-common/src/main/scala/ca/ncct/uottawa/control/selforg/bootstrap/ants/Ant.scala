@@ -16,7 +16,7 @@ object Ant {
   case object NoMorph extends MorphType
 }
 
-case class Ant(serverData: List[(Address, Int, Double)]) {
+case class Ant(var serverData: List[(Address, Int, Double)]) {
 
   def PHEROMONE_LEVEL = 10
 
@@ -89,6 +89,7 @@ case class Ant(serverData: List[(Address, Int, Double)]) {
       }
     }
 
+    this.serverData = serverData
     Tuple3(probTable.last._1, probTable.last._2, newPheromoneValue)
   }
 

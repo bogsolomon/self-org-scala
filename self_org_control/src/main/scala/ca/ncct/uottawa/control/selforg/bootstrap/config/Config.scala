@@ -7,7 +7,8 @@ import scala.collection.mutable
   */
 case class Config(val sensors: List[SensorConfig], filter: FilterConfig, coordinator: GenericConfig,
                   model: GenericConfig, estimatorConfig: GenericConfig, dmConfig: GenericConfig,
-                  actuatorConfig: GenericConfig, adaptorConfig: GenericConfig, seedNode : String)
+                  actuatorConfig: GenericConfig, adaptorConfig: GenericConfig, seedNode : String,
+                  antSystemConfig: AntSystemConfig)
 
 object Config {
   def fromXML(node: scala.xml.NodeSeq): Config =
@@ -20,7 +21,8 @@ object Config {
       GenericConfig.fromXML(node \ "decisionMaker"),
       GenericConfig.fromXML(node \ "actuator"),
       GenericConfig.fromXML(node \ "adaptor"),
-      (node \ "@cluster-seed").text
+      (node \ "@cluster-seed").text,
+      AntSystemConfig.fromXML(node \ "antSystem")
     )
 }
 
@@ -68,4 +70,14 @@ object GenericConfig {
       params
     )
   }
+}
+
+case class AntSystemConfig(decayAmount: Int, decayRate: Int)
+
+object AntSystemConfig {
+  def fromXML(node: scala.xml.NodeSeq) : AntSystemConfig =
+    new AntSystemConfig(
+      decayAmount = (node \ "decayAmount").text.toInt,
+      decayRate = (node \ "decayRate").text.toInt
+    )
 }

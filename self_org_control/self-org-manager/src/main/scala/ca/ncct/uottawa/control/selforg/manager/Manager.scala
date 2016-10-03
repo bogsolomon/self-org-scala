@@ -67,6 +67,7 @@ class Manager(config : Config) extends Actor with ActorLogging {
       s"-e red5_port=$port -e red5_ip=$localIpAddress -e managed_host=red5-$startCount bsolomon/red5-control:v1"
     log.debug("New command is: " + commandControl)
     Process(commandControl).run().exitValue()
+    sender ! AddNode
   }
 
   def removeNode: Unit = {
@@ -80,5 +81,6 @@ class Manager(config : Config) extends Actor with ActorLogging {
     startCount -= 1
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
+    sender ! RemoveNode
   }
 }
