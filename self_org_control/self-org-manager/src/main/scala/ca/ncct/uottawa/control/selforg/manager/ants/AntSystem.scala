@@ -30,6 +30,8 @@ class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
 
   def THR = 0.1
 
+  import scala.concurrent.ExecutionContext.Implicits.global
+
   override def receive = {
     case MemberUp(member) => {
       log.info("Member is Up: {} {}", member.address, member.roles)

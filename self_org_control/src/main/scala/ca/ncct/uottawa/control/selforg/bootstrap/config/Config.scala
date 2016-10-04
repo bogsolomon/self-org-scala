@@ -1,5 +1,7 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.config
 
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.AntSystemConfig
+
 import scala.collection.mutable
 
 /**
@@ -70,14 +72,4 @@ object GenericConfig {
       params
     )
   }
-}
-
-case class AntSystemConfig(decayAmount: Int, decayRate: Int)
-
-object AntSystemConfig {
-  def fromXML(node: scala.xml.NodeSeq) : AntSystemConfig =
-    new AntSystemConfig(
-      decayAmount = (node \ "decayAmount").text.toInt,
-      decayRate = (node \ "decayRate").text.toInt
-    )
 }

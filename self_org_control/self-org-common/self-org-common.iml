@@ -12,5 +12,6 @@
     <orderEntry type="library" name="SBT: com.typesafe.akka:akka-remote_2.11:2.4.0:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.akka:akka-slf4j_2.11:2.4.0:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.akka:akka-actor_2.11:2.4.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.3:jar" level="project" />
   </component>
 </module>

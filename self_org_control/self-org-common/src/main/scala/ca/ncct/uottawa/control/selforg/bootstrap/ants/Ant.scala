@@ -16,14 +16,14 @@ object Ant {
   case object NoMorph extends MorphType
 }
 
-case class Ant(var serverData: List[(Address, Int, Double)]) {
+case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemConfig) {
 
-  def PHEROMONE_LEVEL = 10
+  def PHEROMONE_LEVEL = config.antPheromone
 
-  def WAIT_TIME = 15
-  def HISTORY_SIZE = 5
-  def MIN_MORPH = 3
-  def MAX_MORPH = 10
+  def WAIT_TIME = config.antWaitTime
+  def HISTORY_SIZE = config.antHistorySize
+  def MIN_MORPH = config.minMorphLevel
+  def MAX_MORPH = config.maxMorphLevel
 
   var history: ListBuffer[(Address, Double)] = new ListBuffer[(Address, Double)]
   var morphType : MorphType =  NoMorph

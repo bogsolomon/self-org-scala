@@ -59,7 +59,7 @@ class Red5Sensor(config: SensorConfig, filter: ActorRef) extends Actor with Acto
             log.info("Leaving cluster")
             Cluster(context.system).leave(Cluster(context.system).selfAddress)
             log.info("Shutting down")
-            context.system.shutdown()
+            context.system.terminate()
           }
         }
       }

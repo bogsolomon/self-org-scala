@@ -1,13 +1,12 @@
 package ca.ncct.uottawa.control.selforg.bootstrap.ants
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Address, Props, RootActorPath}
+import akka.actor.{Actor, ActorLogging, Address, Props, RootActorPath}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.pubsub.DistributedPubSub
 import akka.cluster.pubsub.DistributedPubSubMediator.Subscribe
 import akka.cluster.{Cluster, Member}
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, NoMorph}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Model
-import ca.ncct.uottawa.control.selforg.bootstrap.config.AntSystemConfig
 
 import scala.collection.mutable
 import scala.concurrent.duration._
@@ -53,7 +52,7 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
       if (member.roles.contains("control")) {
         controlMembers += (member -> new Metrics)
         if (!isFirst && !hasSentAnt) {
-          context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! Ant(List(Triple(member.address, 0, 0)))
+          context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! Ant(List(Triple(member.address, 0, 0)), antSystemConfig)
           hasSentAnt = true
           log.info("Sent initial ant")
         }
