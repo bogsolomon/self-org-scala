@@ -35,7 +35,7 @@ object Bootstraper {
     val manager:ActorRef = system.actorOf(Props(classOf[Manager], systemConfig), "manager")
 
     val cluster = Cluster(system)
-    val clusterListener = system.actorOf(Props(classOf[AntSystem], manager), "antSystem")
+    val clusterListener = system.actorOf(Props(classOf[AntSystem], manager, systemConfig.antSystemConfig), "antSystem")
     cluster.subscribe(clusterListener, initialStateMode = InitialStateAsEvents,
       classOf[MemberEvent], classOf[UnreachableMember], classOf[MemberUp], classOf[MemberRemoved])
   }

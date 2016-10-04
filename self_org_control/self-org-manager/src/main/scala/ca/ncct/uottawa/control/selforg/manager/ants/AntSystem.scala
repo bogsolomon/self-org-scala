@@ -6,6 +6,7 @@ import akka.cluster.Member
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.NoMorph
 import ca.ncct.uottawa.control.selforg.manager.common.{AddNode, RemoveNode}
+import ca.ncct.uottawa.control.selforg.manager.config.AntSystemConfig
 
 import scala.concurrent.duration._
 import scala.collection.mutable.ListBuffer
@@ -16,10 +17,10 @@ import scala.util.Random
   */
 
 object AntSystem {
-  def props(manager: ActorRef): Props = Props(new AntSystem(manager))
+  def props(manager: ActorRef, antSystemConfig: AntSystemConfig): Props = Props(new AntSystem(manager, antSystemConfig))
 }
 
-class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
+class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Actor with ActorLogging {
 
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
   var activeAnts : ListBuffer[Ant] = new ListBuffer[Ant]
@@ -28,7 +29,7 @@ class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
   var deltaServerCount = 0
   val random:Random = Random
 
-  def THR = 0.1
+  def THR = antSystemConfig.solutionFitnessThr
 
   import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -97,9 +98,11 @@ class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
     val size = controlMemberSize max controlMembers.size
     // Round 1 - all ants are initialized with solutions
     activeAnts.zipWithIndex.map {case (s,i) => initSolutions += new HHAnt(s, size, i)}
+    log.info("Initial solutions {}", initSolutions)
     // Check suitabilities
     initSolutions.filter(_.solFitness < THR).map(inactiveAnts += _)
     initSolutions = initSolutions.filterNot(inactiveAnts.toSet)
+    log.info("Initial solutions with good fitness {}", initSolutions)
     houseHuntingRound(initSolutions)
   }
 
@@ -108,6 +111,7 @@ class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
     initSolutions.foreach(ant => prevNestCounts = prevNestCounts + (ant.nestId -> 1))
     // Round 2 - go home nest and recruit randomly
     val recruited: ListBuffer[(HHAnt, HHAnt)] = antRecruitment(initSolutions)
+    log.info("Round 2 recruitment {}", recruited)
     // Round 3 - Ants go to new nest and check nests which increased/decreased
     var nests: Map[Int, List[HHAnt]] = Map()
     recruited.foreach(ant => {
@@ -118,6 +122,7 @@ class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
       }
       nests = nests + (ant._1.nestId -> prevList)
     })
+    log.info("Round 3 nests {}", nests)
 
     if (nests.size == 1) {
       return nests.head._2(0).newCount
@@ -130,6 +135,7 @@ class AntSystem(manager: ActorRef) extends Actor with ActorLogging {
         newInitSolutions = initSolutions.filterNot(ant => nest._2.contains(ant))
       }
     })
+    log.info("Round 4 newInitSolutions {}", newInitSolutions)
     houseHuntingRound(newInitSolutions)
   }
 
