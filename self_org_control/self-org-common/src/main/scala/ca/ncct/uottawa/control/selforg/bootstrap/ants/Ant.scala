@@ -33,7 +33,7 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
   }
 
   private def updateTables(currentAddress: Address, newPheromoneValue: Double, fuzzyFactor: Double,
-                           knownServers:List[Address]): List[(Address, Int, Double)] = {
+                           knownServers:List[Address]): (List[(Address, Int, Double)], Int) = {
     val rand:Random = new Random
     val newData = new ListBuffer[(Address, Int, Double)]
     val waitTime = (WAIT_TIME / (1 - fuzzyFactor)).min(60).ceil.toInt
@@ -55,42 +55,50 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
       newData += Tuple3(unknownServer, rand.nextInt(maxWait) + waitTime, 0);
     }
 
-    newData.toList
+    Tuple2(newData.toList, waitTime)
   }
 
-  private def jumpNextNode(serverData: List[(Address, Int, Double)], currentAddress: Address,
+  private def jumpNextNode(serverData: (List[(Address, Int, Double)], Int), currentAddress: Address,
                            knownServers:List[Address], newPheromoneValue: Double): (Address, Double, Double) = {
     val r = scala.util.Random
     var sumOfTimes = 0
     var sumOfPheromones:Double = 0
     var probTable = new ListBuffer[(Address, Double)]
 
-    for (serverDatum <- serverData) {
+    if (knownServers.isEmpty) {
+      return Tuple3(currentAddress, serverData._2, newPheromoneValue)
+    }
+
+    for (serverDatum <- serverData._1) {
       if (knownServers.contains(serverDatum._1)) {
         sumOfTimes += serverDatum._2
         sumOfPheromones += serverDatum._3
       }
     }
 
-    for (serverDatum <- serverData) {
+    sumOfPheromones += newPheromoneValue
+
+    for (serverDatum <- serverData._1) {
       if (knownServers.contains(serverDatum._1)) {
         probTable += Tuple2(serverDatum._1, (serverDatum._2 / sumOfTimes + serverDatum._3 / sumOfPheromones) / 2)
       }
     }
+    probTable += Tuple2(currentAddress, (newPheromoneValue / sumOfPheromones) / 2)
+
     probTable = probTable.sortWith(_._2 < _._2)
     val random = r.nextFloat
     var sumOfProbs:Double = 0
 
     for (prob <- probTable) {
       if (sumOfProbs + prob._2 < random ) {
-        return Tuple3(prob._1, prob._2, newPheromoneValue)
+        return Tuple3(prob._1, serverData._2, newPheromoneValue)
       } else {
         sumOfProbs += prob._2
       }
     }
 
-    this.serverData = serverData
-    Tuple3(probTable.last._1, probTable.last._2, newPheromoneValue)
+    this.serverData = serverData._1
+    Tuple3(probTable.last._1, serverData._2, newPheromoneValue)
   }
 
   def morph(): Unit = {

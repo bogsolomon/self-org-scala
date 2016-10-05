@@ -27,9 +27,7 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
   def PHEROMONE_DECAY = antSystemConfig.decayAmount
   def DECAY_RATE = antSystemConfig.decayRate
 
-  var hasSentAnt = false
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
-  val isFirst = instCount == 0
   var model: Model = null
   var pheromoneLevel:Double = 0
   var ants : mutable.LinkedHashSet[Ant] = new mutable.LinkedHashSet[Ant]
@@ -44,6 +42,7 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
 
   override def preStart() = {
     context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
+    self ! Ant(List(Triple(self.path.address, 0, 0)), antSystemConfig)
   }
 
   override def receive = {
@@ -51,11 +50,6 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
       log.info("Member is Up: {} {}", member.address, member.roles)
       if (member.roles.contains("control")) {
         controlMembers += (member -> new Metrics)
-        if (!isFirst && !hasSentAnt) {
-          context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! Ant(List(Triple(member.address, 0, 0)), antSystemConfig)
-          hasSentAnt = true
-          log.info("Sent initial ant")
-        }
       } else {
         manager = member
       }
