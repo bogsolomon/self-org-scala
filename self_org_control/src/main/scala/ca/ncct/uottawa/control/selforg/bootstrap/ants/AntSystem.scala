@@ -51,8 +51,8 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
         controlMembers += (member -> new Metrics)
       } else {
         manager = member
-        val ant = Ant(List(Triple(self.path.address, 0, 0)), antSystemConfig)
-        log.info("Ant {} created for {}", ant, self.path.address)
+        val ant = Ant(List(Triple(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig)
+        log.info("Ant {} created for {}", ant, Cluster(context.system).selfAddress)
         self ! ant
       }
     }
