@@ -3,7 +3,7 @@ package ca.ncct.uottawa.control.selforg.bootstrap.ants
 import akka.actor.{Actor, ActorLogging, Address, Props, RootActorPath}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.pubsub.DistributedPubSub
-import akka.cluster.pubsub.DistributedPubSubMediator.Subscribe
+import akka.cluster.pubsub.DistributedPubSubMediator.{Subscribe, SubscribeAck}
 import akka.cluster.{Cluster, Member}
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, NoMorph}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Model
@@ -28,7 +28,7 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
   def DECAY_RATE = antSystemConfig.decayRate
 
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
-  var model: Model = null
+  var model: Option[Model] = None
   var pheromoneLevel:Double = 0
   var ants : mutable.LinkedHashSet[Ant] = new mutable.LinkedHashSet[Ant]
   var manager: Member = null
@@ -42,7 +42,6 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
 
   override def preStart() = {
     context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
-    self ! Ant(List(Triple(self.path.address, 0, 0)), antSystemConfig)
   }
 
   override def receive = {
@@ -52,6 +51,9 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
         controlMembers += (member -> new Metrics)
       } else {
         manager = member
+        val ant = Ant(List(Triple(self.path.address, 0, 0)), antSystemConfig)
+        log.info("Ant {} created for {}", ant, self.path.address)
+        self ! ant
       }
     }
     case UnreachableMember(member) => {
@@ -66,35 +68,44 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
     case _: MemberEvent => // ignore
       log.info("Members: {}", controlMembers)
     case ant:Ant => {
-      log.info("Received ant: {}", ant)
+      log.info("Received ant: {} by {}", ant, Cluster(context.system).selfAddress)
       var nextAddress: (Address, Double, Double) = null
       if (slaBreach) {
         log.info("SLA breach, ant going to manager")
         nextAddress = (manager.address, 0, 0)
       } else {
-        nextAddress = ant.receive(Cluster(context.system).selfAddress, model.bucketLevel, controlMembers.keySet.map(_.address).toList)
+        val fuzzyFactor = model match {
+          case Some(m) => m.bucketLevel
+          case None => 0
+        }
+        nextAddress = ant.receive(Cluster(context.system).selfAddress, fuzzyFactor, controlMembers.keySet.map(_.address).toList)
       }
-      log.info("Ant {} will jump to {} in {} seconds", ant, nextAddress._1, nextAddress._2.toLong)
-      context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, AntJump((ant, nextAddress._1)))
       pheromoneLevel += nextAddress._3
       ants += ant
+      log.info("Ant {} will jump to {} in {} seconds", ant, nextAddress._1, nextAddress._2.toLong)
+      context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, AntJump((ant, nextAddress._1)))
     }
     case modelRec:Model => {
-      model = modelRec
+      model = Some(modelRec)
     }
     case jump:AntJump => {
+      log.info("Ant {} jumping to {}", jump.value._1, jump.value._2);
       context.actorSelection(RootActorPath(jump.value._2) / "user" / "antSystem") ! jump.value._1
+      ants -= jump.value._1
       log.info("Ant {} jumped to {}", jump.value._1, jump.value._2);
     }
     case "decay" => {
+      log.info("Decaying");
       pheromoneLevel = (pheromoneLevel + PHEROMONE_DECAY) max 0
       context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
       val maxAnts = ants.count(_.morphType == MaxMorph)
       val minAnts = ants.count(_.morphType == MinMorph)
       val noAnts = ants.count(_.morphType == NoMorph)
+      log.info("Decaying maxAnts {} minAnts {} noAnts {}", maxAnts, minAnts, noAnts);
 
       if (maxAnts * 2 > minAnts + noAnts || minAnts * 2 > maxAnts + noAnts) {
         slaBreach = true
+        log.info("Sending SLA Breach");
         mediator ! SLABreach
       }
     }
@@ -102,6 +113,8 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
       log.info("Received SLA breach detected")
       slaBreach = true
     }
+    case SubscribeAck(Subscribe(topic, None, `self`)) ⇒
+      log.info("subscribing to mediator");
   }
 }
 
