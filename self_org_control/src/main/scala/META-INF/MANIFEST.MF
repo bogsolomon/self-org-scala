@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Class-Path: spray-can_2.11-1.3.3.jar akka-slf4j_2.11-2.4.0.jar shapele
+ ss_2.11-1.2.4.jar akka-cluster_2.11-2.4.0.jar config.jar scala-librar
+ y-2.11.7.jar scala-reflect-2.11.7.jar spray-http_2.11-1.3.3.jar logba
+ ck-classic-1.1.3.jar spray-util_2.11-1.3.3.jar spray-routing_2.11-1.3
+ .3.jar akka-actor_2.11.jar logback-core-1.1.3.jar scala-xml_2.11-1.0.
+ 3.jar parboiled-core-1.1.7.jar spray-httpx_2.11-1.3.3.jar jfuzzylite-
+ 5.0.jar slf4j-api-1.7.12.jar netty-3.10.3.Final.jar akka-protobuf_2.1
+ 1-2.4.0.jar akka-cluster-tools_2.11-2.4.0.jar akka-remote_2.11-2.4.0.
+ jar mimepull-1.9.5.jar spray-client_2.11-1.3.3.jar wtRed5_common-0.0.
+ 1.jar spray-io_2.11-1.3.3.jar jgroups-3.6.9.Final.jar uncommons-maths
+ .jar parboiled-scala_2.11-1.1.7.jar
+Main-Class: ca.ncct.uottawa.control.selforg.bootstrap.Bootstraper
+

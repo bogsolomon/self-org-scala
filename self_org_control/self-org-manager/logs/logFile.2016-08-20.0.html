@@ -1,0 +1,1754 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Sat Aug 20 20:54:52 EDT 2016</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Date">Date</td>
+<td class="Thread">Thread</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="LineOfCaller">LineOfCaller</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="info even">
+<td class="Date">20:54:52.352</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.event.slf4j.Slf4jLogger</td>
+<td class="LineOfCaller">80</td>
+<td class="Message">Slf4jLogger started</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">20:54:52.382</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">logger log1-Slf4jLogger started</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">20:54:52.387</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Default Loggers started</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:54:52.452</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Starting remoting</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:54:52.684</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting started; listening on addresses :[akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:54:52.686</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting now listens on addresses: [akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:54:52.697</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Shutting down remote daemon.</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:54:52.699</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remote daemon shut down; proceeding with flushing remote transports.</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:54:52.726</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting shut down</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:54:52.727</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting shut down.</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">20:54:52.727</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">shutting down: StandardOutLogger started</td>
+</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Sat Aug 20 20:57:46 EDT 2016</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Date">Date</td>
+<td class="Thread">Thread</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="LineOfCaller">LineOfCaller</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="info even">
+<td class="Date">20:57:46.688</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.event.slf4j.Slf4jLogger</td>
+<td class="LineOfCaller">80</td>
+<td class="Message">Slf4jLogger started</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">20:57:46.704</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">logger log1-Slf4jLogger started</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">20:57:46.709</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Default Loggers started</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:57:46.773</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Starting remoting</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:57:47.002</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting started; listening on addresses :[akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:57:47.003</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting now listens on addresses: [akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:57:47.017</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Shutting down remote daemon.</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:57:47.019</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remote daemon shut down; proceeding with flushing remote transports.</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:57:47.046</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting shut down</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:57:47.047</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting shut down.</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">20:57:47.047</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">shutting down: StandardOutLogger started</td>
+</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Sat Aug 20 20:58:36 EDT 2016</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Date">Date</td>
+<td class="Thread">Thread</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="LineOfCaller">LineOfCaller</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="info even">
+<td class="Date">20:58:36.356</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.event.slf4j.Slf4jLogger</td>
+<td class="LineOfCaller">80</td>
+<td class="Message">Slf4jLogger started</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">20:58:36.371</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">logger log1-Slf4jLogger started</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">20:58:36.375</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Default Loggers started</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:58:36.433</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Starting remoting</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:58:36.681</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting started; listening on addresses :[akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:58:36.682</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting now listens on addresses: [akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:58:36.694</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Shutting down remote daemon.</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:58:36.695</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remote daemon shut down; proceeding with flushing remote transports.</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">20:58:36.722</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting shut down</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">20:58:36.723</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemotingTerminator</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting shut down.</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">20:58:36.723</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">shutting down: StandardOutLogger started</td>
+</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Sat Aug 20 21:14:44 EDT 2016</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Date">Date</td>
+<td class="Thread">Thread</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="LineOfCaller">LineOfCaller</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="info even">
+<td class="Date">21:14:44.894</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.event.slf4j.Slf4jLogger</td>
+<td class="LineOfCaller">80</td>
+<td class="Message">Slf4jLogger started</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:14:44.908</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">logger log1-Slf4jLogger started</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:14:44.912</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Default Loggers started</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:14:44.970</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Starting remoting</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:14:45.204</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting started; listening on addresses :[akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:14:45.206</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting now listens on addresses: [akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:14:45.217</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Starting up...</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:14:45.319</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Registered cluster JMX MBean [akka:type=Cluster]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:14:45.320</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Started up successfully</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:14:45.324</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-16</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Metrics will be retreived from MBeans, and may be incorrect on some platforms. To increase metric accuracy add the &#39;sigar.jar&#39; to the classpath and the appropriate platform-specific native libary to &#39;java.library.path&#39;. Reason: java.lang.ClassNotFoundException: org.hyperic.sigar.Sigar</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:14:45.326</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Metrics collection has started successfully</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:14:45.444</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-16</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">ca.ncct.uottawa.control.selforg.manager.Manager</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Base command is: docker run -d --net=red5 --name=red5-0 -e red5_port=1935 -e red5_ip= -p 1935:1935 bsolomon/red5-media:v1</td>
+</tr>
+
+<tr class="warn even">
+<td class="Date">21:14:46.469</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">WARN</td>
+<td class="Logger">akka.remote.EndpointWriter</td>
+<td class="LineOfCaller">71</td>
+<td class="Message">AssociationError [akka.tcp://controlSystem@192.168.1.11:2551] -&gt; [akka.tcp://controlSystem@172.30.4.2:2551]: Error [Invalid address: akka.tcp://controlSystem@172.30.4.2:2551] [
+akka.remote.InvalidAssociation: Invalid address: akka.tcp://controlSystem@172.30.4.2:2551
+Caused by: akka.remote.transport.Transport$InvalidAssociationException: Connection refused: no further information: /172.30.4.2:2551
+]</td>
+</tr>
+
+<tr class="warn odd">
+<td class="Date">21:14:46.477</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">WARN</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">71</td>
+<td class="Message">Tried to associate with unreachable remote address [akka.tcp://controlSystem@172.30.4.2:2551]. Address is now gated for 5000 ms, all messages to this address will be delivered to dead letters. Reason: Connection refused: no further information: /172.30.4.2:2551</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:14:46.484</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-16</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemoteDeadLetterActorRef</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Message [akka.cluster.InternalClusterAction$InitJoin$] from Actor[akka://controlSystem/system/cluster/core/daemon/joinSeedNodeProcess-1#-1200690553] to Actor[akka://controlSystem/deadLetters] was not delivered. [1] dead letters encountered. This logging can be turned off or adjusted with configuration settings &#39;akka.log-dead-letters&#39; and &#39;akka.log-dead-letters-during-shutdown&#39;.</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:14:46.485</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-16</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.remote.EndpointWriter</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Disassociated [akka.tcp://controlSystem@192.168.1.11:2551] -&gt; [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:14:50.354</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.remote.RemoteActorRefProvider$RemoteDeadLetterActorRef</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Message [akka.cluster.InternalClusterAction$InitJoin$] from Actor[akka://controlSystem/system/cluster/core/daemon/joinSeedNodeProcess-1#-1200690553] to Actor[akka://controlSystem/deadLetters] was not delivered. [2] dead letters encountered. This logging can be turned off or adjusted with configuration settings &#39;akka.log-dead-letters&#39; and &#39;akka.log-dead-letters-during-shutdown&#39;.</td>
+</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Sat Aug 20 21:23:50 EDT 2016</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Date">Date</td>
+<td class="Thread">Thread</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="LineOfCaller">LineOfCaller</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="info even">
+<td class="Date">21:23:50.396</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.event.slf4j.Slf4jLogger</td>
+<td class="LineOfCaller">80</td>
+<td class="Message">Slf4jLogger started</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:50.412</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">logger log1-Slf4jLogger started</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:50.426</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Default Loggers started</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:23:50.483</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Starting remoting</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:23:50.707</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting started; listening on addresses :[akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:23:50.709</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting now listens on addresses: [akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:23:50.720</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Starting up...</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:23:50.826</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Registered cluster JMX MBean [akka:type=Cluster]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:23:50.827</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Started up successfully</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:23:50.831</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Metrics will be retreived from MBeans, and may be incorrect on some platforms. To increase metric accuracy add the &#39;sigar.jar&#39; to the classpath and the appropriate platform-specific native libary to &#39;java.library.path&#39;. Reason: java.lang.ClassNotFoundException: org.hyperic.sigar.Sigar</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:23:50.833</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Metrics collection has started successfully</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:50.967</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">ca.ncct.uottawa.control.selforg.manager.Manager</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Base command is: docker run -d --net=red5 --name=red5-0 -e red5_port=1935 -e red5_ip= -p 1935:1935 bsolomon/red5-media:v1</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:51.162</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.remote.EndpointWriter</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Associated [akka.tcp://controlSystem@192.168.1.11:2551] -&gt; [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:51.171</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.InternalClusterAction$InitJoin$]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:51.187</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.remote.EndpointWriter</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Drained buffer with maxWriteCount: 50, fullBackoffCount: 1, smallBackoffCount: 0, noBackoffCount: 0 , adaptiveBackoff: 1000</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:51.278</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.InternalClusterAction$Join]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:23:51.501</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Welcome from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:51.502</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.GossipEnvelope]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:51.848</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.GossipStatus]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:51.933</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.ClusterHeartbeatSender$HeartbeatRsp]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:51.937</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterCoreDaemon</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Receiving gossip from [UniqueAddress(akka.tcp://controlSystem@172.30.4.2:2551,-1991946828)]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:52.534</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-18</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - First Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:52.540</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-17</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.ClusterHeartbeatSender$Heartbeat]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:52.578</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-16</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:52.962</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.MetricsGossipEnvelope]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:53.534</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:53.569</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-17</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:54.522</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:54.556</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:55.516</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-22</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:55.545</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-20</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:56.525</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-21</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:56.557</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:57.526</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:57.560</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:58.523</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:58.563</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-20</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:23:59.526</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:23:59.555</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:24:00.522</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-20</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:24:00.553</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-17</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:24:01.516</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-17</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:24:01.545</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:24:02.526</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:24:02.555</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-17</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:24:03.525</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:24:03.554</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-19</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:24:04.527</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:24:04.555</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-19</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:24:05.513</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-17</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:24:05.544</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-17</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Sat Aug 20 21:26:08 EDT 2016</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Date">Date</td>
+<td class="Thread">Thread</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="LineOfCaller">LineOfCaller</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="info even">
+<td class="Date">21:26:08.638</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.event.slf4j.Slf4jLogger</td>
+<td class="LineOfCaller">80</td>
+<td class="Message">Slf4jLogger started</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:08.652</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">logger log1-Slf4jLogger started</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:08.657</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Default Loggers started</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:26:08.718</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Starting remoting</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:08.945</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting started; listening on addresses :[akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:26:08.946</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting now listens on addresses: [akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:08.958</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Starting up...</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:26:09.056</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Registered cluster JMX MBean [akka:type=Cluster]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:09.057</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Started up successfully</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:26:09.061</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Metrics will be retreived from MBeans, and may be incorrect on some platforms. To increase metric accuracy add the &#39;sigar.jar&#39; to the classpath and the appropriate platform-specific native libary to &#39;java.library.path&#39;. Reason: java.lang.ClassNotFoundException: org.hyperic.sigar.Sigar</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:09.062</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Metrics collection has started successfully</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:09.183</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">ca.ncct.uottawa.control.selforg.manager.Manager</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Base command is: docker run -d --net=red5 --name=red5-0 -e red5_port=1935 -e red5_ip= -p 1935:1935 bsolomon/red5-media:v1</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:09.331</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.remote.EndpointWriter</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Associated [akka.tcp://controlSystem@192.168.1.11:2551] -&gt; [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:09.340</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.InternalClusterAction$InitJoin$]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:09.352</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.remote.EndpointWriter</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Drained buffer with maxWriteCount: 50, fullBackoffCount: 1, smallBackoffCount: 0, noBackoffCount: 0 , adaptiveBackoff: 1000</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:09.431</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-16</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.InternalClusterAction$Join]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:09.606</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Welcome from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:09.607</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.GossipEnvelope]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:10.078</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.GossipStatus]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:10.411</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-17</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterCoreDaemon</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Receiving gossip from [UniqueAddress(akka.tcp://controlSystem@172.30.4.2:2551,1520679480)]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:10.444</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.ClusterHeartbeatSender$HeartbeatRsp]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:10.629</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - First Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:10.633</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.ClusterHeartbeatSender$Heartbeat]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:10.666</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:11.623</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:11.657</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:12.086</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.MetricsGossipEnvelope]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:12.623</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-18</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:12.655</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:13.627</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:13.656</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Sat Aug 20 21:26:44 EDT 2016</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Date">Date</td>
+<td class="Thread">Thread</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="LineOfCaller">LineOfCaller</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="info even">
+<td class="Date">21:26:44.852</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">akka.event.slf4j.Slf4jLogger</td>
+<td class="LineOfCaller">80</td>
+<td class="Message">Slf4jLogger started</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:44.866</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">logger log1-Slf4jLogger started</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:44.870</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.event.EventStream</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Default Loggers started</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:26:44.925</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Starting remoting</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:45.157</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting started; listening on addresses :[akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:26:45.158</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Remoting</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Remoting now listens on addresses: [akka.tcp://controlSystem@192.168.1.11:2551]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:45.171</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Starting up...</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:26:45.272</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Registered cluster JMX MBean [akka:type=Cluster]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:45.273</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Started up successfully</td>
+</tr>
+
+<tr class="info odd">
+<td class="Date">21:26:45.277</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Metrics will be retreived from MBeans, and may be incorrect on some platforms. To increase metric accuracy add the &#39;sigar.jar&#39; to the classpath and the appropriate platform-specific native libary to &#39;java.library.path&#39;. Reason: java.lang.ClassNotFoundException: org.hyperic.sigar.Sigar</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:45.279</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Metrics collection has started successfully</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:45.405</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">ca.ncct.uottawa.control.selforg.manager.Manager</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Base command is: docker run -d --net=red5 --name=red5-0 -e red5_port=1935 -e red5_ip= -p 1935:1935 bsolomon/red5-media:v1</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:45.422</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.remote.EndpointWriter</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Associated [akka.tcp://controlSystem@192.168.1.11:2551] -&gt; [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:45.430</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.InternalClusterAction$InitJoin$]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:45.446</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.remote.EndpointWriter</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Drained buffer with maxWriteCount: 50, fullBackoffCount: 1, smallBackoffCount: 0, noBackoffCount: 0 , adaptiveBackoff: 1000</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:45.484</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-16</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.InternalClusterAction$Join]</td>
+</tr>
+
+<tr class="info even">
+<td class="Date">21:26:45.551</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">INFO</td>
+<td class="Logger">Cluster(akka://controlSystem)</td>
+<td class="LineOfCaller">74</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Welcome from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:45.553</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.GossipEnvelope]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:46.292</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-14</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.GossipStatus]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:46.402</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-20</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterCoreDaemon</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Receiving gossip from [UniqueAddress(akka.tcp://controlSystem@172.30.4.2:2551,1520679480)]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:46.444</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.ClusterHeartbeatSender$HeartbeatRsp]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:46.578</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - First Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:46.579</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-2</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.ClusterHeartbeatSender$Heartbeat]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:46.609</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-4</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:47.576</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:47.608</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:48.284</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-20</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.serialization.Serialization(akka://controlSystem)</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Using serializer[akka.cluster.protobuf.ClusterMessageSerializer] for message [akka.cluster.MetricsGossipEnvelope]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:48.576</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:48.607</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-20</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:49.575</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-19</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:49.603</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-3</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug odd">
+<td class="Date">21:26:50.576</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-15</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat to [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+
+<tr class="debug even">
+<td class="Date">21:26:50.605</td>
+<td class="Thread">controlSystem-akka.actor.default-dispatcher-20</td>
+<td class="Level">DEBUG</td>
+<td class="Logger">akka.cluster.ClusterHeartbeatSender</td>
+<td class="LineOfCaller">77</td>
+<td class="Message">Cluster Node [akka.tcp://controlSystem@192.168.1.11:2551] - Heartbeat response from [akka.tcp://controlSystem@172.30.4.2:2551]</td>
+</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Tue Oct 11 20:29:58 EDT 2016</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Date">Date</td>
+<td class="Thread">Thread</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="LineOfCaller">LineOfCaller</td>
+<td class="Message">Message</td>
+</tr>
+
+</table>
+</body></html>
