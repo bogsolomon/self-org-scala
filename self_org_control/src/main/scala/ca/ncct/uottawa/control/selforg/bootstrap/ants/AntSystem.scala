@@ -89,13 +89,11 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
       model = Some(modelRec)
     }
     case jump:AntJump => {
-      log.info("Ant {} jumping to {}", jump.value._1, jump.value._2);
       context.actorSelection(RootActorPath(jump.value._2) / "user" / "antSystem") ! jump.value._1
       ants -= jump.value._1
       log.info("Ant {} jumped to {}", jump.value._1, jump.value._2);
     }
     case "decay" => {
-      log.info("Decaying");
       pheromoneLevel = (pheromoneLevel + PHEROMONE_DECAY) max 0
       context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
       val maxAnts = ants.count(_.morphType == MaxMorph)

@@ -19,8 +19,8 @@ class DataFilterChain(config: FilterConfig, coordinator: ActorRef) extends Actor
   }
 
   def filter(msg: SensorMeasurement): Unit = {
-    val packetsIn = msg.stream.inBw * 1000 / packetSize
-    val packetsOut = msg.stream.outBw * 1000 / packetSize
+    val packetsIn = if (msg.stream.inBw.isNaN) 0 else msg.stream.inBw * 1000 / packetSize
+    val packetsOut = if (msg.stream.outBw.isNaN) 0 else msg.stream.outBw * 1000 / packetSize
     log.debug("Vals:"+packetsIn+"/"+packetsOut)
 
     coordinator ! FilterMeasurement(msg, packetsIn, packetsOut)

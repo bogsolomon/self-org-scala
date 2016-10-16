@@ -39,7 +39,7 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
     val waitTime = (WAIT_TIME / (1 - fuzzyFactor)).min(60).ceil.toInt
     val maxWait = 0
 
-    for (serverDatum <- serverData) {
+    serverData.foreach(serverDatum => {
       if (!serverDatum._1.eq(currentAddress)) {
         newData += Tuple3(serverDatum._1, serverDatum._2 + waitTime, serverDatum._3);
         maxWait.max(serverDatum._2)
@@ -47,9 +47,10 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
       else {
         newData += Tuple3(serverDatum._1, 0, serverDatum._3 + newPheromoneValue);
       }
-    }
+    })
 
-    val unknown = knownServers.filter(newData.map(_._1).contains(_))
+    val newDataServers: Set[Address] = newData.map(_._1).toSet
+    val unknown = knownServers.filterNot(newDataServers)
 
     for (unknownServer <- unknown) {
       newData += Tuple3(unknownServer, rand.nextInt(maxWait) + waitTime, 0);
@@ -65,7 +66,8 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
     var sumOfPheromones:Double = 0
     var probTable = new ListBuffer[(Address, Double)]
 
-    if (knownServers.isEmpty) {
+    if (knownServers.length == 1) {
+      this.serverData = serverData._1
       return Tuple3(currentAddress, serverData._2, newPheromoneValue)
     }
 
@@ -75,8 +77,6 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
         sumOfPheromones += serverDatum._3
       }
     }
-
-    sumOfPheromones += newPheromoneValue
 
     for (serverDatum <- serverData._1) {
       if (knownServers.contains(serverDatum._1)) {
