@@ -45,7 +45,7 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
         maxWait.max(serverDatum._2)
       }
       else {
-        newData += Tuple3(serverDatum._1, 0, serverDatum._3 + newPheromoneValue);
+        newData += Tuple3(serverDatum._1, 0, newPheromoneValue);
       }
     })
 
@@ -112,14 +112,14 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
     }
   }
 
-  def receive(currentAddress: Address, fuzzyFactor: Double, knownServers:List[Address]): (Address, Double, Double) = {
+  def receive(currentAddress: Address, pLevel:Double, fuzzyFactor: Double, knownServers:List[Address]): (Address, Double, Double) = {
     val newPheromone = calculatePheromone(fuzzyFactor)
-    history += Tuple2(currentAddress, newPheromone)
+    history += Tuple2(currentAddress, newPheromone + pLevel)
     if (history.size > HISTORY_SIZE) {
       history.remove(0)
     }
-    val newTable = updateTables(currentAddress, newPheromone, fuzzyFactor, knownServers)
+    val newTable = updateTables(currentAddress, newPheromone + pLevel, fuzzyFactor, knownServers)
     morph()
-    jumpNextNode(newTable, currentAddress, knownServers, newPheromone)
+    jumpNextNode(newTable, currentAddress, knownServers, newPheromone + pLevel)
   }
 }

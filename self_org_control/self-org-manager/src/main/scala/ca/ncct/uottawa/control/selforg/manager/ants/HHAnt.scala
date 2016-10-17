@@ -32,7 +32,7 @@ case class HHAnt(ant: Ant, servCount: Int, nestCount: Int) {
   def initSolution: Double = {
     val servFrac: Double =
       if (ant.morphType == MaxMorph) {
-        (newCount - servCount).toDouble / servCount
+        (newCount - servCount).toDouble / newCount
       } else {
         newCount.toDouble / servCount
       }
@@ -57,4 +57,6 @@ case class HHAnt(ant: Ant, servCount: Int, nestCount: Int) {
       1 - (percentage - 0.5).abs
     }
   }
+
+  override def toString() = s"""(New count: ${newCount}, Fitness: ${solFitness}, NestId: ${_nestId}, OldNestId: ${_oldNestId})"""
 }

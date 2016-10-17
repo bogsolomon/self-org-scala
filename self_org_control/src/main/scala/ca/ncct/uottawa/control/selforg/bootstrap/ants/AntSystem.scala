@@ -3,7 +3,7 @@ package ca.ncct.uottawa.control.selforg.bootstrap.ants
 import akka.actor.{Actor, ActorLogging, Address, Props, RootActorPath}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.pubsub.DistributedPubSub
-import akka.cluster.pubsub.DistributedPubSubMediator.{Subscribe, SubscribeAck}
+import akka.cluster.pubsub.DistributedPubSubMediator.{Publish, Subscribe, SubscribeAck}
 import akka.cluster.{Cluster, Member}
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, NoMorph}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Model
@@ -78,7 +78,7 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
           case Some(m) => m.bucketLevel
           case None => 0
         }
-        nextAddress = ant.receive(Cluster(context.system).selfAddress, fuzzyFactor, controlMembers.keySet.map(_.address).toList)
+        nextAddress = ant.receive(Cluster(context.system).selfAddress, pheromoneLevel, fuzzyFactor, controlMembers.keySet.map(_.address).toList)
       }
       pheromoneLevel += nextAddress._3
       ants += ant
@@ -94,17 +94,17 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
       log.info("Ant {} jumped to {}", jump.value._1, jump.value._2);
     }
     case "decay" => {
-      pheromoneLevel = (pheromoneLevel + PHEROMONE_DECAY) max 0
+      pheromoneLevel = (pheromoneLevel - PHEROMONE_DECAY) max 0
       context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
       val maxAnts = ants.count(_.morphType == MaxMorph)
       val minAnts = ants.count(_.morphType == MinMorph)
       val noAnts = ants.count(_.morphType == NoMorph)
-      log.info("Decaying maxAnts {} minAnts {} noAnts {}", maxAnts, minAnts, noAnts);
+      log.info("Decaying maxAnts {} minAnts {} noAnts {} pheromone {}", maxAnts, minAnts, noAnts, pheromoneLevel);
 
-      if (maxAnts * 2 > minAnts + noAnts || minAnts * 2 > maxAnts + noAnts) {
+      if (maxAnts > minAnts + noAnts || minAnts > maxAnts + noAnts) {
         slaBreach = true
         log.info("Sending SLA Breach");
-        mediator ! SLABreach
+        mediator ! Publish("antSubsystem", SLABreach)
       }
     }
     case SLABreach => {

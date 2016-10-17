@@ -64,7 +64,8 @@ class Manager(config : Config) extends Actor with ActorLogging {
     log.debug("New command is: " + command)
     Process(command).run().exitValue()
     val commandControl = s"docker run -d --net=${config.networkName} --name=red5-control-$startCount " +
-      s"-e red5_port=$port -e red5_ip=$localIpAddress -e managed_host=red5-$startCount bsolomon/red5-control:v1"
+      s"-e red5_port=$port -e red5_ip=$localIpAddress -e managed_host=red5-$startCount " +
+      s"-v /usr/local/docker-images/red5-control/config:/config bsolomon/red5-control:v1"
     log.debug("New command is: " + commandControl)
     Process(commandControl).run().exitValue()
     sender ! AddNode

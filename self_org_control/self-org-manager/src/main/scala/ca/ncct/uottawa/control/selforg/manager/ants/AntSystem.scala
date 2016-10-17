@@ -25,7 +25,6 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
   var activeAnts : ListBuffer[Ant] = new ListBuffer[Ant]
   var inactiveAnts : ListBuffer[HHAnt] = new ListBuffer[HHAnt]
-  var controlMemberSize : Int = -1
   var deltaServerCount = 0
   val random:Random = Random
 
@@ -54,11 +53,11 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
     case ant:Ant => {
       log.info("Received ant: {}", ant)
       activeAnts += ant
-      if (activeAnts.size + 1 == controlMembers.size) {
+      if (activeAnts.size == controlMembers.size) {
         log.info("Received all ants, startong optimization")
         // all ants received - optimize
         val newCount = houseHuntingOptimization
-        deltaServerCount = math.abs(newCount - controlMemberSize)
+        deltaServerCount = math.abs(newCount - controlMembers.size)
         log.info("Delta servers: {}", deltaServerCount)
         if (newCount > controlMembers.size) {
           for (count <- 0 until deltaServerCount) {
@@ -95,10 +94,13 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
 
   def houseHuntingOptimization: Int = {
     var initSolutions = new ListBuffer[HHAnt]
-    val size = controlMemberSize max controlMembers.size
+    val size = controlMembers.size
     // Round 1 - all ants are initialized with solutions
     activeAnts.zipWithIndex.map {case (s,i) => initSolutions += new HHAnt(s, size, i)}
     log.info("Initial solutions {}", initSolutions)
+    if (initSolutions.size == 1) {
+      return initSolutions.head.newCount
+    }
     // Check suitabilities
     initSolutions.filter(_.solFitness < THR).map(inactiveAnts += _)
     initSolutions = initSolutions.filterNot(inactiveAnts.toSet)
