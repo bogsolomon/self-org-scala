@@ -104,9 +104,9 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
   def morph(): Unit = {
     val sum:Double = history.map(_._2).sum
     if ((sum / history.size) < MIN_MORPH) {
-      morphType = MinMorph
-    } else if  ((sum / history.size) > MAX_MORPH) {
       morphType = MaxMorph
+    } else if  ((sum / history.size) > MAX_MORPH) {
+      morphType = MinMorph
     } else {
       morphType = NoMorph
     }

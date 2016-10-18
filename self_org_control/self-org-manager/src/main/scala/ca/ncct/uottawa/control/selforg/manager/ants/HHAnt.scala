@@ -37,7 +37,7 @@ case class HHAnt(ant: Ant, servCount: Int, nestCount: Int) {
         newCount.toDouble / servCount
       }
 
-    val change : Int = (servFrac * ant.history.size).toInt
+    val change : Int = (servFrac * servCount).toInt
 
     if (ant.morphType == MaxMorph) {
       for (i <- 0 until change) {

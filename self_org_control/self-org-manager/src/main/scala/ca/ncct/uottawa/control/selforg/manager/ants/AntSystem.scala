@@ -59,7 +59,10 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
         val newCount = houseHuntingOptimization
         deltaServerCount = math.abs(newCount - controlMembers.size)
         log.info("Delta servers: {}", deltaServerCount)
-        if (newCount > controlMembers.size) {
+        if (newCount == controlMembers.size) {
+          log.info("No change")
+          context.system.scheduler.scheduleOnce(1 minute, self, "tick")
+        } else if (newCount > controlMembers.size) {
           for (count <- 0 until deltaServerCount) {
             manager ! AddNode
           }
