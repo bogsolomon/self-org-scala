@@ -21,7 +21,6 @@ object AntSystem {
 
 class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor with ActorLogging {
 
-  case class SLABreach()
   case class AntJump(value: (Ant, Address))
 
   def PHEROMONE_DECAY = antSystemConfig.decayAmount
@@ -104,12 +103,12 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
       if (maxAnts > minAnts + noAnts || minAnts > maxAnts + noAnts) {
         slaBreach = true
         log.info("Sending SLA Breach");
-        mediator ! Publish("antSubsystem", SLABreach)
+        mediator ! Publish("antSubsystem", SLABreach(true))
       }
     }
-    case SLABreach => {
-      log.info("Received SLA breach detected")
-      slaBreach = true
+    case SLABreach(breach:Boolean) => {
+      log.info("Received SLA breach {}", breach)
+      slaBreach = breach
     }
     case SubscribeAck(Subscribe(topic, None, `self`)) ⇒
       log.info("subscribing to mediator");

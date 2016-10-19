@@ -3,7 +3,9 @@ package ca.ncct.uottawa.control.selforg.manager.ants
 import akka.actor.{Actor, ActorLogging, ActorRef, Props, RootActorPath}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.Member
-import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant
+import akka.cluster.pubsub.DistributedPubSub
+import akka.cluster.pubsub.DistributedPubSubMediator.{Publish, Subscribe, SubscribeAck}
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.{Ant, SLABreach}
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.NoMorph
 import ca.ncct.uottawa.control.selforg.manager.common.{AddNode, RemoveNode}
 import ca.ncct.uottawa.control.selforg.manager.config.AntSystemConfig
@@ -27,6 +29,10 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
   var inactiveAnts : ListBuffer[HHAnt] = new ListBuffer[HHAnt]
   var deltaServerCount = 0
   val random:Random = Random
+
+  val mediator = DistributedPubSub(context.system).mediator
+  val topic = "antSubsystem"
+  mediator ! Subscribe(topic, self)
 
   def THR = antSystemConfig.solutionFitnessThr
 
@@ -83,16 +89,26 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
       }
     }
     case "tick" => {
+      log.info("Sending SLA Breach");
+      mediator ! Publish("antSubsystem", SLABreach(false))
+
       for (activeAnt <- activeAnts) {
         log.info("Restarting ants")
         activeAnt.history = ListBuffer()
         activeAnt.morphType = NoMorph
         activeAnt.serverData = Nil
 
-        val member = controlMembers.toList(random.nextInt(controlMembers.size - 1))._1
+        val destination: Int = if (controlMembers.size == 1) 0 else random.nextInt(controlMembers.size - 1)
+        val member = controlMembers.toList(destination)._1
         context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! activeAnt
       }
+      activeAnts.clear()
     }
+    case SLABreach => {
+      log.info("Received SLA breach detected")
+    }
+    case SubscribeAck(Subscribe(topic, None, `self`)) ⇒
+      log.info("subscribing to mediator");
   }
 
   def houseHuntingOptimization: Int = {

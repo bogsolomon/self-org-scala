@@ -16,6 +16,8 @@ object Ant {
   case object NoMorph extends MorphType
 }
 
+case class SLABreach(breach:Boolean)
+
 case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemConfig) {
 
   def PHEROMONE_LEVEL = config.antPheromone
