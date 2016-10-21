@@ -28,7 +28,7 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
 
   var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
   var model: Option[Model] = None
-  var pheromoneLevel:Double = 0
+  var pheromoneLevel:Double = (antSystemConfig.maxMorphLevel + antSystemConfig.minMorphLevel) / 2
   var ants : mutable.LinkedHashSet[Ant] = new mutable.LinkedHashSet[Ant]
   var manager: Member = null
   var slaBreach: Boolean = false
@@ -50,7 +50,7 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
         controlMembers += (member -> new Metrics)
       } else {
         manager = member
-        val ant = Ant(List(Triple(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig)
+        val ant = Ant(List(Tuple3(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig)
         log.info("Ant {} created for {}", ant, Cluster(context.system).selfAddress)
         self ! ant
       }

@@ -1,6 +1,6 @@
 package ca.ncct.uottawa.control.selforg.manager.ants
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props, RootActorPath}
+import akka.actor.{Actor, ActorLogging, ActorRef, Address, Props, RootActorPath}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
 import akka.cluster.Member
 import akka.cluster.pubsub.DistributedPubSub
@@ -96,10 +96,10 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
         log.info("Restarting ants")
         activeAnt.history = ListBuffer()
         activeAnt.morphType = NoMorph
-        activeAnt.serverData = Nil
 
         val destination: Int = if (controlMembers.size == 1) 0 else random.nextInt(controlMembers.size - 1)
         val member = controlMembers.toList(destination)._1
+        activeAnt.serverData = List(Tuple3(member.address, 0, 0))
         context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! activeAnt
       }
       activeAnts.clear()

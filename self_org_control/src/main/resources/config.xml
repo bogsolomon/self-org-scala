@@ -30,10 +30,10 @@
     <adaptor class="AntAdaptor">
     </adaptor>
     <antSystem>
-        <decayAmount>10</decayAmount>
+        <decayAmount>1</decayAmount>
         <decayRate>15</decayRate>
         <antWaitTime>15</antWaitTime>
-        <antPheromone>10</antPheromone>
+        <antPheromone>4</antPheromone>
         <antHistorySize>5</antHistorySize>
         <maxMorphLevel>10</maxMorphLevel>
         <minMorphLevel>3</minMorphLevel>
