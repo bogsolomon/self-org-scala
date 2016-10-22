@@ -79,6 +79,8 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
           activeAnts.remove(0, deltaServerCount)
         }
       }
+      log.info("Sending SLA Breach");
+      mediator ! Publish("antSubsystem", SLABreach(false))
     }
     case AddNode | RemoveNode => {
       log.info("Server added/removed")
@@ -89,9 +91,6 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
       }
     }
     case "tick" => {
-      log.info("Sending SLA Breach");
-      mediator ! Publish("antSubsystem", SLABreach(false))
-
       for (activeAnt <- activeAnts) {
         log.info("Restarting ants")
         activeAnt.history = ListBuffer()

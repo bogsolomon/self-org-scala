@@ -72,14 +72,15 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
       if (slaBreach) {
         log.info("SLA breach, ant going to manager")
         nextAddress = (manager.address, 0, 0)
+        pheromoneLevel = (antSystemConfig.maxMorphLevel + antSystemConfig.minMorphLevel) / 2
       } else {
         val fuzzyFactor = model match {
           case Some(m) => m.bucketLevel
           case None => 0
         }
         nextAddress = ant.receive(Cluster(context.system).selfAddress, pheromoneLevel, fuzzyFactor, controlMembers.keySet.map(_.address).toList)
+        pheromoneLevel = nextAddress._3
       }
-      pheromoneLevel += nextAddress._3
       ants += ant
       log.info("Ant {} will jump to {} in {} seconds", ant, nextAddress._1, nextAddress._2.toLong)
       context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, AntJump((ant, nextAddress._1)))

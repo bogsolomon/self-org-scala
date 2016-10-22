@@ -29,11 +29,11 @@ class DecisionMaker(config: GenericConfig) extends Actor with ActorLogging {
   }
 
   def makeDecision(count: Int, countType: CountType): Unit = {
-    if (count > lowThreshold && countType == Remove && lastDecision != Reject) {
-      lastDecision = Reject
-      sender ! Decision(lastDecision)
-    } else if (count > highThreshold && countType == Add && lastDecision != Accept) {
+    if (count > lowThreshold && countType == Remove && lastDecision != Accept) {
       lastDecision = Accept
+      sender ! Decision(lastDecision)
+    } else if (count > highThreshold && countType == Add && lastDecision != Reject) {
+      lastDecision = Reject
       sender ! Decision(lastDecision)
     } else {
       sender ! Decision(Nochange)

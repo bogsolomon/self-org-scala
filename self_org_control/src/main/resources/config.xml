@@ -35,7 +35,7 @@
         <antWaitTime>15</antWaitTime>
         <antPheromone>4</antPheromone>
         <antHistorySize>5</antHistorySize>
-        <maxMorphLevel>10</maxMorphLevel>
-        <minMorphLevel>3</minMorphLevel>
+        <maxMorphLevel>100</maxMorphLevel>
+        <minMorphLevel>25</minMorphLevel>
     </antSystem>
 </self-org-config>
