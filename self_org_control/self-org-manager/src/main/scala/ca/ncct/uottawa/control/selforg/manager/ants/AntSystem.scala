@@ -1,8 +1,8 @@
 package ca.ncct.uottawa.control.selforg.manager.ants
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Address, Props, RootActorPath}
+import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Address, Props, RootActorPath}
 import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, UnreachableMember}
-import akka.cluster.Member
+import akka.cluster.{Cluster, Member}
 import akka.cluster.pubsub.DistributedPubSub
 import akka.cluster.pubsub.DistributedPubSubMediator.{Publish, Subscribe, SubscribeAck}
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.{Ant, SLABreach}
@@ -19,16 +19,17 @@ import scala.util.Random
   */
 
 object AntSystem {
-  def props(manager: ActorRef, antSystemConfig: AntSystemConfig): Props = Props(new AntSystem(manager, antSystemConfig))
+  def props(manager: ActorRef, antSystemConfig: AntSystemConfig, system: ActorSystem): Props = Props(new AntSystem(manager, antSystemConfig, system))
 }
 
-class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Actor with ActorLogging {
+class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: ActorSystem) extends Actor with ActorLogging {
 
-  var controlMembers = scala.collection.mutable.Map[Member, Metrics]()
+  var controlMembers = new scala.collection.mutable.ListBuffer[Member]()
   var activeAnts : ListBuffer[Ant] = new ListBuffer[Ant]
   var inactiveAnts : ListBuffer[HHAnt] = new ListBuffer[HHAnt]
   var deltaServerCount = 0
   val random:Random = Random
+  val cluster = Cluster(system)
 
   val mediator = DistributedPubSub(context.system).mediator
   val topic = "antSubsystem"
@@ -42,7 +43,7 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
     case MemberUp(member) => {
       log.info("Member is Up: {} {}", member.address, member.roles)
       if (member.roles.contains("control")) {
-        controlMembers += (member -> new Metrics)
+        controlMembers += member
       }
     }
     case UnreachableMember(member) => {
@@ -59,7 +60,7 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
     case ant:Ant => {
       log.info("Received ant: {}", ant)
       activeAnts += ant
-      if (activeAnts.size == controlMembers.size) {
+      if (activeAnts.size == controlMembers.length) {
         log.info("Sending SLA Breach");
         mediator ! Publish("antSubsystem", SLABreach(true))
         log.info("Received all ants, starting optimization")
@@ -67,15 +68,17 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
         val newCount = houseHuntingOptimization
         deltaServerCount = math.abs(newCount - controlMembers.size)
         log.info("Delta servers: {}", deltaServerCount)
-        if (newCount == controlMembers.size) {
+        if (newCount == controlMembers.length) {
           log.info("No change")
           context.system.scheduler.scheduleOnce(1 minute, self, "tick")
-        } else if (newCount > controlMembers.size) {
+        } else if (newCount > controlMembers.length) {
           for (count <- 0 until deltaServerCount) {
             manager ! AddNode
           }
         } else {
           for (count <- 0 until deltaServerCount) {
+            val member = controlMembers.last
+            cluster.leave(member.address)
             manager ! RemoveNode
           }
           activeAnts.remove(0, deltaServerCount)
@@ -97,7 +100,7 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
         activeAnt.morphType = NoMorph
 
         val destination: Int = if (controlMembers.size == 1) 0 else random.nextInt(controlMembers.size - 1)
-        val member = controlMembers.toList(destination)._1
+        val member = controlMembers(destination)
         activeAnt.serverData = List(Tuple3(member.address, 0, 0))
         context.actorSelection(RootActorPath(member.address) / "user" / "antSystem") ! activeAnt
       }
