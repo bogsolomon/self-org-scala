@@ -60,7 +60,9 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
       log.info("Received ant: {}", ant)
       activeAnts += ant
       if (activeAnts.size == controlMembers.size) {
-        log.info("Received all ants, startong optimization")
+        log.info("Sending SLA Breach");
+        mediator ! Publish("antSubsystem", SLABreach(true))
+        log.info("Received all ants, starting optimization")
         // all ants received - optimize
         val newCount = houseHuntingOptimization
         deltaServerCount = math.abs(newCount - controlMembers.size)
@@ -79,8 +81,6 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig) extends Act
           activeAnts.remove(0, deltaServerCount)
         }
       }
-      log.info("Sending SLA Breach");
-      mediator ! Publish("antSubsystem", SLABreach(false))
     }
     case AddNode | RemoveNode => {
       log.info("Server added/removed")

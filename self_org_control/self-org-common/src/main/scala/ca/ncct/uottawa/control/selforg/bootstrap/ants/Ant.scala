@@ -18,7 +18,7 @@ object Ant {
 
 case class SLABreach(breach:Boolean)
 
-case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemConfig) {
+case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemConfig, antUid: String) {
 
   def PHEROMONE_LEVEL = config.antPheromone
 
@@ -55,7 +55,8 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
     val unknown = knownServers.filterNot(newDataServers)
 
     for (unknownServer <- unknown) {
-      newData += Tuple3(unknownServer, rand.nextInt(maxWait) + waitTime, 0);
+      val nextWait = if (maxWait == 0) waitTime else rand.nextInt(maxWait) + waitTime
+      newData += Tuple3(unknownServer, nextWait, 0);
     }
 
     Tuple2(newData.toList, waitTime)
@@ -68,24 +69,23 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
     var sumOfPheromones:Double = 0
     var probTable = new ListBuffer[(Address, Double)]
 
-    if (knownServers.length == 1) {
+    if (knownServers.length <= 1) {
       this.serverData = serverData._1
       return Tuple3(currentAddress, serverData._2, newPheromoneValue)
     }
 
     for (serverDatum <- serverData._1) {
-      if (knownServers.contains(serverDatum._1)) {
+      if (knownServers.contains(serverDatum._1) && !serverDatum._1.equals(currentAddress)) {
         sumOfTimes += serverDatum._2
         sumOfPheromones += serverDatum._3
       }
     }
 
     for (serverDatum <- serverData._1) {
-      if (knownServers.contains(serverDatum._1)) {
+      if (knownServers.contains(serverDatum._1) && !serverDatum._1.equals(currentAddress)) {
         probTable += Tuple2(serverDatum._1, (serverDatum._2 / sumOfTimes + serverDatum._3 / sumOfPheromones) / 2)
       }
     }
-    probTable += Tuple2(currentAddress, (newPheromoneValue / sumOfPheromones) / 2)
 
     probTable = probTable.sortWith(_._2 < _._2)
     val random = r.nextFloat
@@ -124,4 +124,6 @@ case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemCo
     morph()
     jumpNextNode(newTable, currentAddress, knownServers, newPheromone + pLevel)
   }
+
+  override def toString() = s"""(Ant UUID: ${antUid}, History: ${history}, Morph Type ${morphType})"""
 }

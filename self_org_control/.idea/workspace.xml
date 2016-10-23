@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="self_org_control:jar" />
+      <artifact name="self-org-common:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b1f245c-1abb-4a07-89ad-b8645670f961" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/self-org-manager/src/main/resources/config.xml" afterPath="$PROJECT_DIR$/self-org-manager/src/main/resources/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala" afterPath="$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala" afterPath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" afterPath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config.xml" afterPath="$PROJECT_DIR$/src/main/resources/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala" afterPath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" afterPath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DecisionMaker.scala" afterPath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DecisionMaker.scala" />
     </list>
     <ignored path="self_org_control.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,18 +53,7 @@
     <favorites_list name="self_org_control" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DecisionMaker.scala" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DecisionMaker.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -126,14 +114,14 @@
         <option value="$PROJECT_DIR$/src/main/scala/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DataFilterChain.scala" />
-        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala" />
-        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala" />
-        <option value="$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala" />
         <option value="$PROJECT_DIR$/src/main/resources/config.xml" />
-        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/resources/config.xml" />
-        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DecisionMaker.scala" />
+        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala" />
+        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" />
+        <option value="$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala" />
+        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala" />
       </list>
     </option>
   </component>
@@ -206,6 +194,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="self-org-manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self-org-manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self-org-manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -228,29 +252,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="self_org_control" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="self_org_control" />
+              <option name="myItemId" value="self-org-manager" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -266,11 +268,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
+              <option name="myItemId" value="manager" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="component" />
+              <option name="myItemId" value="Manager.scala" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self-org-manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manager" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -281,6 +313,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self-org-manager" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -323,7 +359,7 @@
       <recent name="D:\scala-thesis\self-org-scala\self_org_control\self-org-manager\src\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Remote.control-docker-cloud2">
+  <component name="RunManager" selected="Remote.manager-docker-cloud2">
     <configuration default="false" name="HelloSimpleMain" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -867,7 +903,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -882,12 +918,12 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24739583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24739583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3625793" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3625793" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -909,10 +945,18 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala</url>
+          <line>118</line>
+          <properties />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="53" />
+      <option name="time" value="60" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -927,13 +971,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.10.5-sources.jar!/scala/collection/SeqLike.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="68" column="6" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.10.5-sources.jar!/scala/collection/generic/SeqForwarder.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1045,21 +1082,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystemConfig.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/config/Config.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -1161,22 +1183,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="67" column="64" selection-start-line="67" selection-start-column="64" selection-end-line="67" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/srcs/akka-actor_2.11-2.4.0-sources.jar!/akka/actor/Actor.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
@@ -1223,7 +1229,7 @@
         <state relative-caret-position="353">
           <caret line="321" column="4" selection-start-line="321" selection-start-column="4" selection-end-line="321" selection-end-column="4" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1247,39 +1253,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="116" column="40" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="82" column="58" selection-start-line="82" selection-start-column="58" selection-end-line="82" selection-end-column="58" />
-          <folding>
-            <element signature="e#54#134#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/resources/config.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="48" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
-          <folding>
-            <element signature="e#56#126#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1295,6 +1273,74 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="60" column="129" selection-start-line="60" selection-start-column="2" selection-end-line="60" selection-end-column="129" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-391">
+          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/com.typesafe.akka/akka-remote_2.11/srcs/akka-remote_2.11-2.4.0-sources.jar!/akka/remote/Endpoint.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="163" column="23" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystemConfig.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="80" column="28" selection-start-line="80" selection-start-column="28" selection-end-line="80" selection-end-column="28" />
+          <folding>
+            <element signature="e#56#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-55">
+          <caret line="67" column="8" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+          <folding>
+            <element signature="e#54#134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="83" column="39" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
           <folding />
         </state>
       </provider>

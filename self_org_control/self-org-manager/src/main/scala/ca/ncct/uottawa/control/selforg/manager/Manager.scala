@@ -75,8 +75,14 @@ class Manager(config : Config) extends Actor with ActorLogging {
     var command = s"docker stop red5-$startCount"
     log.debug("Stop command is: " + command)
     Process(command).run().exitValue()
-    command = s"docker rm red5-$startCount"
+    command = s"docker stop red5-control-$startCount"
     log.debug("Stop command is: " + command)
+    Process(command).run().exitValue()
+    command = s"docker rm red5-$startCount"
+    log.debug("Remove command is: " + command)
+    Process(command).run().exitValue()
+    command = s"docker rm red5-control-$startCount"
+    log.debug("Remove command is: " + command)
     Process(command).run().exitValue()
     context.system.scheduler.scheduleOnce(180 second, self, "tick")
     startCount -= 1

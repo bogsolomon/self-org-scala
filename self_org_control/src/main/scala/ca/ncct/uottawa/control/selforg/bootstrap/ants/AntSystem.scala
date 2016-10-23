@@ -50,7 +50,7 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
         controlMembers += (member -> new Metrics)
       } else {
         manager = member
-        val ant = Ant(List(Tuple3(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig)
+        val ant = Ant(List(Tuple3(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig, java.util.UUID.randomUUID.toString)
         log.info("Ant {} created for {}", ant, Cluster(context.system).selfAddress)
         self ! ant
       }
@@ -103,15 +103,13 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
 
       if (maxAnts > minAnts + noAnts || minAnts > maxAnts + noAnts) {
         slaBreach = true
-        log.info("Sending SLA Breach");
-        mediator ! Publish("antSubsystem", SLABreach(true))
       }
     }
     case SLABreach(breach:Boolean) => {
       log.info("Received SLA breach {}", breach)
-      slaBreach = breach
+      slaBreach = false
     }
-    case SubscribeAck(Subscribe(topic, None, `self`)) ⇒
+    case SubscribeAck(Subscribe(topic, None, `self`)) =>
       log.info("subscribing to mediator");
   }
 }

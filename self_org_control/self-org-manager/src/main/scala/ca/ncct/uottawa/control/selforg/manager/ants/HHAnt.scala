@@ -50,8 +50,8 @@ case class HHAnt(ant: Ant, servCount: Int, nestCount: Int) {
     }
 
     val avgPheromone = simSolution.sum / simSolution.size
-    if (avgPheromone > ant.MAX_MORPH || avgPheromone < ant.MIN_MORPH) {
-      0
+    if (avgPheromone < ant.MIN_MORPH) {
+      1
     } else {
       val percentage = (avgPheromone - ant.MIN_MORPH) / (ant.MAX_MORPH - ant.MIN_MORPH)
       1 - (percentage - 0.5).abs
