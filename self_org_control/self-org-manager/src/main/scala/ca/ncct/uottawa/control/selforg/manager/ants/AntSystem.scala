@@ -5,7 +5,7 @@ import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, Unreacha
 import akka.cluster.{Cluster, Member}
 import akka.cluster.pubsub.DistributedPubSub
 import akka.cluster.pubsub.DistributedPubSubMediator.{Publish, Subscribe, SubscribeAck}
-import ca.ncct.uottawa.control.selforg.bootstrap.ants.{Ant, SLABreach}
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.{Ant, ControllerRegister, SLABreach}
 import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.NoMorph
 import ca.ncct.uottawa.control.selforg.manager.common.{AddNode, RemoveNode}
 import ca.ncct.uottawa.control.selforg.manager.config.AntSystemConfig
@@ -25,6 +25,7 @@ object AntSystem {
 class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: ActorSystem) extends Actor with ActorLogging {
 
   var controlMembers = new scala.collection.mutable.ListBuffer[Member]()
+  var controlMemberAddresses = scala.collection.mutable.Map[String, Address]()
   var activeAnts : ListBuffer[Ant] = new ListBuffer[Ant]
   var inactiveAnts : ListBuffer[HHAnt] = new ListBuffer[HHAnt]
   var deltaServerCount = 0
@@ -68,18 +69,23 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: Act
         val newCount = houseHuntingOptimization
         deltaServerCount = math.abs(newCount - controlMembers.size)
         log.info("Delta servers: {}", deltaServerCount)
+        val clusterSize = controlMembers.length
         if (newCount == controlMembers.length) {
           log.info("No change")
           context.system.scheduler.scheduleOnce(1 minute, self, "tick")
         } else if (newCount > controlMembers.length) {
           for (count <- 0 until deltaServerCount) {
-            manager ! AddNode
+            val instName = "red5-"+(clusterSize + count)
+            val controllName = "red5-control-"+(clusterSize + count)
+            manager ! AddNode(instName, controllName)
           }
         } else {
           for (count <- 0 until deltaServerCount) {
-            val member = controlMembers.last
-            cluster.leave(member.address)
-            manager ! RemoveNode
+            val instName = "red5-"+(clusterSize - 1 - count)
+            val controllName = "red5-control-"+(clusterSize - 1 - count)
+            cluster.leave(controlMemberAddresses(instName))
+            controlMemberAddresses -= instName
+            manager ! RemoveNode(instName, controllName)
           }
           activeAnts.remove(0, deltaServerCount)
         }
@@ -109,8 +115,11 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: Act
     case SLABreach => {
       log.info("Received SLA breach detected")
     }
-    case SubscribeAck(Subscribe(topic, None, `self`)) ⇒
+    case SubscribeAck(Subscribe(topic, None, `self`)) =>
       log.info("subscribing to mediator");
+    case ControllerRegister(managedHost, address) => {
+      controlMemberAddresses += (managedHost -> address)
+    }
   }
 
   def houseHuntingOptimization: Int = {

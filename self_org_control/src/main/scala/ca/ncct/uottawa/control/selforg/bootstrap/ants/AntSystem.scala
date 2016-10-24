@@ -16,10 +16,10 @@ import scala.concurrent.duration._
   */
 
 object AntSystem {
-  def props(instCount: Int, antSystemConfig: AntSystemConfig): Props = Props(new AntSystem(instCount, antSystemConfig))
+  def props(managedHost: String, antSystemConfig: AntSystemConfig): Props = Props(new AntSystem(managedHost, antSystemConfig))
 }
 
-class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor with ActorLogging {
+class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends Actor with ActorLogging {
 
   case class AntJump(value: (Ant, Address))
 
@@ -50,9 +50,11 @@ class AntSystem(instCount: Int, antSystemConfig: AntSystemConfig) extends Actor 
         controlMembers += (member -> new Metrics)
       } else {
         manager = member
-        val ant = Ant(List(Tuple3(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig, java.util.UUID.randomUUID.toString)
+        val ant = Ant(List(Tuple3(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig, managedHost)
         log.info("Ant {} created for {}", ant, Cluster(context.system).selfAddress)
         self ! ant
+        context.actorSelection(RootActorPath(manager.address) / "user" / "antSystem") !
+          ControllerRegister(managedHost, Cluster(context.system).selfAddress)
       }
     }
     case UnreachableMember(member) => {

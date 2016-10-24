@@ -40,10 +40,10 @@ class Manager(config : Config) extends Actor with ActorLogging {
   log.debug("Base command is: " + command)
 
   override def receive  = {
-    case AddNode =>
-      addNode
-    case RemoveNode =>
-      removeNode
+    case AddNode(instName, controllName) =>
+      addNode(instName, controllName)
+    case RemoveNode(instName, controllName) =>
+      removeNode(instName, controllName)
     case "tick" =>
       val count = startCount + 1
       var command = s"docker stop red5-control-$count"
@@ -54,34 +54,34 @@ class Manager(config : Config) extends Actor with ActorLogging {
       Process(command).run().exitValue()
   }
 
-  def addNode: Unit = {
+  def addNode(instName: String, controllName:String): Unit = {
     startCount += 1
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
     port = config.startPort + startCount
-    val command = s"docker run -d --net=${config.networkName} --name=red5-$startCount " +
+    val command = s"docker run -d --net=${config.networkName} --name=$instName " +
       s"-e red5_port=$port -e red5_ip=$localIpAddress -p ${port}:${config.startPort} bsolomon/red5-media:v1"
     log.debug("New command is: " + command)
     Process(command).run().exitValue()
-    val commandControl = s"docker run -d --net=${config.networkName} --name=red5-control-$startCount " +
-      s"-e red5_port=$port -e red5_ip=$localIpAddress -e managed_host=red5-$startCount " +
+    val commandControl = s"docker run -d --net=${config.networkName} --name=$controllName " +
+      s"-e red5_port=$port -e red5_ip=$localIpAddress -e managed_host=$instName " +
       s"-v /usr/local/docker-images/red5-control/config:/config bsolomon/red5-control:v1"
     log.debug("New command is: " + commandControl)
     Process(commandControl).run().exitValue()
     sender ! AddNode
   }
 
-  def removeNode: Unit = {
-    var command = s"docker stop red5-$startCount"
+  def removeNode(instName: String, controllName:String): Unit = {
+    var command = s"docker stop $instName"
     log.debug("Stop command is: " + command)
     Process(command).run().exitValue()
-    command = s"docker stop red5-control-$startCount"
+    command = s"docker stop $controllName"
     log.debug("Stop command is: " + command)
     Process(command).run().exitValue()
-    command = s"docker rm red5-$startCount"
+    command = s"docker rm $instName"
     log.debug("Remove command is: " + command)
     Process(command).run().exitValue()
-    command = s"docker rm red5-control-$startCount"
+    command = s"docker rm $controllName"
     log.debug("Remove command is: " + command)
     Process(command).run().exitValue()
     context.system.scheduler.scheduleOnce(180 second, self, "tick")

@@ -18,6 +18,8 @@ object Ant {
 
 case class SLABreach(breach:Boolean)
 
+case class ControllerRegister(instCount:String, address: Address)
+
 case class Ant(var serverData: List[(Address, Int, Double)], config: AntSystemConfig, antUid: String) {
 
   def PHEROMONE_LEVEL = config.antPheromone
