@@ -59,7 +59,6 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
     }
     case UnreachableMember(member) => {
       log.info("Member detected as unreachable: {}", member)
-      controlMembers -= member
     }
     case MemberRemoved(member, previousStatus) => {
       log.info("Member is Removed: {} after {}",

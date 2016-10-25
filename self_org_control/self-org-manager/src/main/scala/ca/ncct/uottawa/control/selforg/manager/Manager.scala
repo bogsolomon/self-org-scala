@@ -1,13 +1,13 @@
 package ca.ncct.uottawa.control.selforg.manager
 
 import java.nio.charset.StandardCharsets
-import java.nio.file.{StandardOpenOption, Files, Paths}
+import java.nio.file.{Files, Paths, StandardOpenOption}
 
-import akka.actor.{ActorLogging, Actor, ActorRef, Props}
-import ca.ncct.uottawa.control.selforg.manager.common.{RemoveNode, AddNode}
+import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import ca.ncct.uottawa.control.selforg.manager.common.{AddNode, RemoveNode}
 import ca.ncct.uottawa.control.selforg.manager.config.Config
-import scala.concurrent.duration._
 
+import scala.concurrent.duration._
 import scala.io.Source
 import scala.sys.process.Process
 
@@ -18,6 +18,8 @@ import scala.sys.process.Process
 object Manager {
   def props(config: Config, filter: ActorRef): Props = Props(new Manager(config))
 }
+
+case class RemoveController(instName:String)
 
 class Manager(config : Config) extends Actor with ActorLogging {
 
@@ -44,12 +46,11 @@ class Manager(config : Config) extends Actor with ActorLogging {
       addNode(instName, controllName)
     case RemoveNode(instName, controllName) =>
       removeNode(instName, controllName)
-    case "tick" =>
-      val count = startCount + 1
-      var command = s"docker stop red5-control-$count"
+    case RemoveController(instName) =>
+      var command = s"docker stop $instName"
       log.debug("Stop command is: " + command)
       Process(command).run().exitValue()
-      command = s"docker rm red5-control-$count"
+      command = s"docker rm $instName"
       log.debug("Stop command is: " + command)
       Process(command).run().exitValue()
   }
@@ -75,16 +76,10 @@ class Manager(config : Config) extends Actor with ActorLogging {
     var command = s"docker stop $instName"
     log.debug("Stop command is: " + command)
     Process(command).run().exitValue()
-    command = s"docker stop $controllName"
-    log.debug("Stop command is: " + command)
-    Process(command).run().exitValue()
     command = s"docker rm $instName"
     log.debug("Remove command is: " + command)
     Process(command).run().exitValue()
-    command = s"docker rm $controllName"
-    log.debug("Remove command is: " + command)
-    Process(command).run().exitValue()
-    context.system.scheduler.scheduleOnce(180 second, self, "tick")
+    context.system.scheduler.scheduleOnce(1 minute, self, RemoveController(controllName))
     startCount -= 1
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
