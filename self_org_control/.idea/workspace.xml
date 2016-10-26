@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="self_org_control:jar" />
+      <artifact name="self-org-manager:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b1f245c-1abb-4a07-89ad-b8645670f961" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" afterPath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala" afterPath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala" />
     </list>
     <ignored path="self_org_control.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,21 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HHAnt.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AntSystem.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AntSystem.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="183" column="67" selection-start-line="183" selection-start-column="67" selection-end-line="183" selection-end-column="67" />
+            <state relative-caret-position="212">
+              <caret line="150" column="35" selection-start-line="150" selection-start-column="35" selection-end-line="150" selection-end-column="35" />
               <folding>
                 <element signature="e#54#147#0" expanded="true" />
               </folding>
@@ -118,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bootstraper.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Bootstraper.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="739">
-              <caret line="120" column="6" selection-start-line="120" selection-start-column="6" selection-end-line="120" selection-end-column="6" />
+            <state relative-caret-position="518">
+              <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -195,8 +183,8 @@
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/common/Messages.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala" />
-        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala" />
+        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" />
       </list>
     </option>
   </component>
@@ -1370,10 +1358,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        <state relative-caret-position="518">
+          <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1386,21 +1374,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala">
+    <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="183" column="67" selection-start-line="183" selection-start-column="67" selection-end-line="183" selection-end-column="67" />
-          <folding>
-            <element signature="e#54#147#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="238">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala">
+    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
-          <caret line="120" column="6" selection-start-line="120" selection-start-column="6" selection-end-line="120" selection-end-column="6" />
-          <folding />
+        <state relative-caret-position="212">
+          <caret line="150" column="35" selection-start-line="150" selection-start-column="35" selection-end-line="150" selection-end-column="35" />
+          <folding>
+            <element signature="e#54#147#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

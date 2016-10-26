@@ -159,11 +159,12 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: Act
       return nests.head._2(0).newCount
     }
 
-    var newInitSolutions: ListBuffer[HHAnt] = ListBuffer()
+    var newInitSolutions: ListBuffer[HHAnt] = initSolutions.map( x => x)
     nests.foreach(nest => {
       if (nest._2.size < prevNestCounts(nest._1)) {
+        log.info("Nest  {} is dropping out with {} ants", nest._1, nest._2.size)
         // nest has decreased in size so it should be dropped. Filter out all ants going to it
-        newInitSolutions = initSolutions.filterNot(ant => nest._2.contains(ant))
+        newInitSolutions = newInitSolutions.filterNot(ant => nest._2.contains(ant))
       }
     })
     log.info("Round 4 newInitSolutions {}", newInitSolutions)
