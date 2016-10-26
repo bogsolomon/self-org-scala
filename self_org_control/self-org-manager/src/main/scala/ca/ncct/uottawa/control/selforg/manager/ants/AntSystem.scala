@@ -140,6 +140,7 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: Act
   def houseHuntingRound(initSolutions: ListBuffer[HHAnt]): Int = {
     var prevNestCounts: Map[Int, Int] = Map()
     initSolutions.foreach(ant => prevNestCounts = prevNestCounts + (ant.nestId -> 1))
+    log.info("Round 2 previous nests {}", prevNestCounts)
     // Round 2 - go home nest and recruit randomly
     val recruited: ListBuffer[(HHAnt, HHAnt)] = antRecruitment(initSolutions)
     log.info("Round 2 recruitment {}", recruited)
@@ -156,10 +157,11 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: Act
     log.info("Round 3 nests {}", nests)
 
     if (nests.size == 1) {
-      return nests.head._2(0).newCount
+      return nests.head._2.head.newCount
     }
 
     var newInitSolutions: ListBuffer[HHAnt] = initSolutions.map( x => x)
+    log.info("Round 4 newInitSolutions before filtering {}", newInitSolutions)
     nests.foreach(nest => {
       if (nest._2.size < prevNestCounts(nest._1)) {
         log.info("Nest  {} is dropping out with {} ants", nest._1, nest._2.size)
