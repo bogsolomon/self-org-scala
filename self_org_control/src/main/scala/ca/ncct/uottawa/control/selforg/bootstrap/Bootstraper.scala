@@ -117,7 +117,7 @@ class UnhandledMessageListener extends Actor with ActorLogging {
     case message: UnhandledMessage =>
       log.error(s"CRITICAL! No actors found for message ${message.getMessage}")
 
-    log.error("Shutting application down")
-    System.exit(-1)
+    //log.error("Shutting application down")
+    //System.exit(-1)
   }
 }

@@ -181,7 +181,7 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: Act
     }
 
     if (initSolutions.nonEmpty) {
-      recruited += Tuple2(initSolutions(0), HHAnt(initSolutions(0).ant, 0, -1))
+      recruited += Tuple2(initSolutions.head, HHAnt(initSolutions.head.ant, initSolutions.head.servCount, initSolutions.head.nestId))
     }
 
     recruited
