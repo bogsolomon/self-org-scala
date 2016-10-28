@@ -160,7 +160,8 @@ class AntSystem(manager: ActorRef, antSystemConfig: AntSystemConfig, system: Act
       return nests.head._2.head.newCount
     }
 
-    var newInitSolutions: ListBuffer[HHAnt] = initSolutions.map( x => x)
+    var newInitSolutions = ListBuffer[HHAnt]()
+    nests.foreach( x => {x._2.foreach( y=> {newInitSolutions += y}) })
     log.info("Round 4 newInitSolutions before filtering {}", newInitSolutions)
     nests.foreach(nest => {
       if (nest._2.size < prevNestCounts(nest._1)) {
