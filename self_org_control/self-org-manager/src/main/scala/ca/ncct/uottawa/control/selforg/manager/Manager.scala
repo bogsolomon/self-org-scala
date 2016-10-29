@@ -6,10 +6,13 @@ import java.nio.file.{Files, Paths, StandardOpenOption}
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import ca.ncct.uottawa.control.selforg.manager.common.{AddNode, RemoveNode}
 import ca.ncct.uottawa.control.selforg.manager.config.Config
+import spray.client.pipelining._
+import spray.http.HttpResponse
 
+import scala.concurrent.Future
 import scala.concurrent.duration._
 import scala.io.Source
-import scala.sys.process.Process
+import scala.util.{Failure, Success}
 
 /**
   * Created by Bogdan on 7/16/2016.
@@ -26,6 +29,7 @@ class Manager(config : Config) extends Actor with ActorLogging {
   import scala.concurrent.ExecutionContext.Implicits.global
 
   val PERSITENCE_FILE: String = "instance-count.txt"
+  val RM_NODE_URL = "http://172.30.4.2:8080/removeNode?"
 
   var startCount = 0;
   if (Files.exists(Paths.get(PERSITENCE_FILE))) {
@@ -35,11 +39,7 @@ class Manager(config : Config) extends Actor with ActorLogging {
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8))
   }
 
-  val localIpAddress: String = System.getenv("red5_ip")
   var port = config.startPort + startCount
-  val command = s"docker run -d --net=${config.networkName} --name=red5-$startCount " +
-    s"-e red5_port=$port -e red5_ip=$localIpAddress -p $port:${config.startPort} bsolomon/red5-media:v1"
-  log.debug("Base command is: " + command)
 
   override def receive  = {
     case AddNode(instName, controllName) =>
@@ -47,42 +47,59 @@ class Manager(config : Config) extends Actor with ActorLogging {
     case RemoveNode(instName, controllName) =>
       removeNode(instName, controllName)
     case RemoveController(instName) =>
-      var command = s"docker stop $instName"
-      log.debug("Stop command is: " + command)
-      Process(command).run().exitValue()
-      command = s"docker rm $instName"
-      log.debug("Stop command is: " + command)
-      Process(command).run().exitValue()
+      removeControl(instName)
   }
 
-  def addNode(instName: String, controllName:String): Unit = {
+  def addNode(instName: String, controlName:String): Unit = {
     startCount += 1
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
     port = config.startPort + startCount
-    val command = s"docker run -d --net=${config.networkName} --name=$instName " +
-      s"-e red5_port=$port -e red5_ip=$localIpAddress -p ${port}:${config.startPort} bsolomon/red5-media:v1"
-    log.debug("New command is: " + command)
-    Process(command).run().exitValue()
-    val commandControl = s"docker run -d --net=${config.networkName} --name=$controllName " +
-      s"-e red5_port=$port -e red5_ip=$localIpAddress -e managed_host=$instName " +
-      s"-v /usr/local/docker-images/red5-control/config:/config bsolomon/red5-control:v1"
-    log.debug("New command is: " + commandControl)
-    Process(commandControl).run().exitValue()
-    sender ! AddNode
+    val pipeline: SendReceive = sendReceive
+    val response: Future[HttpResponse] = pipeline {
+      Get(s"http://172.30.4.2:8080/addNode?instName=${instName}&controlName=${controlName}" +
+        s"&port=${port}&netName=${config.networkName}&startPort=${config.startPort}")
+    }
+    response.onComplete {
+      case Success(s: HttpResponse) => {
+        log.debug("Add server answer: " + s.entity.asString)
+        sender ! AddNode
+      }
+      case Failure(error) => {
+      }
+    }
   }
 
   def removeNode(instName: String, controllName:String): Unit = {
-    var command = s"docker stop $instName"
-    log.debug("Stop command is: " + command)
-    Process(command).run().exitValue()
-    command = s"docker rm $instName"
-    log.debug("Remove command is: " + command)
-    Process(command).run().exitValue()
-    context.system.scheduler.scheduleOnce(1 minute, self, RemoveController(controllName))
-    startCount -= 1
-    Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
-      StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
-    sender ! RemoveNode
+    val pipeline: SendReceive = sendReceive
+    val response: Future[HttpResponse] = pipeline {
+      Get(s"http://172.30.4.2:8080/removeNode?instName=${instName}")
+    }
+    response.onComplete {
+      case Success(s: HttpResponse) => {
+        log.debug("Server removed answer: " + s.entity.asString)
+        context.system.scheduler.scheduleOnce(1 minute, self, RemoveController(controllName))
+        startCount -= 1
+        Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
+          StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
+        sender ! RemoveNode
+      }
+      case Failure(error) => {
+      }
+    }
+  }
+
+  def removeControl(controlName:String): Unit = {
+    val pipeline: SendReceive = sendReceive
+    val response: Future[HttpResponse] = pipeline {
+      Get(s"http://172.30.4.2:8080/removeNode?instName=${controlName}")
+    }
+    response.onComplete {
+      case Success(s: HttpResponse) => {
+        log.debug("Controller removed answer: " + s.entity.asString)
+      }
+      case Failure(error) => {
+      }
+    }
   }
 }

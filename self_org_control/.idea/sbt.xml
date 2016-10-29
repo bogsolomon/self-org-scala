@@ -15,6 +15,19 @@
         <option name="useOurOwnAutoImport" value="true" />
       </SbtProjectSettings>
       <SbtProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/docker-proxy" />
+        <option name="jdk" value="1.8" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/docker-proxy" />
+            <option value="$PROJECT_DIR$/docker-proxy/project" />
+          </set>
+        </option>
+        <option name="sbtVersion" value="0.13.9" />
+        <option name="useAutoImport" value="true" />
+        <option name="useOurOwnAutoImport" value="true" />
+      </SbtProjectSettings>
+      <SbtProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/self-org-manager" />
         <option name="jdk" value="1.8" />
         <option name="modules">
