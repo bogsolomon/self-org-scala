@@ -43,14 +43,14 @@ class Manager(config : Config) extends Actor with ActorLogging {
 
   override def receive  = {
     case AddNode(instName, controllName) =>
-      addNode(instName, controllName)
+      addNode(instName, controllName, sender)
     case RemoveNode(instName, controllName) =>
-      removeNode(instName, controllName)
+      removeNode(instName, controllName, sender)
     case RemoveController(instName) =>
       removeControl(instName)
   }
 
-  def addNode(instName: String, controlName:String): Unit = {
+  def addNode(instName: String, controlName:String, senderAct: ActorRef): Unit = {
     startCount += 1
     Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
@@ -63,14 +63,14 @@ class Manager(config : Config) extends Actor with ActorLogging {
     response.onComplete {
       case Success(s: HttpResponse) => {
         log.debug("Add server answer: " + s.entity.asString)
-        sender ! AddNode
+        senderAct ! AddNode
       }
       case Failure(error) => {
       }
     }
   }
 
-  def removeNode(instName: String, controllName:String): Unit = {
+  def removeNode(instName: String, controllName:String, senderAct: ActorRef): Unit = {
     val pipeline: SendReceive = sendReceive
     val response: Future[HttpResponse] = pipeline {
       Get(s"http://172.30.4.2:8080/removeNode?instName=${instName}")
@@ -82,7 +82,7 @@ class Manager(config : Config) extends Actor with ActorLogging {
         startCount -= 1
         Files.write(Paths.get(PERSITENCE_FILE), startCount.toString.getBytes(StandardCharsets.UTF_8),
           StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.TRUNCATE_EXISTING)
-        sender ! RemoveNode
+        senderAct ! RemoveNode
       }
       case Failure(error) => {
       }

@@ -2,7 +2,7 @@ package ca.ncct.uottawa.control.selforg.bootstrap.component
 
 import akka.actor.{Actor, ActorLogging, Props}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.DecisionMaker.{Accept, DecisionType, Nochange, Reject}
-import ca.ncct.uottawa.control.selforg.bootstrap.component.data.{Decision, SensorMeasurement}
+import ca.ncct.uottawa.control.selforg.bootstrap.component.data.{Decision}
 import ca.ncct.uottawa.control.selforg.bootstrap.config.GenericConfig
 import com.watchtogether.autonomic.selforg.red5.manager.group.GroupManager
 import com.watchtogether.common.ClientPolicyMessage
@@ -19,8 +19,11 @@ object Actuator {
   def props(config: GenericConfig): Props = Props(new Actuator(config))
 }
 class Actuator(config: GenericConfig) extends Actor with ActorLogging {
+
+  import scala.concurrent.ExecutionContext.Implicits.global
+
   val contName = System.getenv("managed_host")
-  var urlRequest:String = "http://http://172.30.4.2:8080/serverIp?managedHost="+contName
+  var urlRequest:String = s"http://172.30.4.2:8080/serverIp?managedHost=$contName"
   var envHost = ""
 
   val pipeline: SendReceive = sendReceive
@@ -30,12 +33,12 @@ class Actuator(config: GenericConfig) extends Actor with ActorLogging {
   response.onComplete {
     case Success(s: HttpResponse) => {
       envHost = s.entity.toString
+      log.debug("envHost: " + envHost)
     }
     case Failure(error) => {
     }
   }
 
-  log.debug("envHost: " + envHost)
   val envPort: Int = System.getenv("red5_port").toInt
 
   override def receive  = {

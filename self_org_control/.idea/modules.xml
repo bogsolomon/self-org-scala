@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/docker-proxy/.idea/modules/docker-proxy.iml" filepath="$PROJECT_DIR$/docker-proxy/.idea/modules/docker-proxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/docker-proxy/.idea/modules/docker-proxy-build.iml" filepath="$PROJECT_DIR$/docker-proxy/.idea/modules/docker-proxy-build.iml" />
-      <module fileurl="file://$PROJECT_DIR$/docker-proxy/project/.idea/modules/project.iml" filepath="$PROJECT_DIR$/docker-proxy/project/.idea/modules/project.iml" />
       <module fileurl="file://$PROJECT_DIR$/docker-proxy/project/.idea/modules/project-build.iml" filepath="$PROJECT_DIR$/docker-proxy/project/.idea/modules/project-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/self-org-common/self-org-common.iml" filepath="$PROJECT_DIR$/self-org-common/self-org-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/self-org-manager/.idea/modules/self-org-manager.iml" filepath="$PROJECT_DIR$/self-org-manager/.idea/modules/self-org-manager.iml" />

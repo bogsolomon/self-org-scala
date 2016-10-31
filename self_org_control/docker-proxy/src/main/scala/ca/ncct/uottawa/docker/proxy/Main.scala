@@ -39,7 +39,7 @@ object Main extends App with SimpleRoutingApp {
           }
         } ~
         path("removeNode") {
-          parameters('instName) {
+          parameter('instName) {
             instName => {
               val stopCommand = s"docker -H 172.30.4.2:4000 stop $instName"
               logRequest("New command is: " + stopCommand, akka.event.Logging.InfoLevel)
