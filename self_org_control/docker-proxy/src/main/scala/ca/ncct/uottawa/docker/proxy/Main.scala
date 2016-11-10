@@ -1,5 +1,7 @@
 package ca.ncct.uottawa.docker.proxy
 
+import java.io.{BufferedWriter, File, FileWriter, PrintWriter}
+
 import akka.actor.ActorSystem
 import spray.routing.SimpleRoutingApp
 
@@ -26,7 +28,7 @@ object Main extends App with SimpleRoutingApp {
           parameters('instName, 'controlName, 'port.as[Int], 'netName, 'startPort.as[Int]) {
             (instName, controlName, port, netName, startPort) => {
               val mediaServCommand = s"docker -H 172.30.4.2:4000 run -d --net=${netName} --name=$instName " +
-                s"-e red5_port=$port -v /etc/hostname:/hostname -p ${port}:${startPort} bsolomon/red5-media:v1"
+                s"-e red5_port=$port -v /etc/hostname:/hostname -p ${port}:1935 bsolomon/red5-media:v1"
               logRequest("New command is: " + mediaServCommand, akka.event.Logging.InfoLevel)
               var exitValue = Process(mediaServCommand).run().exitValue()
               val commandControl = s"docker -H 172.30.4.2:4000 run -d --net=${netName} --name=$controlName " +
@@ -41,6 +43,17 @@ object Main extends App with SimpleRoutingApp {
         path("removeNode") {
           parameter('instName) {
             instName => {
+              if (instName.contains("control")) {
+                val timestamp: Long = System.currentTimeMillis / 1000
+                val pw = new BufferedWriter(new FileWriter(s"/usr/local/logs/$instName-stop-$timestamp.log" ))
+                val result = s"docker -H 172.30.4.2:4000 logs $instName".lineStream_!
+                result.foreach(line => {
+                  pw.write(line)
+                  pw.newLine()
+                })
+                pw.flush()
+                pw.close()
+              }
               val stopCommand = s"docker -H 172.30.4.2:4000 stop $instName"
               logRequest("New command is: " + stopCommand, akka.event.Logging.InfoLevel)
               var exitValue = Process(stopCommand).run().exitValue()

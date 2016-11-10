@@ -12,18 +12,21 @@ import com.fuzzylite.variable.InputVariable
 object FuzzyModel {
   def props(config: GenericConfig): Props = Props(new FuzzyModel(config))
 }
+
 class FuzzyModel(config: GenericConfig) extends Actor with ActorLogging {
-  val clientsIV:InputVariable = new InputVariable
+  val clientsIV: InputVariable = new InputVariable
   clientsIV.addTerm(new Trapezoid("", 0, config.params("CLIENTS_THR").toDouble, Double.MaxValue, Double.MaxValue))
-  val cpuIV:InputVariable = new InputVariable
+  val cpuIV: InputVariable = new InputVariable
   cpuIV.addTerm(new Trapezoid("", 0, config.params("CPU_THR").toDouble, Double.MaxValue, Double.MaxValue))
-  val streamsInIV:InputVariable = new InputVariable
+  val streamsInIV: InputVariable = new InputVariable
   streamsInIV.addTerm(new Trapezoid("", 0, config.params("STREAMSIN_THR").toDouble, Double.MaxValue, Double.MaxValue))
-  val streamsOutIV:InputVariable = new InputVariable
+  val streamsOutIV: InputVariable = new InputVariable
   streamsOutIV.addTerm(new Trapezoid("", 0, config.params("STREAMSOUT_THR").toDouble, Double.MaxValue, Double.MaxValue))
 
-  override def receive  = {
-    case msg : FilterMeasurement => updateModel(msg)
+  var started = false
+
+  override def receive = {
+    case msg: FilterMeasurement => updateModel(msg)
   }
 
   def updateModel(msg: FilterMeasurement): Unit = {
@@ -35,17 +38,32 @@ class FuzzyModel(config: GenericConfig) extends Actor with ActorLogging {
     val packetsIn = msg.packetIn
     val packetsOut = msg.packetOut
 
-    var confidenceR1:Double = clientsIV.fuzzify(clients).split("/")(0).toDouble
+    var confidenceR1: Double = clientsIV.fuzzify(clients).split("/")(0).toDouble
 
-    if (packetsIn != 0 && streamsIn != 0)
-    {
-      confidenceR1 = Math.min(confidenceR1, streamsOutIV.fuzzify(packetsOut / (packetsIn / streamsIn)).split("/")(0).toDouble)
+    log.debug("clientsIV: " + confidenceR1)
+
+    if (packetsIn != 0 && streamsIn != 0) {
+      val outValue: Double = streamsOutIV.fuzzify(packetsOut / (packetsIn / streamsIn)).split("/")(0).toDouble
+      log.debug("streamsOutValue: " + outValue)
+      confidenceR1 = (confidenceR1 + outValue) / 2
+      log.debug("confidenceR1: " + confidenceR1)
+    }
+    else {
+      confidenceR1 = confidenceR1 / 2
+      log.debug("confidenceR1: " + confidenceR1)
     }
 
-    var confidenceR2:Double = streamsInIV.fuzzify(packetsIn).split("/")(0).toDouble
-    confidenceR2 = Math.min(confidenceR2, cpuIV.fuzzify(cpu).split("/")(0).toDouble)
+    var confidenceR2: Double = streamsInIV.fuzzify(packetsIn).split("/")(0).toDouble
+    log.debug("streamsInIV: " + confidenceR2)
+    val cpuValue: Double = cpuIV.fuzzify(cpu).split("/")(0).toDouble
+    log.debug("cpuValue: " + cpuValue)
+    confidenceR2 = (confidenceR2 + cpuValue) / 2
+    log.debug("confidenceR2: " + confidenceR2)
 
-    sender ! Model(Math.max(confidenceR1, confidenceR2))
+    if (packetsIn != 0 || started) {
+      sender ! Model((confidenceR1 + confidenceR2) / 2)
+      started = true
+    }
   }
 }
 

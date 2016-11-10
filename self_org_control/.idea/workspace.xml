@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="self-org-manager:jar" />
+      <artifact name="self_org_control:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b1f245c-1abb-4a07-89ad-b8645670f961" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" afterPath="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docker-proxy/src/main/scala/ca/ncct/uottawa/docker/proxy/Main.scala" afterPath="$PROJECT_DIR$/docker-proxy/src/main/scala/ca/ncct/uottawa/docker/proxy/Main.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config.xml" afterPath="$PROJECT_DIR$/src/main/resources/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" afterPath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Estimator.scala" afterPath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Estimator.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/FuzzyModel.scala" afterPath="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/FuzzyModel.scala" />
     </list>
     <ignored path="self_org_control.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -17,6 +22,10 @@
     <ignored path="$PROJECT_DIR$/self-org-manager/target/" />
     <ignored path="$PROJECT_DIR$/self-org-manager/project/project/target/" />
     <ignored path="$PROJECT_DIR$/self-org-manager/project/target/" />
+    <ignored path="$PROJECT_DIR$/docker-proxy/target/" />
+    <ignored path="$PROJECT_DIR$/docker-proxy/project/project/target/" />
+    <ignored path="$PROJECT_DIR$/docker-proxy/project/target/" />
+    <ignored path="$PROJECT_DIR$/docker-proxy/project/project/project/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +39,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/docker-proxy">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/docker-proxy/project">
       <ProjectState />
     </projectState>
     <projectState path="$PROJECT_DIR$/self-org-manager">
@@ -50,11 +65,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AntSystem.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AntSystem.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="60" column="60" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+            <state relative-caret-position="515">
+              <caret line="89" column="121" selection-start-line="89" selection-start-column="121" selection-end-line="89" selection-end-column="121" />
               <folding>
                 <element signature="e#56#126#0" expanded="true" />
               </folding>
@@ -62,55 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ant.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AntSystem.scala" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="150" column="35" selection-start-line="150" selection-start-column="35" selection-end-line="150" selection-end-column="35" />
-              <folding>
-                <element signature="e#54#147#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Manager.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="926">
-              <caret line="81" column="79" selection-start-line="81" selection-start-column="79" selection-end-line="81" selection-end-column="79" />
-              <folding>
-                <element signature="e#49#89#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Bootstraper.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Bootstraper.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="30" column="28" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Bootstraper.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
+            <state relative-caret-position="1215">
+              <caret line="85" column="3" selection-start-line="85" selection-start-column="3" selection-end-line="85" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -138,13 +109,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/data/SensorConfig.scala" />
         <option value="$PROJECT_DIR$/project/plugins.sbt" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/client/Local.scala" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/util/Utils.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/config/SensorConfig.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/data/SensorMeasurement.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/FuzzyModel.scala" />
         <option value="$PROJECT_DIR$/src/main/java/GroupManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/watchtogether/autonomic/selforg/red5/manager/group/GroupReceiverAdapter.java" />
         <option value="$PROJECT_DIR$/plugins.sbt" />
@@ -157,8 +126,6 @@
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/ClusterMessageListener.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Coordinator.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/data/Data.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Estimator.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Actuator.scala" />
         <option value="$PROJECT_DIR$/build.sbt" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala" />
         <option value="$PROJECT_DIR$/self-org-common/src/main/scala/Ant.scala" />
@@ -166,13 +133,11 @@
         <option value="$PROJECT_DIR$/self-org-manager/build.sbt" />
         <option value="$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystemConfig.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/config/Config.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Red5Sensor.scala" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/config/Config.scala" />
         <option value="$PROJECT_DIR$/self-org-manager/src/test/scala/AntSystemTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DataFilterChain.scala" />
-        <option value="$PROJECT_DIR$/src/main/resources/config.xml" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/resources/config.xml" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DecisionMaker.scala" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala" />
@@ -181,10 +146,20 @@
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Bootstraper.scala" />
         <option value="$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/common/Messages.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" />
-        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala" />
         <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/TestList.scala" />
+        <option value="$PROJECT_DIR$/docker-proxy/build.sbt" />
+        <option value="$PROJECT_DIR$/docker-proxy/src/main/scala/ca/ncct/uottawa/docker/proxy/DockerProxyService.scala" />
+        <option value="$PROJECT_DIR$/docker-proxy/src/main/resources/application.conf" />
+        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Red5Sensor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Actuator.scala" />
+        <option value="$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Estimator.scala" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.xml" />
+        <option value="$PROJECT_DIR$/docker-proxy/src/main/scala/ca/ncct/uottawa/docker/proxy/Main.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/FuzzyModel.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala" />
       </list>
     </option>
   </component>
@@ -214,7 +189,7 @@
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
-      <showMembers />
+      <showMembers PackagesPane="true" ProjectPane="true" />
       <showModules />
       <showLibraryContents />
       <hideEmptyPackages />
@@ -228,7 +203,9 @@
     <panes>
       <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -294,9 +271,39 @@
               <option name="myItemId" value="bootstrap" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Bootstraper.scala" />
               <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UnhandledMessageListener" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$TypeDefinitionTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -323,6 +330,14 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="bootstrap" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bootstraper.scala" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bootstraper$" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$TypeDefinitionTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -376,16 +391,92 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ants" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AntSystem.scala" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AntSystem" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$TypeDefinitionTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ants" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AntSystem.scala" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AntSystem$" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$TypeDefinitionTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="self_org_control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/self-org-manager" />
+    <property name="last_opened_file_path" value="D:/self_org_logparser" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.40804598" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
@@ -395,11 +486,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\scala-thesis\self-org-scala\self_org_control\docker-proxy\src\main\resources" />
+      <recent name="D:\scala-thesis\self-org-scala\self_org_control\docker-proxy" />
       <recent name="D:\scala-thesis\self-org-scala\self_org_control\self-org-common\src\main\scala" />
       <recent name="D:\scala-thesis\self-org-scala\self_org_control\self-org-manager\src\main\scala\ca\ncct\uottawa\control\selforg\manager" />
       <recent name="D:\scala-thesis\self-org-scala\self_org_control\src\main\resources" />
-      <recent name="D:\scala-thesis\self-org-scala\self_org_control\src\main\java\com\watchtogether\autonomic\selforg\red5\manager\config" />
-      <recent name="D:\scala-thesis\self-org-scala\self_org_control\src\main\java\com\watchtogether\autonomic\selforg\red5\manager\group" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="ca.ncct.uottawa.control.selforg.manager" />
@@ -408,27 +499,7 @@
       <recent name="D:\scala-thesis\self-org-scala\self_org_control\self-org-manager\src\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Remote.manager-docker-cloud2">
-    <configuration default="false" name="HelloSimpleMain" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.example.HelloSimpleMain" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="self_org_control" />
-      <envs />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Remote.proxy">
     <configuration default="false" name="Bootstraper" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -473,23 +544,43 @@
       </envs>
       <method />
     </configuration>
-    <configuration default="false" name="Local" type="Application" factoryName="Application" temporary="true">
+    <configuration default="false" name="TestList" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="ca.ncct.uottawa.control.selforg.manager.client.*" />
+          <option name="PATTERN" value="ca.ncct.uottawa.control.selforg.bootstrap.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="ca.ncct.uottawa.control.selforg.manager.client.Local" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="MAIN_CLASS_NAME" value="ca.ncct.uottawa.control.selforg.bootstrap.TestList" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="self-org-manager" />
+      <module name="self_org_control" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ca.ncct.uottawa.docker.proxy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="ca.ncct.uottawa.docker.proxy.Main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="docker-proxy" />
       <envs />
       <method />
     </configuration>
@@ -804,6 +895,18 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="false" name="proxy" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="172.30.4.2" />
+      <option name="PORT" value="8000" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="8000" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+      <method />
+    </configuration>
     <configuration default="false" name="control-docker-cloud2" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -828,45 +931,46 @@
       </RunnerSettings>
       <method />
     </configuration>
-    <list size="7">
-      <item index="0" class="java.lang.String" itemvalue="Remote.control-docker-cloud2" />
-      <item index="1" class="java.lang.String" itemvalue="Remote.manager-docker-cloud2" />
-      <item index="2" class="java.lang.String" itemvalue="Application.HelloSimpleMain" />
+    <list size="8">
+      <item index="0" class="java.lang.String" itemvalue="Remote.proxy" />
+      <item index="1" class="java.lang.String" itemvalue="Remote.control-docker-cloud2" />
+      <item index="2" class="java.lang.String" itemvalue="Remote.manager-docker-cloud2" />
       <item index="3" class="java.lang.String" itemvalue="Application.Bootstraper" />
       <item index="4" class="java.lang.String" itemvalue="Application.Bootstraper (1)" />
-      <item index="5" class="java.lang.String" itemvalue="Application.Local" />
-      <item index="6" class="java.lang.String" itemvalue="ScalaTest.AntSystemTest" />
+      <item index="5" class="java.lang.String" itemvalue="Application.TestList" />
+      <item index="6" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="7" class="java.lang.String" itemvalue="ScalaTest.AntSystemTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Bootstraper" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Bootstraper (1)" />
-        <item index="2" class="java.lang.String" itemvalue="ScalaTest.AntSystemTest" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Local" />
-        <item index="4" class="java.lang.String" itemvalue="Application.HelloSimpleMain" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="Application.TestList" />
+        <item index="2" class="java.lang.String" itemvalue="Application.Bootstraper" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Bootstraper (1)" />
+        <item index="4" class="java.lang.String" itemvalue="ScalaTest.AntSystemTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="SbtLocalSettings">
-    <option name="lastUpdateTimestamp" value="1476648930683" />
+    <option name="lastUpdateTimestamp" value="1477755803277" />
     <option name="availableProjects">
       <map>
         <entry>
           <key>
             <ExternalProjectPojo>
               <option name="name" value="akka-scala-seed" />
-              <option name="path" value="$PROJECT_DIR$/self-org-manager" />
+              <option name="path" value="$PROJECT_DIR$/docker-proxy" />
             </ExternalProjectPojo>
           </key>
           <value>
             <list>
               <ExternalProjectPojo>
-                <option name="name" value="self-org-manager" />
-                <option name="path" value="$PROJECT_DIR$/self-org-manager" />
+                <option name="name" value="docker-proxy" />
+                <option name="path" value="$PROJECT_DIR$/docker-proxy" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value="self-org-manager-build" />
-                <option name="path" value="$PROJECT_DIR$/self-org-manager/project" />
+                <option name="name" value="docker-proxy-build" />
+                <option name="path" value="$PROJECT_DIR$/docker-proxy/project" />
               </ExternalProjectPojo>
             </list>
           </value>
@@ -891,11 +995,32 @@
             </list>
           </value>
         </entry>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="akka-scala-seed" />
+              <option name="path" value="$PROJECT_DIR$/self-org-manager" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="self-org-manager" />
+                <option name="path" value="$PROJECT_DIR$/self-org-manager" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
+                <option name="name" value="self-org-manager-build" />
+                <option name="path" value="$PROJECT_DIR$/self-org-manager/project" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$/../hello-akka" value="1454121786607" />
+        <entry key="$PROJECT_DIR$/docker-proxy/project/project" value="1477755532037" />
       </map>
     </option>
     <option name="externalProjectsViewState">
@@ -957,17 +1082,19 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2293869" sideWeight="0.49375" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="SBT" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329429" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="SBT" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23150106" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2945571" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29386893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24739583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -997,7 +1124,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="61" />
+      <option name="time" value="71" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1012,53 +1139,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.7-sources.jar!/scala/Predef.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="228" column="58" selection-start-line="228" selection-start-column="15" selection-end-line="228" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala" />
-    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ClusterMessageListener.scala" />
-    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.7-sources.jar!/scala/package.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-manager/src/test/scala/FlatSpec.scala" />
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/srcs/akka-actor_2.11-2.4.0-sources.jar!/akka/actor/Address.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scalatest/scalatest_2.11/srcs/scalatest_2.11-2.2.4-sources.jar!/org/scalatest/Suite.scala" />
-    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scalatest/scalatest_2.11/srcs/scalatest_2.11-2.2.4-sources.jar!/org/scalatest/OutcomeOf.scala" />
-    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.7-sources.jar!/scala/util/Random.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2346">
-          <caret line="147" column="7" selection-start-line="147" selection-start-column="7" selection-end-line="147" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Coordinator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.7-sources.jar!/scala/collection/mutable/ListBuffer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="266" column="15" selection-start-line="266" selection-start-column="15" selection-end-line="266" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.7-sources.jar!/scala/runtime/RichInt.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -1070,13 +1150,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.sbt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1099,6 +1172,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1107,16 +1181,6 @@
         <state relative-caret-position="136">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/config/Config.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-          <folding>
-            <element signature="e#58#127#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1144,21 +1208,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Red5Sensor.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
-          <folding>
-            <element signature="e#61#117#0" expanded="false" />
-            <element signature="e#931#950#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DataFilterChain.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1199,17 +1253,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/srcs/akka-actor_2.11-2.4.0-sources.jar!/akka/actor/ActorCell.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="392" column="23" selection-start-line="392" selection-start-column="23" selection-end-line="392" selection-end-column="23" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#96#139#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ivy2/cache/com.typesafe.akka/akka-remote_2.11/srcs/akka-remote_2.11-2.4.0-sources.jar!/akka/remote/RemoteActorRefProvider.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
@@ -1242,34 +1285,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="18" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/resources/config.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="48" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Estimator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DecisionMaker.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="31" column="47" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -1314,14 +1333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Bootstraper.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="30" column="28" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/client/Local.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1338,34 +1349,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="60" column="60" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
-          <folding>
-            <element signature="e#56#126#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="926">
-          <caret line="81" column="79" selection-start-line="81" selection-start-column="79" selection-end-line="81" selection-end-column="79" />
-          <folding>
-            <element signature="e#49#89#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/HHAnt.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1374,20 +1357,211 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/TestList.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        <state relative-caret-position="306">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+          <folding>
+            <element signature="e#51#76#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.7-sources.jar!/scala/sys/process/ProcessBuilder.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="145" column="6" selection-start-line="145" selection-start-column="6" selection-end-line="145" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/srcs/akka-actor_2.11-2.4.0-sources.jar!/akka/actor/ActorCell.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="570" column="30" selection-start-line="570" selection-start-column="30" selection-end-line="570" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-proxy/src/main/scala/ca/ncct/uottawa/docker/proxy/DockerProxyService.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="17" column="66" selection-start-line="17" selection-start-column="66" selection-end-line="17" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-proxy/build.sbt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="74" selection-start-line="12" selection-start-column="74" selection-end-line="12" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/srcs/akka-actor_2.11-2.4.0-sources.jar!/akka/event/Logging.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-561">
+          <caret line="377" column="7" selection-start-line="377" selection-start-column="7" selection-end-line="377" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-proxy/src/main/resources/application.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-proxy/src/main/resources/logback.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/io.spray/spray-httpx_2.11/srcs/spray-httpx_2.11-1.3.3-sources.jar!/spray/httpx/ResponseTransformation.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/config/Config.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="e#58#127#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Actuator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding>
+            <element signature="e#61#107#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Bootstraper.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="47" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/ants/AntSystem.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="150" column="35" selection-start-line="150" selection-start-column="35" selection-end-line="150" selection-end-column="35" />
+        <state relative-caret-position="246">
+          <caret line="86" column="30" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
           <folding>
             <element signature="e#54#147#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.sbt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/self-org-common/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/Ant.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Red5Sensor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
+          <folding>
+            <element signature="e#61#117#0" expanded="true" />
+            <element signature="e#931#950#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/DecisionMaker.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="17" column="47" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/self-org-manager/src/main/scala/ca/ncct/uottawa/control/selforg/manager/Manager.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="60" column="76" selection-start-line="60" selection-start-column="76" selection-end-line="60" selection-end-column="76" />
+          <folding>
+            <element signature="e#49#89#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-proxy/src/main/scala/ca/ncct/uottawa/docker/proxy/Main.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="30" column="79" selection-start-line="30" selection-start-column="79" selection-end-line="30" selection-end-column="79" />
+          <folding>
+            <element signature="e#38#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/Estimator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-491">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/component/FuzzyModel.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/Bootstraper.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1215">
+          <caret line="85" column="3" selection-start-line="85" selection-start-column="3" selection-end-line="85" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ca/ncct/uottawa/control/selforg/bootstrap/ants/AntSystem.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="89" column="121" selection-start-line="89" selection-start-column="121" selection-end-line="89" selection-end-column="121" />
+          <folding>
+            <element signature="e#56#126#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1398,7 +1572,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>self_org_control:jar</last-edited>
+          <last-edited>self-org-manager:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

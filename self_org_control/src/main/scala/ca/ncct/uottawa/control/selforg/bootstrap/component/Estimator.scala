@@ -27,16 +27,19 @@ class Estimator(config: GenericConfig) extends Actor with ActorLogging {
 
   def stable: Receive = {
     case msg : Model => msg.bucketLevel match {
-      case x if x < lowThreshold => {
+      case x if x < lowThreshold =>
+        log.debug("From stable -> remove")
         countType = Remove
         count = 0
         context become remove
-      }
-      case x if x > highThreshold => {
+      case y if y > highThreshold =>
+        log.debug("From stable -> add")
         countType = Add
         count = 0
         context become add
-      }
+      case _ =>
+        log.debug("From stable -> stable")
+        countType = Stable
     }
   }
 
@@ -44,14 +47,18 @@ class Estimator(config: GenericConfig) extends Actor with ActorLogging {
     case msg : Model => msg.bucketLevel match {
       case x if x < lowThreshold => {
         count += 1
+        log.debug("From remove -> remove " + count)
         sender ! EstimatedData(count, countType)
       }
-      case x if x > highThreshold => {
+      case y if y > highThreshold => {
         countType = Add
         count = 0
+        log.debug("From remove -> add " + count)
         context become add
       }
-      case _ => context become stable
+      case _ =>
+        log.debug("From remove -> stable ")
+        context become stable
     }
   }
 
@@ -60,13 +67,17 @@ class Estimator(config: GenericConfig) extends Actor with ActorLogging {
       case x if x < lowThreshold => {
         countType = Remove
         count = 0
+        log.debug("From add -> remove " + count)
         context become remove
       }
-      case x if x > highThreshold => {
+      case y if y > highThreshold => {
         count += 1
+        log.debug("From add -> add " + count)
         sender ! EstimatedData(count, countType)
       }
-      case _ => context become stable
+      case _ =>
+        log.debug("From add -> stable ")
+        context become stable
     }
   }
 }

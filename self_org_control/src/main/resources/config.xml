@@ -14,12 +14,12 @@
     <model type="FuzzyModel">
         <param name="CLIENTS_THR" value="50"/>
         <param name="CPU_THR" value="40"/>
-        <param name="STREAMSIN_THR" value="20"/>
-        <param name="STREAMSOUT_THR" value="10"/>
+        <param name="STREAMSIN_THR" value="150"/>
+        <param name="STREAMSOUT_THR" value="100"/>
     </model>
     <estimator type="ThresholdEstimator">
-        <param name="LOWER_THRESHOLD" value="20"/>
-        <param name="HIGH_THRESHOLD" value="40"/>
+        <param name="LOWER_THRESHOLD" value="0.2"/>
+        <param name="HIGH_THRESHOLD" value="0.5"/>
     </estimator>
     <decisionMaker class="ClientPolicyDecisionMaker">
         <param name="LOWER_THRESHOLD_CHANGE_COUNT" value="5"/>

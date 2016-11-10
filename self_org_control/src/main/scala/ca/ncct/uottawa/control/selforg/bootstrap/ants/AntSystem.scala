@@ -32,6 +32,8 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
   var ants : mutable.LinkedHashSet[Ant] = new mutable.LinkedHashSet[Ant]
   var manager: Member = null
   var slaBreach: Boolean = false
+  var hasReceivedAnt: Boolean = false
+  var hasCreatedAnt: Boolean = false
 
   import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -50,11 +52,6 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
         controlMembers += (member -> new Metrics)
       } else {
         manager = member
-        val ant = Ant(List(Tuple3(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig, managedHost)
-        log.info("Ant {} created for {}", ant, Cluster(context.system).selfAddress)
-        self ! ant
-        context.actorSelection(RootActorPath(manager.address) / "user" / "antSystem") !
-          ControllerRegister(managedHost, Cluster(context.system).selfAddress)
       }
     }
     case UnreachableMember(member) => {
@@ -68,6 +65,7 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
     case _: MemberEvent => // ignore
       log.info("Members: {}", controlMembers)
     case ant:Ant => {
+      hasReceivedAnt = true
       log.info("Received ant: {} by {}", ant, Cluster(context.system).selfAddress)
       var nextAddress: (Address, Double, Double) = null
       if (slaBreach) {
@@ -87,6 +85,16 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
       context.system.scheduler.scheduleOnce(nextAddress._2.toLong seconds, self, AntJump((ant, nextAddress._1)))
     }
     case modelRec:Model => {
+      if ((model.isEmpty || hasReceivedAnt) && !hasCreatedAnt)
+      {
+        log.info("Ant {} created because model - {} hasReceived = {} hasCreated= {}", model.isEmpty, hasReceivedAnt, hasCreatedAnt)
+        hasCreatedAnt = true
+        val ant = Ant(List(Tuple3(Cluster(context.system).selfAddress, 0, 0)), antSystemConfig, managedHost)
+        log.info("Ant {} created for {}", ant, Cluster(context.system).selfAddress)
+        self ! ant
+        context.actorSelection(RootActorPath(manager.address) / "user" / "antSystem") !
+          ControllerRegister(managedHost, Cluster(context.system).selfAddress)
+      }
       model = Some(modelRec)
     }
     case jump:AntJump => {
@@ -95,16 +103,18 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
       log.info("Ant {} jumped to {}", jump.value._1, jump.value._2);
     }
     case "decay" => {
-      pheromoneLevel = (pheromoneLevel - PHEROMONE_DECAY) max 0
-      context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
-      val maxAnts = ants.count(_.morphType == MaxMorph)
-      val minAnts = ants.count(_.morphType == MinMorph)
-      val noAnts = ants.count(_.morphType == NoMorph)
-      log.info("Decaying maxAnts {} minAnts {} noAnts {} pheromone {}", maxAnts, minAnts, noAnts, pheromoneLevel);
+      if (model.isDefined || hasReceivedAnt) {
+        pheromoneLevel = (pheromoneLevel - PHEROMONE_DECAY) max 0
+        val maxAnts = ants.count(_.morphType == MaxMorph)
+        val minAnts = ants.count(_.morphType == MinMorph)
+        val noAnts = ants.count(_.morphType == NoMorph)
+        log.info("Decaying maxAnts {} minAnts {} noAnts {} pheromone {}", maxAnts, minAnts, noAnts, pheromoneLevel);
 
-      if (maxAnts > minAnts + noAnts || minAnts > maxAnts + noAnts) {
-        slaBreach = true
+        if (maxAnts > minAnts + noAnts || minAnts > maxAnts + noAnts) {
+          slaBreach = true
+        }
       }
+      context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
     }
     case SLABreach(breach:Boolean) => {
       log.info("Received SLA breach {}", breach)
