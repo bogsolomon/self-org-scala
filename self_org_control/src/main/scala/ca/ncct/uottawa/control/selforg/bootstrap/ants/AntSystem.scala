@@ -5,7 +5,7 @@ import akka.cluster.ClusterEvent.{MemberEvent, MemberRemoved, MemberUp, Unreacha
 import akka.cluster.pubsub.DistributedPubSub
 import akka.cluster.pubsub.DistributedPubSubMediator.{Publish, Subscribe, SubscribeAck}
 import akka.cluster.{Cluster, Member}
-import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, NoMorph}
+import ca.ncct.uottawa.control.selforg.bootstrap.ants.Ant.{MaxMorph, MinMorph, MorphType, NoMorph}
 import ca.ncct.uottawa.control.selforg.bootstrap.component.data.Model
 
 import scala.collection.mutable
@@ -32,6 +32,7 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
   var ants : mutable.LinkedHashSet[Ant] = new mutable.LinkedHashSet[Ant]
   var manager: Member = null
   var slaBreach: Boolean = false
+  var slaBreachType : MorphType = NoMorph
   var hasReceivedAnt: Boolean = false
   var hasCreatedAnt: Boolean = false
 
@@ -70,6 +71,10 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
       var nextAddress: (Address, Double, Double) = null
       if (slaBreach) {
         log.info("SLA breach, ant going to manager")
+        if (ant.morphType == NoMorph) {
+          log.info("Ant has no morph switching morph type to {}", slaBreachType)
+          ant.morphType = slaBreachType
+        }
         nextAddress = (manager.address, 0, 0)
         pheromoneLevel = (antSystemConfig.maxMorphLevel + antSystemConfig.minMorphLevel) / 2
       } else {
@@ -112,6 +117,11 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
 
         if (maxAnts > minAnts + noAnts || minAnts > maxAnts + noAnts) {
           slaBreach = true
+          if (maxAnts > minAnts + noAnts) {
+            slaBreachType = MaxMorph
+          } else {
+            slaBreachType = MinMorph
+          }
         }
       }
       context.system.scheduler.scheduleOnce(DECAY_RATE seconds, self, "decay")
@@ -119,6 +129,7 @@ class AntSystem(managedHost: String, antSystemConfig: AntSystemConfig) extends A
     case SLABreach(breach:Boolean) => {
       log.info("Received SLA breach {}", breach)
       slaBreach = false
+      slaBreachType = NoMorph
     }
     case SubscribeAck(Subscribe(topic, None, `self`)) =>
       log.info("subscribing to mediator");

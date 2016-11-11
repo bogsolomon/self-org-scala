@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaCompilerConfiguration">
-    <profile name="SBT 2" modules="self_org_control,self-org-manager,project,docker-proxy" />
+    <profile name="SBT 2" modules="self-org-manager,project,self_org_control,docker-proxy" />
   </component>
 </project>
